@@ -1,0 +1,10 @@
+version: '3'
+services:
+        web:
+                container_name: 'angular'
+                build:
+                        context: .
+                        dockerfile: Dockerfile.angular
+                ports:
+                        - '4200:4200'
+
