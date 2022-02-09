@@ -1,0 +1,17 @@
+version: '3'
+services:
+  frontend:
+    container_name: web
+    build:
+      context: ./boilerplate
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - boilerplate-network
+
+networks:
+  boilerplate-network:
+    driver: overlay
+    attachable: true
