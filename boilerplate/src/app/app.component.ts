@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+declare var $:JQueryStatic;
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  
   title = 'boilerplate';
+  constructor() {
+    console.log("testing-jquery: " + $('.poke-infos'))
+    $('.poke-infos').hide();
+  }
 }
