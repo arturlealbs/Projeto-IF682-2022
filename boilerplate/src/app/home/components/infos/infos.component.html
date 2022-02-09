@@ -1,8 +1,25 @@
-<div *ngIf="infos">
+<div *ngIf="infos" class="poke-infos">
     <img src="{{infos.image}}" alt="Pokemon">
-    <p> ID: {{infos.id}} </p>
-    <p> Nome: {{infos.name}} </p>
-    <p> Peso: {{infos.weight}} </p>
-    <p> Altura: {{infos.height}} </p>
-    <p> Experiência: {{infos.base_experience}} </p>
+    <div>
+        <span>
+            <strong> ID: </strong>
+            <span> {{infos.id}} </span>
+        </span>
+        <span>
+            <strong> Name: </strong>
+            <span> {{infos.name}} </span>
+        </span>
+        <span>
+            <strong> Weight: </strong>
+            <span> {{infos.weight}} </span>
+        </span>
+        <span>
+            <strong> Height: </strong>
+            <span> {{infos.height}} </span>
+        </span>
+        <span>
+            <strong> Experience: </strong>
+            <span> {{infos.base_experience}} </span>
+        </span>
+    </div>
 </div>

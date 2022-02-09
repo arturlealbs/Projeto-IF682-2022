@@ -1,9 +1,0 @@
-FROM node:17
-
-
-WORKDIR /usr/app
-COPY ./boilerplate/ /usr/app
-RUN npm install 
-RUN npm install @angular/cli -g
-
-CMD ng serve --host 0.0.0.0 

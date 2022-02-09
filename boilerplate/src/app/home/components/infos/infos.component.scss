@@ -1,0 +1,15 @@
+.poke-infos {
+    display: flex;
+
+    img {
+        height: 100px;
+        border: solid 1px #CCC;
+        border-radius: 50%;
+    }
+
+    div {
+        display: flex;
+        margin-left: 10px;
+        flex-direction: column;
+    }
+}
