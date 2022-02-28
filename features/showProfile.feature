@@ -83,3 +83,16 @@ Scenario: Edit personal information on the system
     And I change the text of my description (characteristics about me)
 
     Then I receive a error message because I didn't save the new informations
+
+Scenario: Reporting an user and selecting an option
+
+    Given I’m at the “John More Informations” page
+    And I see that John’s profile its a spam
+
+
+    When I clicked to report his profile
+    And I select the option that the user is a span
+    And I confirm the reporting
+    
+    Then I’m in the same page
+    And I can see a message of success
