@@ -1,0 +1,1 @@
+Feature: List people that have common interests with the user
