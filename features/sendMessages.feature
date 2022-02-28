@@ -50,3 +50,9 @@ Scenario: Users can see when the people are online
     When {John} stay online
     Then {JDaniloC} can see that {John} is online
     And {John} can see that {JDaniloC} is online
+
+Scenario: User can see the hour of the message
+    Given the user {JDaniloC} is in the “chat page”
+    And the user {JDaniloC} is chatting with the {Lucas} user
+    When the {JDaniloC} hovers the mouse over the message
+    Then the {JDaniloC} can see the hour of the message
