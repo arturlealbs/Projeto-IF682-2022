@@ -1,4 +1,4 @@
-Feature: Show profile of users
+Feature: Show profile
 AS A user 
 I WANT to see more informations about other user 
 SO THAT I can know more about the other user
@@ -68,3 +68,18 @@ Scenario: Edit personal information on the system
     Then I am at my personal profile page
     And all changes are stored on the system
 
+Scenario: Storing personal information on the system
+    Given I am at the register page
+
+    When I fill some of the informations that is required by the system to register
+    And I click to register me
+
+    Then I receive a message that I can't register me because I not filled all the mandatory informations
+
+Scenario: Edit personal information on the system
+    Given I am at my personal profile page
+
+    When I click to edit my description
+    And I change the text of my description (characteristics about me)
+
+    Then I receive a error message because I didn't save the new informations
