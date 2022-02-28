@@ -35,3 +35,18 @@ Scenario: Send a message to another person
     Then I’m still in the “chats page”
     And I see the message {“Hello”} in the chat
     And I see the hour of the message
+
+Scenario: Blocked users can’t chat with the person who blocked them
+	Given the user {JDaniloC} is in the “chat page”
+    And he is chatting with the {Lucas} user
+    When he blocks the {Lucas} user
+    Then the {Lucas} user cannot chat with {JDaniloC}
+    And {Lucas} cannot see the {JDaniloC} chat
+    And the chat is deleted
+
+Scenario: Users can see when the people are online
+	Given the user {JDaniloC} is in the “chat page”
+    And {John} isn’t online yet
+    When {John} stay online
+    Then {JDaniloC} can see that {John} is online
+    And {John} can see that {JDaniloC} is online
