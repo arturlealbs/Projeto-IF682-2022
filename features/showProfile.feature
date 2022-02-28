@@ -3,7 +3,7 @@ AS A user
 I WANT to see more informations about other user 
 SO THAT I can know more about the other user
 
-Scenario: Getting more information about an user
+Scenario: Getting more information about a user
 
     Given that I’m at the “Users List” page
     And I want to know more about the user “John”
@@ -24,7 +24,7 @@ Scenario: Returning to Users List Page
     Then I’m at the “Users List” page
     And I can see the list of users with less information 
 
-Scenario: Seeing better the picture of an user
+Scenario: Seeing better the picture of a user
 
     Given I’m at the “John More Informations” page
     And I want to see better a picture of the user “John”
@@ -37,7 +37,7 @@ Scenario: Seeing better the picture of an user
 
 
 
-Scenario: Reporting an user
+Scenario: Reporting a user
 
     Given I’m at the “John More Informations” page
     And I see that John’s profile has an unappropriated description
@@ -85,7 +85,7 @@ Scenario: Edit personal information on the system
     Then I receive a error message because I didn't save the new informations
     And I'm in my the personal profile page
 
-Scenario: Reporting an user and selecting an option
+Scenario: Reporting a user and selecting an option
 
     Given I’m at the “John More Informations” page
     And I see that John’s profile its a spam
@@ -98,7 +98,7 @@ Scenario: Reporting an user and selecting an option
     Then I’m in the same page
     And I can see a message of success
 
-Scenario: Error reporting an user 
+Scenario: Error reporting a user 
 
     Given I’m at the “John More Informations” page
     And I see that John’s profile its a spam
