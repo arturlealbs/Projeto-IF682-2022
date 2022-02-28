@@ -83,3 +83,4 @@ Scenario: Edit personal information on the system
     And I change the text of my description (characteristics about me)
 
     Then I receive a error message because I didn't save the new informations
+    And I'm in my the personal profile page
