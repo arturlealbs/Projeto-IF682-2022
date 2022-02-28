@@ -42,7 +42,6 @@ Scenario: Blocked users can’t chat with the person who blocked them
     When he blocks the {Lucas} user
     Then the {Lucas} user cannot chat with {JDaniloC}
     And {Lucas} cannot see the {JDaniloC} chat
-    And the chat is deleted
 
 Scenario: Users can see when the people are online
 	Given the user {JDaniloC} is in the “chat page”
