@@ -109,4 +109,5 @@ Scenario: Error reporting an user
     And I confirm the reporting
     
     Then I go to other random page
+    And I can see a message error
     
