@@ -68,7 +68,7 @@ Scenario: Edit personal information on the system
     Then I am at my personal profile page
     And all changes are stored on the system
 
-Scenario: Storing personal information on the system
+Scenario: Storing personal information on the system without all the obrigatory informations
     Given I am at the register page
 
     When I fill some of the informations that is required by the system to register
@@ -76,7 +76,7 @@ Scenario: Storing personal information on the system
 
     Then I receive a message that I can't register me because I not filled all the mandatory informations
 
-Scenario: Edit personal information on the system
+Scenario: Edit personal information on the system without save them
     Given I am at my personal profile page
 
     When I click to edit my description
