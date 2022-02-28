@@ -28,3 +28,9 @@ And Clicks in the red option "Cancel Date"
 Then the "Date details" is updated to "Date is Canceled"
 And "Roger" receives a Date notification
 And both of them are no longer available to check "Date Details" for that specific date
+
+Scenario: Date notification
+Given "Bruno" and "Isabela" settled a date
+And it's 1 day until the date
+When Bruno enters the application
+Then he receives a notification remiding him of the date
