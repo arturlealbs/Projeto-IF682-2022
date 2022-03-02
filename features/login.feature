@@ -1,4 +1,4 @@
-Feature: Login with my account
+Feature: Create and acess my account
     As a system user
     I want to create and access my account
     In order to have access to my personal settings
