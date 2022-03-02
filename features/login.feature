@@ -27,3 +27,17 @@ Scenario: Login to my account
     And I fill the fields {"Email"} and {"Password"} correctly
     When I select the {"Sign in"} button
     Then I'm on {“Home”} page
+
+Scenario: Non-existing account
+    Given I'm on {“Login Screen”} page
+    And I want to log into my account {"John"}
+    And I fill the fields {"Email"} and {"Password"} with a non-existing account
+    When I select the {"Sign in"} button
+    Then I get a prompt on the screen requesting the account creation
+
+Scenario: Wrong password
+    Given I'm on {“Login Screen”} page
+    And I want to log into my account {"John"}
+    And I fill the fields {"Email"} and {"Password"} with a wrong password
+    When I select the {"Sign in"} button
+    Then I get a prompt on the screen warning me about the password
