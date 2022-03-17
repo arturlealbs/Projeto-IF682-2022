@@ -7,10 +7,10 @@ assignees: ''
 
 ---
 
-**Describe the solution you'd like**
+**The solution**
 A clear and concise description of what you want to happen.
 
-** List the steps to finish **
+**List the steps to finish**
 - [ ] Create the users page 
 
 **Additional context**

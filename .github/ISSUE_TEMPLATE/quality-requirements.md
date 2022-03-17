@@ -7,8 +7,8 @@ assignees: ''
 
 ---
 
-* Describe what needed to be documented *
+**Describe what needed to be documented**
 Eg: Implement tests to User page
 
-* List the steps to finish *
+**List the steps to finish**
 - [ ] Test creation
