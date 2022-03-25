@@ -1,12 +1,14 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { MongooseModule } from '@nestjs/mongoose';
+import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
-import { join } from 'path'
+import { Module } from '@nestjs/common';
+
+import { UsersModule } from './users/users.module';
+
+import { AppGateway } from './app.gateway';
+import { join } from 'path';
 
 const envConfig = ConfigModule.forRoot();
 
@@ -18,10 +20,14 @@ const envConfig = ConfigModule.forRoot();
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'static'),
+      exclude: ['/graphql/**', '/messages/**'],
+    }),
     envConfig,
     UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [AppGateway],
 })
 export class AppModule {}
