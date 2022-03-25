@@ -18,21 +18,36 @@ export class UsersService {
     return userList.exec();
   }
 
-  findOne(id: number): Promise<User> {
-    const user = this.userModel.findOne({ id });
-    return user.exec();
+  findOne(email = '', username = ''): Promise<User> {
+    if (email) {
+      return this.userModel.findOne({ email }).exec();
+    }
+    return this.userModel.findOne({ username }).exec();
   }
 
-  update(username: string, updateUserInput: UpdateUserInput): Promise<User> {
-    const user = this.userModel.findOneAndUpdate(
-      { username },
-      updateUserInput,
-      { new: true },
-    );
-    return user.exec();
+  update(
+    email = '',
+    username = '',
+    updateUserInput: UpdateUserInput,
+  ): Promise<User> {
+    const identifier: { email?: string; username?: string } = {};
+    if (email) {
+      identifier['email'] = email;
+    } else {
+      identifier['username'] = username;
+    }
+
+    return this.userModel
+      .findOneAndUpdate(identifier, updateUserInput, {
+        new: true,
+      })
+      .exec();
   }
 
-  remove(id: number): Promise<User> {
-    return this.userModel.findOneAndRemove({ id }).exec();
+  remove(email = '', username = ''): Promise<User> {
+    if (email) {
+      return this.userModel.findOneAndRemove({ email }).exec();
+    }
+    return this.userModel.findOneAndRemove({ username }).exec();
   }
 }

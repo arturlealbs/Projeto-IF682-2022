@@ -19,16 +19,16 @@ input CreateUserInput {
   city: String!
 
   """User's level of education"""
-  education: String
+  education: Education
 
-  """User e-mail"""
+  """Unique user e-mail"""
   email: String!
 
-  """Part of full name"""
+  """First part of full name"""
   firstName: String!
 
   """User's gender"""
-  gender: String!
+  gender: Gender!
 
   """Genders of people that the user wants to meet"""
   genderOfInterest: [Gender!]!
@@ -39,7 +39,7 @@ input CreateUserInput {
   """Languages the user speaks"""
   languages: [String!]
 
-  """Part of full name"""
+  """Last part of full name"""
   lastName: String!
 
   """User's phone number"""
@@ -55,6 +55,17 @@ input CreateUserInput {
   workWith: String
 }
 
+"""The education levels."""
+enum Education {
+  bacharelado
+  cursoTecnico
+  doutorado
+  ensinoFundamental
+  ensinoMedio
+  licenciatura
+  mestrado
+}
+
 """The biological gender."""
 enum Gender {
   FEMALE
@@ -63,63 +74,71 @@ enum Gender {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
-  removeUser(id: Int!): User!
+  removeUser(searchUserInput: SearchUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Query {
-  user(id: Int!): User!
+  user(searchUserInput: SearchUserInput!): User!
   users: [User!]!
+}
+
+input SearchUserInput {
+  """Unique user e-mail"""
+  email: String
+
+  """Unique user name to identify"""
+  username: String
 }
 
 input UpdateUserInput {
   """User's address (neighborhood, street, etc)"""
-  address: String!
+  address: String
 
   """User's age"""
-  age: Int!
+  age: Int
 
   """User's description of himself"""
   bio: String
 
   """User's date of birth"""
-  birthDate: String!
+  birthDate: String
 
   """User's city"""
-  city: String!
+  city: String
 
   """User's level of education"""
-  education: String
+  education: Education
 
-  """User e-mail"""
+  """Unique user e-mail"""
   email: String
 
-  """Part of full name"""
-  firstName: String!
+  """First part of full name"""
+  firstName: String
 
   """User's gender"""
-  gender: String!
+  gender: Gender
 
   """Genders of people that the user wants to meet"""
-  genderOfInterest: [Gender!]!
+  genderOfInterest: [Gender!]
 
   """User's interests and hobbies"""
-  interest: [String!]!
+  interest: [String!]
 
   """Languages the user speaks"""
   languages: [String!]
 
-  """Part of full name"""
-  lastName: String!
+  """Last part of full name"""
+  lastName: String
 
   """User's phone number"""
   phoneNumber: String
 
   """User's state"""
-  state: String!
+  state: String
 
   """Unique user name to identify"""
-  username: String!
+  username: String
 
   """User's occupation"""
   workWith: String
@@ -142,22 +161,19 @@ type User {
   city: String!
 
   """User's level of education"""
-  education: String
+  education: Education
 
-  """User e-mail"""
+  """Unique user e-mail"""
   email: String!
 
-  """Part of full name"""
+  """First part of full name"""
   firstName: String!
 
   """User's gender"""
-  gender: String!
+  gender: Gender!
 
   """Genders of people that the user wants to meet"""
   genderOfInterest: [Gender!]!
-
-  """Identifier column"""
-  id: ID!
 
   """User's interests and hobbies"""
   interest: [String!]!
@@ -165,7 +181,7 @@ type User {
   """Languages the user speaks"""
   languages: [String!]
 
-  """Part of full name"""
+  """Last part of full name"""
   lastName: String!
 
   """User's phone number"""

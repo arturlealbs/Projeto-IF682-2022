@@ -1,57 +1,75 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { CreateUserInput } from './create-user.input';
-import { Gender, Education } from '../types/user';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { CreateUserInput } from './create-user.input';
+import { Education } from '../types/education';
+import { Gender } from '../types/gender';
 
 @InputType()
 export class UpdateUserInput extends PartialType(CreateUserInput) {
-  @Field({ description: 'Part of full name' })
-  firstName: string;
+  @Field({ description: 'Unique user e-mail', nullable: true })
+  email?: string;
 
-  @Field({ description: 'Part of full name' })
-  lastName: string;
-  
-  @Field({ description: 'Unique user name to identify' })
-  username: string;
-  
-  @Field(type => Int, { description: "User's age" })
-  age: number;
-  
+  @Field({ description: 'Unique user name to identify', nullable: true })
+  username?: string;
+
+  @Field({ description: 'First part of full name', nullable: true })
+  firstName?: string;
+
+  @Field({ description: 'Last part of full name', nullable: true })
+  lastName?: string;
+
+  @Field((type) => Int, { description: "User's age", nullable: true })
+  age?: number;
+
   @Field({ description: "User's description of himself", nullable: true })
   bio?: string;
-  
-  @Field({ description: "User's gender" })
-  gender: Gender;
 
-  @Field({ description: "User's date of birth"})
-  birthDate: string;
+  @Field((type) => Gender, { description: "User's gender", nullable: true })
+  gender?: Gender;
 
-  @Field({ description: "User's city" })
-  city: string;
+  @Field({ description: "User's date of birth", nullable: true })
+  birthDate?: string;
 
-  @Field({ description: "User's state"})
-  state: string;
+  @Field({ description: "User's city", nullable: true })
+  city?: string;
 
-  @Field({ description: "User's address (neighborhood, street, etc)" })
-  address: string;
-  
-  @Field(type => [String], { description: "User's interests and hobbies" })
-  interest: string[];
+  @Field({ description: "User's state", nullable: true })
+  state?: string;
 
-  @Field(type => [Gender], { description: "Genders of people that the user wants to meet"})
-  genderOfInterest: Gender[];
-  
+  @Field({
+    description: "User's address (neighborhood, street, etc)",
+    nullable: true,
+  })
+  address?: string;
+
+  @Field((type) => [String], {
+    description: "User's interests and hobbies",
+    nullable: true,
+  })
+  interest?: string[];
+
+  @Field((type) => [Gender], {
+    description: 'Genders of people that the user wants to meet',
+    nullable: true,
+  })
+  genderOfInterest?: Gender[];
+
   @Field({ description: "User's occupation", nullable: true })
   workWith?: string;
 
   @Field({ description: "User's phone number", nullable: true })
   phoneNumber?: string;
 
-  @Field({ description: "User's level of education", nullable: true })
+  @Field((type) => Education, {
+    description: "User's level of education",
+    nullable: true,
+  })
   education?: Education;
 
-  @Field(type => [String], { description: "Languages the user speaks", nullable: true })
+  @Field((type) => [String], {
+    description: 'Languages the user speaks',
+    nullable: true,
+  })
   languages?: string[];
 }
