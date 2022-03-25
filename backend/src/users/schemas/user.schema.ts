@@ -47,16 +47,16 @@ export class User {
   genderOfInterest: Gender[];
 
   @Prop()
-  workWith: string;
+  workWith?: string;
 
   @Prop()
-  phoneNumber: string;
+  phoneNumber?: string;
 
   @Prop({ type: String })
-  education: Education;
+  education?: Education;
 
   @Prop({ type: [String] })
-  languages: string[];
+  languages?: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
