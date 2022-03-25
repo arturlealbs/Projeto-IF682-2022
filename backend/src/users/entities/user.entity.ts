@@ -1,11 +1,50 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { ObjectType, Field, Int, createUnionType } from '@nestjs/graphql';
 import { Education } from '../types/education';
+import { UserError } from './error.entity';
 import { Gender } from '../types/gender';
 
 @ObjectType()
 export class User {
+  constructor({
+    email,
+    username,
+    lastName,
+    firstName,
+    age,
+    bio,
+    city,
+    state,
+    gender,
+    address,
+    interest,
+    workWith,
+    birthDate,
+    education,
+    languages,
+    phoneNumber,
+    genderOfInterest,
+  }: User) {
+    this.email = email;
+    this.username = username;
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.age = age;
+    this.bio = bio;
+    this.city = city;
+    this.state = state;
+    this.gender = gender;
+    this.address = address;
+    this.interest = interest;
+    this.workWith = workWith;
+    this.birthDate = birthDate;
+    this.education = education;
+    this.languages = languages;
+    this.phoneNumber = phoneNumber;
+    this.genderOfInterest = genderOfInterest;
+  }
+
   @Field({ description: 'Unique user e-mail' })
   email: string;
 
@@ -65,3 +104,8 @@ export class User {
   })
   languages?: string[];
 }
+
+export const UserOrError = createUnionType({
+  name: 'UserOrError',
+  types: () => [User, UserError] as const,
+});

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()

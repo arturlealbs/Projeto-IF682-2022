@@ -73,13 +73,13 @@ enum Gender {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
-  removeUser(searchUserInput: SearchUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
+  createUser(createUserInput: CreateUserInput!): UserOrError!
+  removeUser(searchUserInput: SearchUserInput!): UserOrError!
+  updateUser(updateUserInput: UpdateUserInput!): UserOrError!
 }
 
 type Query {
-  user(searchUserInput: SearchUserInput!): User!
+  user(searchUserInput: SearchUserInput!): UserOrError!
   users: [User!]!
 }
 
@@ -196,3 +196,13 @@ type User {
   """User's occupation"""
   workWith: String
 }
+
+type UserError {
+  """The error message"""
+  reason: String
+
+  """The error title"""
+  title: String
+}
+
+union UserOrError = User | UserError

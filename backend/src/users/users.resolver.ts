@@ -1,17 +1,34 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { UsersService } from './users.service';
-import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { SearchUserInput } from './dto/search-user.input';
+import { User, UserOrError } from './entities/user.entity';
+import { UserError } from './entities/error.entity';
+import { UsersService } from './users.service';
 
-@Resolver(() => User)
+@Resolver(() => UserOrError)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Mutation(() => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-    return this.usersService.create(createUserInput);
+  @Mutation(() => UserOrError)
+  async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
+    const emailAlreadyUsed = await this.usersService.findOne({
+      email: createUserInput.email,
+    });
+
+    if (emailAlreadyUsed) {
+      return new UserError('Duplicated', 'E-mail already used');
+    }
+
+    const usernameAlreadyUsed = await this.usersService.findOne({
+      username: createUserInput.username,
+    });
+    if (usernameAlreadyUsed) {
+      return new UserError('Duplicated', 'Username already used');
+    }
+
+    const userCreated = await this.usersService.create(createUserInput);
+    return new User(userCreated);
   }
 
   @Query(() => [User], { name: 'users' })
@@ -19,34 +36,57 @@ export class UsersResolver {
     return this.usersService.findAll();
   }
 
-  @Query(() => User, { name: 'user' })
-  findOne(@Args('searchUserInput') searchUserInput: SearchUserInput) {
-    if (searchUserInput.email == '' && searchUserInput.username == '') {
-      throw new Error('You must provide either email or username');
+  @Query(() => UserOrError, { name: 'user' })
+  async findOne(@Args('searchUserInput') searchUserInput: SearchUserInput) {
+    if (!searchUserInput.email && !searchUserInput.username) {
+      return new UserError(
+        'Missing identifier',
+        'You must provide either email or username',
+      );
     }
-    return this.usersService.findOne(
-      searchUserInput.email,
-      searchUserInput.username,
-    );
+    const userFound = await this.usersService.findOne(searchUserInput);
+    if (!userFound) {
+      const input = `${searchUserInput.email} ${searchUserInput.username}`;
+      return new UserError('Not found', `User ${input} not found`);
+    }
+    return new User(userFound);
   }
 
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.usersService.update(
-      updateUserInput.email,
-      updateUserInput.username,
+  @Mutation(() => UserOrError)
+  async updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+    if (!updateUserInput.email && !updateUserInput.username) {
+      return new UserError(
+        'Missing identifier',
+        'You must provide either email or username',
+      );
+    }
+    const updatedUser = await this.usersService.update(
+      {
+        email: updateUserInput.email,
+        username: updateUserInput.username,
+      },
       updateUserInput,
     );
+    if (!updatedUser) {
+      const input = `${updateUserInput.email} ${updateUserInput.username}`;
+      return new UserError('Not found', `User ${input} not found`);
+    }
+    return new User(updatedUser);
   }
 
-  @Mutation(() => User)
-  removeUser(@Args('searchUserInput') searchUserInput: SearchUserInput) {
-    if (searchUserInput.email == '' && searchUserInput.username == '') {
-      throw new Error('You must provide either email or username');
+  @Mutation(() => UserOrError)
+  async removeUser(@Args('searchUserInput') searchUserInput: SearchUserInput) {
+    if (!searchUserInput.email && !searchUserInput.username) {
+      return new UserError(
+        'Missing identifier',
+        'You must provide either email or username',
+      );
     }
-    return this.usersService.remove(
-      searchUserInput.email,
-      searchUserInput.username,
-    );
+    const removedUser = await this.usersService.remove(searchUserInput);
+    if (!removedUser) {
+      const input = `${searchUserInput.email} ${searchUserInput.username}`;
+      return new UserError('Not found', `User ${input} not found`);
+    }
+    return new User(removedUser);
   }
 }
