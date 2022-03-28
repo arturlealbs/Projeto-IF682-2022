@@ -1,9 +1,49 @@
-import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
+import {
+  SubscribeMessage,
+  WebSocketGateway,
+  ConnectedSocket,
+  WebSocketServer,
+  MessageBody,
+} from '@nestjs/websockets';
 
-@WebSocketGateway()
+import { Socket, Server } from 'socket.io';
+
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+  },
+})
 export class AppGateway {
-  @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
-    return 'Hello world!';
+  @WebSocketServer() server: Server;
+
+  @SubscribeMessage('connection')
+  handleConnection(@ConnectedSocket() client: Socket) {
+    console.log('Client', client.id, 'connected');
+  }
+
+  @SubscribeMessage('register')
+  handleRegister(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: string,
+  ) {
+    console.log('Client', client.id, 'registering', data);
+  }
+
+  @SubscribeMessage('messages')
+  handleMessage(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: string,
+  ) {
+    console.log(client.id, data);
+    this.server.emit('messages', data);
+  }
+
+  @SubscribeMessage('preview')
+  handlePreview(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: string,
+  ) {
+    console.log(client.id, data);
+    this.server.emit('preview', data);
   }
 }

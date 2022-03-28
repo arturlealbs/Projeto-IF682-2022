@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 
 import { HomeModule } from './home/home.module';
+import { ChatsModule } from './chats/chats.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,7 +14,8 @@ import { HomeModule } from './home/home.module';
     BrowserModule,
     AppRoutingModule,
 		CoreModule,
-    HomeModule
+    HomeModule,
+    ChatsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

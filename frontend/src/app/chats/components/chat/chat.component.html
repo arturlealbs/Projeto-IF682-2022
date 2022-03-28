@@ -1,0 +1,12 @@
+<textarea
+  (keyup)='sendPreview($event)'
+  placeholder='Start typing...'
+>
+</textarea>
+{{ preview?.text }}
+
+<ul>
+  <li *ngFor="let message of messages;">
+    {{ message.username }} {{ message.timestamp }} {{ message.text }}
+  </li>
+</ul>
