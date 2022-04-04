@@ -1,0 +1,32 @@
+.title {
+    padding: 0.9em;
+}
+
+.contacts .item {
+    display: flex;
+
+    .content {
+        max-width: 70%;
+    }
+
+    img {
+        min-width: 80px;
+    }
+}
+
+.item {
+    .description {
+        width: 100%; 
+
+        p {
+            overflow: hidden;
+            white-space: nowrap; 
+            text-overflow: ellipsis;
+            max-height: 65px; 
+
+            &:hover {
+                white-space: normal;
+            }
+        }
+    }
+}
