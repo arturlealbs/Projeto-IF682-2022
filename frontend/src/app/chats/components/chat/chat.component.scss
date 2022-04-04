@@ -1,0 +1,40 @@
+.messages {
+    height: 100%;
+    
+    .item {
+        margin: 1em;
+    }
+}
+
+.item {
+    &.right {
+        padding-right: 2em;
+        text-align: end;
+        flex-direction: row-reverse;
+
+        .description {
+            justify-content: end;
+            flex-direction: row-reverse;
+        }
+    }
+    .content {
+        padding: 0 1.5em;
+    }
+
+    &:hover {
+        span {
+            transition: opacity .2s;
+            opacity: 1;
+        }
+    }
+}
+
+.description {
+    display: flex;
+
+    span {
+        opacity: 0;
+        padding: 0 1em;
+        font-size: x-small;
+    }
+}

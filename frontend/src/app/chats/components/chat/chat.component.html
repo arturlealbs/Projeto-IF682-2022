@@ -1,12 +1,56 @@
-<textarea
-  (keyup)='sendPreview($event)'
-  placeholder='Start typing...'
->
-</textarea>
-{{ preview?.text }}
+<div class="ui secondary attached stackable menu">
+  <div class="ui container">
+    <div class="ui item">
+      <img class="ui mini avatar circular image" src="https://avatars.githubusercontent.com/u/49529180?v=4">
+      <div>
+        <strong> Username </strong> <br>
+        <div class="ui horizontal label {{(online) ? 'green' : 'red'}}">
+          {{(online) ? 'Online' : 'Offline'}}
+        </div>
+      </div>
+    </div>
+    <div class="right item">
+      <div class="ui input">
+        <input type="text" placeholder="Pesquisar...">
+      </div>
+      <button class="ui icon button right item">
+        <i class="ellipsis horizontal icon"></i>
+      </button>
+    </div>
+  </div>
+</div>
 
-<ul>
-  <li *ngFor="let message of messages;">
-    {{ message.username }} {{ message.timestamp }} {{ message.text }}
-  </li>
-</ul>
+<div class="ui fluid container items messages">
+  <div class="item {{ (message.username === contactUsername) ? 'left' : 'right' }}" 
+    *ngFor = "let message of messages">
+    <a class="ui tiny image">
+      <img src="https://fomantic-ui.com/images/avatar/large/stevie.jpg">
+    </a>
+    <div class="content">
+      <a class="header">  {{ message.username }} </a>
+      <div class="description">
+        <p> {{ message.text }} </p>
+        <span> {{ message.timestamp }} </span>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="item" *ngIf = "hasPreview()">
+    <a class="ui tiny image">
+      <img src="https://fomantic-ui.com/images/avatar/large/stevie.jpg">
+    </a>
+    <div class="content">
+      <a class="header">  {{ contactUsername }} </a>
+      <div class="description">
+        <p> {{ preview?.text }} </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui fluid icon input">
+  <input (keyup)='sendPreview($event)' placeholder='Digite aqui...'/>
+  <button class="ui icon button">
+    <i class="paper plane icon"></i>
+  </button>
+</div>
