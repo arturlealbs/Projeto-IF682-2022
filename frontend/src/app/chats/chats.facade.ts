@@ -20,6 +20,14 @@ export class ChatsFacade {
 		});
 	}
 
+	public getUsername(): string {
+		return this.state.getUsername();
+	}
+
+	public setUsername(username: string) {
+		this.state.setUsername(username);
+	}
+
 	public getPreview(): Observable<Message|null> {
 		return this.state.getPreview();
 	}
@@ -32,21 +40,23 @@ export class ChatsFacade {
 		this.state.setChatMessages(username);
 	}
 
-	public sendMessage(message: string) {
+	public sendMessage(contact: string, message: string) {
 		const username = this.state.getUsername();
 		this.messageService.sendMessage({
 			timestamp: Date.now(),
-			username: username,
+			from: username,
 			text: message,
+			to: contact,
 		});
 	}
 
-	public sendPreview(message: string) {
+	public sendPreview(contact: string, message: string) {
 		const username = this.state.getUsername();
 		this.messageService.sendPreview({
 			timestamp: Date.now(),
-			username: username,
+			from: username,
 			text: message,
+			to: contact,
 		});
 	}
 }

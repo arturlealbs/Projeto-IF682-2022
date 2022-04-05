@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProfileService } from './shared/services/profile.service';
 declare var $:JQueryStatic;
 
 
@@ -10,8 +11,12 @@ declare var $:JQueryStatic;
 export class AppComponent {
   
   title = 'Coopido';
-  constructor() {
+  constructor(private profileService: ProfileService) {
     console.log("testing-jquery: " + $('.poke-infos'))
     $('.poke-infos').hide();
+  }
+
+  setUsername(event: any) {
+    this.profileService.setUsername(event.target.value);
   }
 }

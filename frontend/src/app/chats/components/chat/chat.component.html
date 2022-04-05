@@ -3,7 +3,7 @@
     <div class="ui item">
       <img class="ui mini avatar circular image" src="https://avatars.githubusercontent.com/u/49529180?v=4">
       <div>
-        <strong> Username </strong> <br>
+        <strong> {{ contactUsername }} </strong> <br>
         <div class="ui horizontal label {{(online) ? 'green' : 'red'}}">
           {{(online) ? 'Online' : 'Offline'}}
         </div>
@@ -21,13 +21,13 @@
 </div>
 
 <div class="ui fluid container items messages">
-  <div class="item {{ (message.username === contactUsername) ? 'left' : 'right' }}" 
+  <div class="item {{ (message.from === contactUsername) ? 'left' : 'right' }}" 
     *ngFor = "let message of messages">
     <a class="ui avatar tiny image">
       <img src="https://fomantic-ui.com/images/avatar/large/stevie.jpg">
     </a>
     <div class="content">
-      <a class="header">  {{ message.username }} </a>
+      <a class="header">  {{ message.from }} </a>
       <div class="description">
         <p> {{ message.text }} </p>
         <span> {{ message.timestamp }} </span>
@@ -36,11 +36,11 @@
   </div>
  
   <div class="item preview" *ngIf = "hasPreview()">
-    <a class="ui tiny image">
+    <a class="ui avatar tiny image">
       <img src="https://fomantic-ui.com/images/avatar/large/stevie.jpg">
     </a>
     <div class="content">
-      <a class="header">  {{ contactUsername }} </a>
+      <a class="header">  {{ preview?.from }} </a>
       <div class="description">
         <p> {{ preview?.text }} </p>
       </div>
