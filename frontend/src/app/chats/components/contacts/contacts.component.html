@@ -2,35 +2,13 @@
   <span class="ui large text"> Contatos </span>
 </div>
 <div class="ui middle aligned selection list contacts">
-    <div class="item">
-      <img class="ui tiny image" 
-        src="https://fomantic-ui.com/images/avatar/small/helen.jpg">
+    <div class="item" *ngFor="let contact of contacts" 
+      (click) = "chooseContact(contact.username)">
+      <img class="ui tiny image" src="{{contact.image}}">
       <div class="content">
-        <div class="header">Helen</div>
+        <div class="header"> {{contact.username}} </div>
         <div class="description">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut justo a dui rutrum vulputate. Nunc commodo quam purus, non molestie nulla tincidunt at. Pellentesque volutpat nulla quis massa sagittis volutpat. Duis malesuada nibh sed nibh auctor efficitur. Integer condimentum ut magna quis pellentesque. Quisque quis turpis laoreet, molestie lorem eu, cursus orci. Aliquam volutpat lorem mauris, ac tincidunt neque fringilla non. Morbi eget tristique sem, vel bibendum arcu.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="ui tiny image" 
-        src="https://fomantic-ui.com/images/avatar/small/christian.jpg">
-      <div class="content">
-        <div class="header">Christian</div>
-        <div class="description">
-          <p> Uma mensagem muito grande para caber nesse local </p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="ui tiny image" 
-        src="https://fomantic-ui.com/images/avatar/small/daniel.jpg">
-      <div class="content">
-        <div class="header">Daniel</div>
-        <div class="description">
-          <p> Última mensagem </p>
+          <p> {{ contact.lastMessage}} </p>
         </div>
       </div>
     </div>

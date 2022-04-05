@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import Message from './types/message';
+import Contact from './types/contact';
 
 @Injectable()
 export class ChatsFacade {
@@ -34,6 +35,10 @@ export class ChatsFacade {
 
 	public getCurrentMessages(): Observable<Message[]> {
 		return this.state.getMessages();
+	}
+	
+	public getContacts(): Observable<Contact[]> {
+		return this.state.getContacts();
 	}
 
 	public setCurrentChat(username: string) {

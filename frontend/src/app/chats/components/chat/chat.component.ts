@@ -28,6 +28,10 @@ export class ChatComponent {
   @Output()
   sendPreviewEvent = new EventEmitter<string>();
 
+  message: { text: string } = {
+    text: ''
+  }
+
   constructor() { }
 
   hasPreview(): boolean { 
@@ -38,7 +42,8 @@ export class ChatComponent {
     this.sendPreviewEvent.emit(target.value);
   }
 
-  sendMessage({ target }: any) {
-    this.sendMessageEvent.emit(target.value);
+  sendMessage() {
+    this.sendMessageEvent.emit(this.message.text);
+    this.message.text = '';
   }
 }

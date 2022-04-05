@@ -2,12 +2,15 @@ import { BehaviorSubject, map, Observable, Subscription } from "rxjs";
 import { Injectable } from "@angular/core";
 
 import Message from "../types/message";
+import Contact from "../types/contact";
 
 @Injectable({ providedIn: 'root' })
 export class ChatsState {
   private username: string = "";
-
   private messageSubscription!: Subscription;
+
+  private readonly preview = new BehaviorSubject<Message|null>(null);
+  private readonly currentMessages = new BehaviorSubject<Message[]>([]);
   private readonly messages = new BehaviorSubject<Message[]>([
     {
       to: 'Daniel',
@@ -40,8 +43,24 @@ export class ChatsState {
       timestamp: new Date().toLocaleString()
     },
   ]);
-  private readonly preview = new BehaviorSubject<Message|null>(null);
-  private readonly currentMessages = new BehaviorSubject<Message[]>([]);
+  
+  private readonly contacts = new BehaviorSubject<Contact[]>([
+    {
+      username: 'Daniel',
+      lastMessage: "Uma mensagem muito grande para caber nesse local",
+      image: "https://fomantic-ui.com/images/avatar/small/daniel.jpg"
+    },
+    {
+      username: 'Helen',
+      lastMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut justo a dui rutrum vulputate. Nunc commodo quam purus, non molestie nulla tincidunt at. Pellentesque volutpat nulla quis massa sagittis volutpat. Duis malesuada nibh sed nibh auctor efficitur. Integer condimentum ut magna quis pellentesque. Quisque quis turpis laoreet, molestie lorem eu, cursus orci. Aliquam volutpat lorem mauris, ac tincidunt neque fringilla non. Morbi eget tristique sem, vel bibendum arcu.",
+      image: "https://fomantic-ui.com/images/avatar/small/helen.jpg"
+    },
+    {
+      username: 'Christian',
+      lastMessage: "Última mensagem enviada",
+      image: "https://fomantic-ui.com/images/avatar/small/christian.jpg"
+    }
+  ]);
 
   public setChatMessages(username: string) {
     if (this.messageSubscription) {
@@ -71,6 +90,10 @@ export class ChatsState {
     return this.preview.asObservable().pipe(
       map(message => message?.from !== this.username ? message : null)
     );
+  }
+
+  public getContacts(): Observable<Contact[]> {
+    return this.contacts.asObservable();
   }
 
   public getUsername(): string {

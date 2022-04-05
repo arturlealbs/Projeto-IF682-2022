@@ -3,6 +3,7 @@ import { ProfileService } from '../../../shared/services/profile.service';
 import { ChatsFacade } from '../../chats.facade';
 import Message from '../../types/message';
 import { Subscription } from 'rxjs';
+import Contact from '../../types/contact';
 
 @Component({
   selector: 'app-chat-page',
@@ -13,6 +14,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   public preview!: Message|null;
   public online: boolean = false;
   public messages: Message[] = [];
+  public contacts: Contact[] = [];
 
   public username: string = 'Username';
   public contactUsername: string = "Daniel";
@@ -47,6 +49,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
       }
       this.preview = message;
     });
+
+    this.chatFacade.getContacts().subscribe(contacts => {
+      this.contacts = contacts;
+    });
   }
 
   ngOnDestroy(): void {
@@ -65,5 +71,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
   sendMessage(value: string) {
     this.chatFacade.sendMessage(this.contactUsername, value);
+  }
+
+  chooseContact(username: string) {
+    this.contactUsername = username;
+    this.chatFacade.setCurrentChat(username);
   }
 }
