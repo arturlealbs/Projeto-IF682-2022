@@ -15,11 +15,11 @@ const routes: Routes = [
     },
   },
   {
-    path: '/login',
+    path: 'login',
     component: LoginComponent
   },
   {
-    path: '/signin',
+    path: 'signin',
     component: SigninComponent
   },
 ];
