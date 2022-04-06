@@ -9,12 +9,16 @@ import { HomeRoutingModule } from './home-routing.module';
 import { homeInitializerProvider } from './home.initializer';
 
 import { SharedModule } from '../shared/shared.module';
+import { LoginComponent } from './pages/login/login.component';
+import { SigninComponent } from './pages/signin/signin.component';
 
 @NgModule({
 	providers: [HomeFacade, HomeApi, homeInitializerProvider],
   declarations: [
     HomeComponent,
-    InfosComponent
+    InfosComponent,
+    LoginComponent,
+    SigninComponent
   ],
   imports: [
     CommonModule,
