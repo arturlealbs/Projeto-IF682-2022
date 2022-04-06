@@ -14,7 +14,9 @@ const envConfig = ConfigModule.forRoot();
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.DB_URI),
+    MongooseModule.forRoot(process.env.DB_URI, {
+      dbName: process.env.DB_NAME,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
