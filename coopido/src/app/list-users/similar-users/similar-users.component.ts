@@ -12,14 +12,10 @@ export class SimilarUsersComponent implements AfterViewInit {
   
   ngAfterViewInit(): void {
     const cards = $('.ui.cards') as any
-    console.log("CARDS: ", cards)
     cards.slick({
-      dots: true,
-      arrows: true,
       infinite: true,
-      speed: 300,
-      slidesToShow: 4,
-      slidesToScroll: 2,    
+      slidesToShow: 3,
+      slidesToScroll: 3,    
     });
   }
   
