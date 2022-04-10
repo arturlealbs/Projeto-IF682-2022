@@ -12,7 +12,6 @@ export class AppComponent {
   
   title = 'Coopido';
   constructor(private profileService: ProfileService) {
-    console.log("testing-jquery: " + $('.poke-infos'))
     $('.poke-infos').hide();
   }
 

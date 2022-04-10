@@ -16,31 +16,31 @@ export class ChatsState {
       to: 'Daniel',
       from: 'Danilo',
       text: 'Olá, tudo bem?',
-      timestamp: new Date().toLocaleString()
+      timestamp: new Date().getTime(),
     },
     {
       to: 'Danilo',
       from: 'Daniel',
       text: 'Isso é um texto qualquer',
-      timestamp: new Date().toLocaleString()
+      timestamp: new Date().getTime(),
     },
     {
       to: 'Danilo',
       from: 'Daniel',
       text: 'Outro texto qualquer',
-      timestamp: new Date().toLocaleString()
+      timestamp: new Date().getTime(),
     },
     {
       to: 'Daniel',
       from: 'Danilo',
       text: 'Essa é a última mensagem salva',
-      timestamp: new Date().toLocaleString()
+      timestamp: new Date().getTime(),
     },
     {
       to: 'Another',
       from: 'Danilo',
       text: 'Essa mensagem precisa ser filtrada',
-      timestamp: new Date().toLocaleString()
+      timestamp: new Date().getTime(),
     },
   ]);
   

@@ -21,16 +21,17 @@
 </div>
 
 <div class="ui fluid container items messages">
-  <div class="item {{ (message.from === contactUsername) ? 'left' : 'right' }}" 
-    *ngFor = "let message of messages">
+  <div class="item {{ (chatMessage.from === contactUsername) ? 'left' : 'right' }}" 
+    *ngFor = "let chatMessage of messages">
     <a class="ui avatar tiny image">
       <img src="https://fomantic-ui.com/images/avatar/large/stevie.jpg">
     </a>
     <div class="content">
-      <a class="header">  {{ message.from }} </a>
-      <div class="description">
-        <p> {{ message.text }} </p>
-        <span> {{ message.timestamp }} </span>
+      <a class="header">  {{ chatMessage.from }} </a>
+      <div class="description" 
+        *ngFor = "let messageText of chatMessage.messages">
+        <p> {{ messageText.text }} </p>
+        <span> {{ messageText.timestamp }} </span>
       </div>
     </div>
   </div>

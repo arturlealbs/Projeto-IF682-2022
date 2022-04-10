@@ -5,11 +5,11 @@
     >
     </app-contacts>
     <app-chat class="chat-component"
-        [contactUsername]="contactUsername"
-        [messages]="messages"
         [username]="username"
         [preview]="preview"
         [online]="online"
+        [messages]="chatMessages"
+        [contactUsername]="contactUsername"
         (sendMessageEvent)="sendMessage($event)"
         (sendPreviewEvent)="sendPreview($event)"
     >

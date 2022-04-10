@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import ChatMessage from '../../types/chat-message';
 import Message from '../../types/message';
 
 @Component({
@@ -14,7 +15,7 @@ export class ChatComponent {
   online: boolean = false;
   
   @Input()
-  messages: Message[] = [];
+  messages: ChatMessage[] = [];
 
   @Input()
   username: string = 'Username';
@@ -27,12 +28,12 @@ export class ChatComponent {
 
   @Output()
   sendPreviewEvent = new EventEmitter<string>();
-
+  
   message: { text: string } = {
     text: ''
   }
 
-  constructor() { }
+  constructor() {}
 
   hasPreview(): boolean { 
     return this.preview !== null && this.preview.text !== '' 
