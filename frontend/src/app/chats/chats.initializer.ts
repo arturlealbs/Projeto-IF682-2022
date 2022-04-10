@@ -6,8 +6,8 @@ export const chatsInitializer = (
 	chatsFacade: ChatsFacade,
 	profileService: ProfileService
 ) => () => {
-	profileService.getUsername().subscribe(username => {
-		chatsFacade.setUsername(username);
+	profileService.getProfile().subscribe(profile => {
+		if (profile) chatsFacade.setProfile(profile);
 	});
 };
 

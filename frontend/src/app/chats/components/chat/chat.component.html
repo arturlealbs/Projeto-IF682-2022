@@ -1,7 +1,7 @@
 <div class="ui secondary attached stackable menu">
   <div class="ui container">
     <div class="ui item">
-      <img class="ui mini avatar circular image" src="https://avatars.githubusercontent.com/u/49529180?v=4">
+      <img class="ui mini avatar circular image" [src]="profile.profileImg">
       <div>
         <strong> {{ contactUsername }} </strong> <br>
         <div class="ui horizontal label {{(online) ? 'green' : 'red'}}">

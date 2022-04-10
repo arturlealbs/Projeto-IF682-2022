@@ -1,4 +1,4 @@
-import User from "src/app/shared/types/User";
+import User from "../types/User";
 import Actions from './actions'
 
 

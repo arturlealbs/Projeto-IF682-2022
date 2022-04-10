@@ -8,15 +8,13 @@
     </div>
 
     <form>
-      <input type="text" name="login" placeholder="login">
-      <input type="text" name="login" placeholder="password">
       <div class="login-signin">
-        <input type="submit" value="Log In">
-          <a routerLink="/signin">
-            <input type="submit" value="Sign In">
-          </a>
+        <input type="button" value="Log In"  (click)="signin()">
       </div>
     </form>
 
-  </div>
+    <div class="fb-login-button" data-width="" data-size="large" 
+      data-button-type="login_with" data-layout="default" 
+      data-auto-logout-link="true" data-use-continue-as="true"></div>
+    </div>  
 </div>

@@ -1,4 +1,3 @@
-import { ProfileService } from '../../../shared/services/profile.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import ChatMessage from '../../types/chat-message';
 import { ChatsFacade } from '../../chats.facade';
@@ -6,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import Message from '../../types/message';
 import Contact from '../../types/contact';
+import { defaultUser, User } from '../../../shared/types/User';
 
 @Component({
   selector: 'app-chat-page',
@@ -19,18 +19,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   public contacts: Contact[] = [];
   public chatMessages: ChatMessage[] = [];
 
-  public username: string = 'Username';
+  public profile: User = defaultUser;
   public contactUsername: string = "Daniel";
   
   private _messageSub!: Subscription;
   private _previewSub!: Subscription;
 
   constructor(
-    private profileService: ProfileService,
     private chatFacade: ChatsFacade
   ) {
-    this.profileService.getUsername().subscribe(username => {
-      this.username = username;
+    this.chatFacade.getProfile().subscribe(profile => {
+      this.profile = profile;
     });
   }
 

@@ -8,11 +8,6 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    data: {
-      id: 'home',
-      icon: 'home', 
-      title: 'Tela Inicial'
-    },
   },
   {
     path: 'login',

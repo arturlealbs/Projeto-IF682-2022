@@ -3,10 +3,11 @@ import { Injectable } from "@angular/core";
 
 import Message from "../types/message";
 import Contact from "../types/contact";
+import { User, defaultUser } from "../../shared/types/User";
 
 @Injectable({ providedIn: 'root' })
 export class ChatsState {
-  private username: string = "";
+  private profile: BehaviorSubject<User> = new BehaviorSubject<User>(defaultUser);
   private messageSubscription!: Subscription;
 
   private readonly preview = new BehaviorSubject<Message|null>(null);
@@ -87,8 +88,9 @@ export class ChatsState {
   }
   
   public getPreview(): Observable<Message|null> {
+    const username = this.profile.getValue().username;
     return this.preview.asObservable().pipe(
-      map(message => message?.from !== this.username ? message : null)
+      map(message => message?.from !== username ? message : null)
     );
   }
 
@@ -97,10 +99,14 @@ export class ChatsState {
   }
 
   public getUsername(): string {
-    return this.username;
+    return this.profile.getValue().username;
   }
 
-  public setUsername(username: string) {
-    this.username = username;
+  public getProfile(): Observable<User> {
+    return this.profile.asObservable();
+  }
+
+  public setProfile(profile: User) {
+    this.profile.next(profile);
   }
 }

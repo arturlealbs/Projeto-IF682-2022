@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import User from '../../shared/types/User'
+import User from '../types/User'
 import Rate from '../types/rate';
 @Component({
   selector: 'app-similar-users',
