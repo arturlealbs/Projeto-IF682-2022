@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProfileService } from './shared/services/profile.service';
 declare var $:JQueryStatic;
 
 

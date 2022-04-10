@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import Message from './types/message';
+import Contact from './types/contact';
 
 @Injectable()
 export class ChatsFacade {
@@ -20,6 +21,14 @@ export class ChatsFacade {
 		});
 	}
 
+	public getUsername(): string {
+		return this.state.getUsername();
+	}
+
+	public setUsername(username: string) {
+		this.state.setUsername(username);
+	}
+
 	public getPreview(): Observable<Message|null> {
 		return this.state.getPreview();
 	}
@@ -27,26 +36,32 @@ export class ChatsFacade {
 	public getCurrentMessages(): Observable<Message[]> {
 		return this.state.getMessages();
 	}
+	
+	public getContacts(): Observable<Contact[]> {
+		return this.state.getContacts();
+	}
 
 	public setCurrentChat(username: string) {
 		this.state.setChatMessages(username);
 	}
 
-	public sendMessage(message: string) {
+	public sendMessage(contact: string, message: string) {
 		const username = this.state.getUsername();
 		this.messageService.sendMessage({
 			timestamp: Date.now(),
-			username: username,
+			from: username,
 			text: message,
+			to: contact,
 		});
 	}
 
-	public sendPreview(message: string) {
+	public sendPreview(contact: string, message: string) {
 		const username = this.state.getUsername();
 		this.messageService.sendPreview({
 			timestamp: Date.now(),
-			username: username,
+			from: username,
 			text: message,
+			to: contact,
 		});
 	}
 }

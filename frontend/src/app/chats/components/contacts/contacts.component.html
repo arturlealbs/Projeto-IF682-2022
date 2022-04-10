@@ -1,23 +1,15 @@
-<div class="ui middle aligned selection list">
-    <div class="item">
-      <img class="ui tiny image" 
-        src="https://fomantic-ui.com/images/avatar/small/helen.jpg">
+<div class="ui segment title">
+  <span class="ui large text"> Contatos </span>
+</div>
+<div class="ui middle aligned selection list contacts">
+    <div class="item" *ngFor="let contact of contacts" 
+      (click) = "chooseContact(contact.username)">
+      <img class="ui tiny image" src="{{contact.image}}">
       <div class="content">
-        <div class="header">Helen</div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="ui tiny image" 
-        src="https://fomantic-ui.com/images/avatar/small/christian.jpg">
-      <div class="content">
-        <div class="header">Christian</div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="ui tiny image" 
-        src="https://fomantic-ui.com/images/avatar/small/daniel.jpg">
-      <div class="content">
-        <div class="header">Daniel</div>
+        <div class="header"> {{contact.username}} </div>
+        <div class="description">
+          <p> {{ contact.lastMessage}} </p>
+        </div>
       </div>
     </div>
 </div>    

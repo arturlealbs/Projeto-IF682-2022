@@ -1,5 +1,6 @@
 export default interface Message {
+    to: string;
+    from: string;
     text: string;
-    username: string;
-    timestamp: number | string;
+    timestamp: number;
 }

@@ -7,10 +7,12 @@ import { CoreModule } from './core/core.module';
 
 import { HomeModule } from './home/home.module';
 import { ChatsModule } from './chats/chats.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
 		CoreModule,
