@@ -10,8 +10,6 @@ declare var $:JQueryStatic;
 export class AppComponent {
   
   title = 'Coopido';
-  constructor() {
-    console.log("testing-jquery: " + $('.poke-infos'))
-    $('.poke-infos').hide();
-  }
+  constructor() {}
+
 }

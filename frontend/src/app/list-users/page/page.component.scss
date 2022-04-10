@@ -1,0 +1,13 @@
+
+.page {
+    background-color: #FF9898;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vw;
+}
+
+app-similar-users {
+    width: 80%;
+    justify-self: center;
+}
