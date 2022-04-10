@@ -1,0 +1,13 @@
+.chat-page-container {
+    display: flex;
+    height: 94%;
+}
+.chat-component {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+}
+.contact-component {
+    width: 20%;
+}

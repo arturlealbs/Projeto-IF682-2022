@@ -1,0 +1,13 @@
+<div class="ui link card" id="{{ user?.username }}" (click)="requestShowModal()">
+    <div class="ui image">
+        <img src="../../../assets/example_user.png">
+    </div>
+    <div class="ui content">
+        <div class="header">{{ user?.name }}</div>
+        <div class="description">{{ user?.bio }}</div>
+        <div class="ui two buttons">
+            <div class="ui icon button" (click)="requestRateUser('like'); $event.stopPropagation()"><i class="ui green big heart icon"></i></div>
+            <div class="ui icon button" (click)="requestRateUser('dislike'); $event.stopPropagation()"><i class="ui red big thumbs down icon"></i></div>
+        </div>
+    </div>
+</div>
