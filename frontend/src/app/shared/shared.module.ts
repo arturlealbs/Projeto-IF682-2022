@@ -4,9 +4,10 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileService } from './services/profile.service';
 
 @NgModule({
- providers: [],
+ providers: [ProfileService],
  declarations: [],
  imports: [
    CommonModule,

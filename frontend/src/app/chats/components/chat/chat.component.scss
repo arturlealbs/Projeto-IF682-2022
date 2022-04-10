@@ -1,6 +1,8 @@
 .messages {
     height: 100%;
-    
+    overflow-y: scroll;
+    overflow-x: clip;
+
     .item {
         margin: 1em;
     }
@@ -18,9 +20,23 @@
         }
     }
     .content {
-        padding: 0 1.5em;
+        padding: 0 1.5em !important;
     }
+}
 
+.description {
+    display: flex;
+    margin: 0 !important;
+
+    p {
+        margin: 0 !important;
+    }
+    
+    span {
+        opacity: 0;
+        padding: 0 1em;
+        font-size: x-small;
+    }
     &:hover {
         span {
             transition: opacity .2s;
@@ -29,12 +45,6 @@
     }
 }
 
-.description {
-    display: flex;
-
-    span {
-        opacity: 0;
-        padding: 0 1em;
-        font-size: x-small;
-    }
+.preview .content .description {
+    color: #888;
 }
