@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   sockets: {
     url: 'http://localhost:3000',
-  }
+  },
+  facebookID: '1086039068912591',
 };
 
 /*

@@ -7,18 +7,26 @@
       <p>Coopido</p>
     </div>
 
-    <form>
-      <input type="text" name="email" placeholder="email">
-      <input type="text" name="age" placeholder="age">
-      <input type="text" name="password" placeholder="password">
-      <input type="text" name="occupation" placeholder="occupation">
-      <input type="text" name="description" placeholder="description">
+    <form (submit)="register()">
+      <input type="text" name="email" placeholder="email" 
+             [(ngModel)]="profile.email" required disabled>
+      <input type="text" name="username" placeholder="Nome de usuário"
+             [(ngModel)]="profile.username" required>
+      <input type="text" name="firstName" placeholder="Nome"
+             [(ngModel)]="profile.firstName" required>
+      <input type="text" name="lastName" placeholder="Sobrenome"
+             [(ngModel)]="profile.lastName" required>
+      <input type="number" name="age" placeholder="age"
+             [(ngModel)]="profile.age" required min="18">
+      <input type="text" name="occupation" placeholder="Profissão"
+             [(ngModel)]="profile.occupation">
+      <input type="text" name="education" placeholder="Escolaridade"
+             [(ngModel)]="profile.education">
+      <input type="text" name="bio" placeholder="Descrição"
+             [(ngModel)]="profile.bio">
 
       <div class="login-signin">
-        <a routerLink="/login">
-          <input type="submit" value="Login">
-        </a>
-        <input type="submit" value="Register">
+        <button type="submit"> Cadastrar </button>
       </div>
     </form>
 

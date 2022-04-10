@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { defaultUser, User } from '../../../shared/types/User';
 import ChatMessage from '../../types/chat-message';
 import Message from '../../types/message';
 
@@ -18,7 +19,7 @@ export class ChatComponent {
   messages: ChatMessage[] = [];
 
   @Input()
-  username: string = 'Username';
+  profile: User = defaultUser;
 
   @Input()
   contactUsername: string = "Contact";

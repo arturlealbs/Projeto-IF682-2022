@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 
 import Message from './types/message';
 import Contact from './types/contact';
+import { User } from '../shared/types/User';
 
 @Injectable()
 export class ChatsFacade {
@@ -21,12 +22,12 @@ export class ChatsFacade {
 		});
 	}
 
-	public getUsername(): string {
-		return this.state.getUsername();
+	public getProfile(): Observable<User> {
+		return this.state.getProfile();
 	}
 
-	public setUsername(username: string) {
-		this.state.setUsername(username);
+	public setProfile(profile: User) {
+		this.state.setProfile(profile);
 	}
 
 	public getPreview(): Observable<Message|null> {

@@ -1,21 +1,34 @@
+import { BehaviorSubject, Observable } from "rxjs";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
 
-import { Infos } from "../types/infos";
+import { User } from "../../shared/types/User";
+import { 
+  FacebookUser,
+  defaultFacebookUser
+} from "../types/facebook-user";
 
 @Injectable({ providedIn: 'root' })
 export class HomeState {
-  private readonly infos = new BehaviorSubject<Infos>({
-    id: -1, name: "", image: "",
-    height: -1, weight: -1,
-    base_experience: -1,
-  });
+  private profile: BehaviorSubject<User|null> = 
+    new BehaviorSubject<User|null>(null);
+  private facebookProfile: BehaviorSubject<FacebookUser> =
+    new BehaviorSubject<FacebookUser>(defaultFacebookUser);
 
-  public getInfos() {
-    return this.infos.asObservable();
+  public constructor() {}
+
+  public setProfile(profile: User) {
+    this.profile.next(profile);
   }
 
-  public setInfos(newInfo: Infos) {
-    this.infos.next(newInfo);
+  public getProfile(): Observable<User|null> {
+    return this.profile.asObservable();
+  }
+
+  public getFacebookProfile(): Observable<FacebookUser> {
+    return this.facebookProfile.asObservable();
+  }
+
+  public setFacebookProfile(profile: FacebookUser) {
+    this.facebookProfile.next(profile);
   }
 }

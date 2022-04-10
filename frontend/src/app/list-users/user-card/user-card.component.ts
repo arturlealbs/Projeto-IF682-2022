@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import User  from "../../shared/types/User"
+import User from "../types/User"
 import Actions from '../types/actions';
 import Rate from '../types/rate';
 

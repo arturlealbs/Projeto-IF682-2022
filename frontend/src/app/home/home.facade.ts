@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HomeApi } from './api/home.api';
+import { Observable } from 'rxjs';
+
 import { HomeState } from './state/home.state';
+import { HomeApi } from './api/home.api';
+
+import { User } from '../shared/types/User';
+import { FacebookUser } from './types/facebook-user';
 
 @Injectable()
 export class HomeFacade {
@@ -9,13 +14,19 @@ export class HomeFacade {
 		private readonly api: HomeApi
 	) {}
 
-    public fetchInfos(name: string) {
-        this.api.fetchInfos(name).subscribe(infos => {
-            this.state.setInfos(infos);
-        });
+    getProfile(): Observable<User|null> {
+        return this.state.getProfile();
     }
 
-	public getInfos() {
-		return this.state.getInfos();
+    setProfile(profile: User) {
+        this.state.setProfile(profile);
+    }
+
+    getFacebookProfile(): Observable<FacebookUser> {
+        return this.state.getFacebookProfile();
+    }
+
+    setFacebookProfile(profile: FacebookUser) {
+        this.state.setFacebookProfile(profile);
     }
 }
