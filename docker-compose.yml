@@ -3,18 +3,18 @@ services:
   web:
     container_name: web
     build:
-      context: ./boilerplate
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - '4200:4200'
       - '49153:49153'
     networks:
-      - boilerplate-network
+      - coopido-network
     volumes:
-      - ./boilerplate:/usr/app
+      - ./frontend:/usr/app
 
 networks:
-  boilerplate-network:
+  coopido-network:
     driver: overlay
     attachable: true
 
