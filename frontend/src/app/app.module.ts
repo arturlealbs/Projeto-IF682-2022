@@ -17,7 +17,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
 		CoreModule,
     HomeModule,
-    ChatsModule
+    ChatsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

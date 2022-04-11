@@ -10,7 +10,7 @@ export const homeInitializer = (
 ) => () => {
 	profileService.getProfile().subscribe(profile => {
 		if (profile === null) {
-			router.navigate(['/login']);
+			// router.navigate(['/login']);
 		} 
 	});
 

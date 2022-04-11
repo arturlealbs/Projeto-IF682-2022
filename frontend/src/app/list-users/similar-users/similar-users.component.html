@@ -1,12 +1,16 @@
-<div class="ui cards">
+<ngx-slick-carousel class="carousel" 
+  [config]="slideConfig" 
+  #slickModal="slick-carousel" 
+>
   <app-user-card
+    ngxSlickItem *ngFor="let user of users" class="slide"
     (showRequest)="showUserModal($event)"
     (rateRequest)="rateUser($event)"
     [user]="user"
-    *ngFor="let user of users"
   >
   </app-user-card>
-</div>
+</ngx-slick-carousel>
+
 <div class="ui tiny modal" id="user-profile-modal">
   <div class="ui header">
     <img class="modal-picture" src="../../../assets/example_user.png">
