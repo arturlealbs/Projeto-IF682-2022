@@ -12,6 +12,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SigninComponent } from './pages/signin/signin.component';
 
+import { ProfileComponent } from './pages/profile/profile.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+
 import { environment } from '../../environments/environment';
 import { 
   SocialAuthServiceConfig,
@@ -42,7 +46,8 @@ import {
   declarations: [
     HomeComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    ProfileComponent
   ],
   imports: [
     SocialLoginModule,
@@ -50,6 +55,8 @@ import {
     FormsModule,
 		SharedModule,
 		HomeRoutingModule,
+    MatSelectModule,
+    MatIconModule
   ]
 })
 export class HomeModule { }
