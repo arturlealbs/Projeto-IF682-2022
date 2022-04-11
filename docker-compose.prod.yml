@@ -3,15 +3,15 @@ services:
   frontend:
     container_name: web
     build:
-      context: ./boilerplate
+      context: ./frontend
       dockerfile: Dockerfile.prod
     restart: unless-stopped
     ports:
       - "80:80"
     networks:
-      - boilerplate-network
+      - coopido-network
 
 networks:
-  boilerplate-network:
+  coopido-network:
     driver: overlay
     attachable: true

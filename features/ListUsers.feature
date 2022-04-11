@@ -5,65 +5,65 @@ So that I can get to know them better and potentially meet them
 
 
 Scenario: User filters other users by preference
-    Given I am logged in as a normal user with username {"John"}
-    And {"Anna"} and {"Jessica"} have the {"soccer"} tag
-    And I am at the {"Find people"} page
-    When I select the {"soccer"} tag on the {"filter by preference"} element
-    Then I see Anna and Jessica on the list
+    GIVEN I am logged in as a normal user with username {"John"}
+    AND {"Anna"} and {"Jessica"} have the {"soccer"} tag
+    AND I am at the {"Find people"} page
+    WHEN I select the {"soccer"} tag on the {"filter by preference"} element
+    THEN I see Anna and Jessica on the list
 
 Scenario: No people with the same preference as the User
-    Given I am logged in as a normal user with username {"John"}
-    And I am at the {"Find people"} page
-    And there are 5 users on the platform
-    When there are no other users with  the same preferences as mine
-    Then I see the 5 users on the list
+    GIVEN I am logged in as a normal user with username {"John"}
+    AND I am at the {"Find people"} page
+    AND there are 5 users on the platform
+    WHEN there are no other users with  the same preferences as mine
+    THEN I see the 5 users on the list
 
 Scenario: Person that users likes gets out of the list 
-    Given I am logged in as a normal user with username {"John"}
-    And I am at the {"Find people"} page
-    And I see {"Anna"} and {"Jessica"}  on the list
-    And {"Anna"} has not liked my profile yet
-    When I like Anna’s profile
-    Then Anna’s profile gets out of the list
-    And Jessica’s profile is still on the list
+    GIVEN I am logged in as a normal user with username {"John"}
+    AND I am at the {"Find people"} page
+    AND I see {"Anna"} and {"Jessica"}  on the list
+    AND {"Anna"} has not liked my profile yet
+    WHEN I like Anna’s profile
+    THEN Anna’s profile gets out of the list
+    AND Jessica’s profile is still on the list
 
 Scenario: Info message is displayed when there is no people available to the user
-    Given I am logged in as a normal user with username {"John"}
-    And I am at the {"Find people"} page
-    When there are no users in my list
-    Then I see an info message telling me that there are no users available at the moment
+    GIVEN I am logged in as a normal user with username {"John"}
+    AND I am at the {"Find people"} page
+    WHEN there are no users in my list
+    THEN I see an info message telling me that there are no users available at the moment
 
 Scenario: User filters other users by preference
-    Given I am logged in as a normal user with username “John”
-    And  “Anna” and “Jessica” have “soccer”  in their preference list
-    When I ask the system to filter users by the preference “soccer”
-    Then the system returns Anna’s and Jessica’s profiles to my list of users
+    GIVEN I am logged in as a normal user with username “John”
+    AND  “Anna” and “Jessica” have “soccer”  in their preference list
+    WHEN I ask the system to filter users by the preference “soccer”
+    THEN the system returns Anna’s and Jessica’s profiles to my list of users
 
 Scenario: No people with the same preference as the User
-    Given I am logged in as a normal user with username “John”
-    And there are 5 users on the database
-    When all of the users don’t have any preference that is in my preference list
-    Then the system returns the five profiles to my list of users 
-    And the database does not change
+    GIVEN I am logged in as a normal user with username “John”
+    AND there are 5 users on the database
+    WHEN all of the users don’t have any preference that is in my preference list
+    THEN the system returns the five profiles to my list of users
+    THEN merge conflict
 
 Scenario: Person that users likes matches with him 
-    Given I am logged in as a normal user with username {"John"}
-    And I am at the {"Find people"} page
-    And I see {"Anna"} and {"Jessica"} on the list
-    And {"Anna"} has already liked my profile
-    When I like Anna’s profile
-    Then Anna’s profile gets out of the list
-    And I receive a popup that I mathed with {"Anna"} and have the ability to chat her
-    And Jessica’s profile is still on the list
+    GIVEN I am logged in as a normal user with username {"John"}
+    AND I am at the {"Find people"} page
+    AND I see {"Anna"} and {"Jessica"} on the list
+    AND {"Anna"} has already liked my profile
+    WHEN I like Anna’s profile
+    THEN Anna’s profile gets out of the list
+    AND I receive a popup that I mathed with {"Anna"} and have the ability to chat her
+    AND Jessica’s profile is still on the list
 
 
 Scenario: Person that users dislikes gets out of the list 
-    Given I am logged in as a normal user with username {"John"}
-    And I am at the {"Find people"} page
-    And I see {"Anna"} and {"Jessica"}  on the list
-    And {"Anna"} has not liked my profile yet
-    When I dislike Anna’s profile
-    Then Anna’s profile gets out of the list
-    And Jessica’s profile is still on the list
+    GIVEN I am logged in as a normal user with username {"John"}
+    AND I am at the {"Find people"} page
+    AND I see {"Anna"} and {"Jessica"}  on the list
+    AND {"Anna"} has not liked my profile yet
+    WHEN I dislike Anna’s profile
+    THEN Anna’s profile gets out of the list
+    AND Jessica’s profile is still on the list
 
 

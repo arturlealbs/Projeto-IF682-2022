@@ -1,0 +1,17 @@
+<div class="chat-page-container">
+    <app-contacts class="contact-component"
+        [contacts]="contacts"
+        (chooseContactEvent)="chooseContact($event)"
+    >
+    </app-contacts>
+    <app-chat class="chat-component"
+        [profile]="profile"
+        [preview]="preview"
+        [online]="online"
+        [messages]="chatMessages"
+        [contactUsername]="contactUsername"
+        (sendMessageEvent)="sendMessage($event)"
+        (sendPreviewEvent)="sendPreview($event)"
+    >
+    </app-chat>
+</div>
