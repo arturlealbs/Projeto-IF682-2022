@@ -1,0 +1,17 @@
+version: '3'
+services:
+  frontend:
+    container_name: web
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - coopido-network
+
+networks:
+  coopido-network:
+    driver: overlay
+    attachable: true

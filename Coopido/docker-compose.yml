@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    container_name: web
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - '4200:4200'
+      - '49153:49153'
+    networks:
+      - coopido-network
+    volumes:
+      - ./frontend:/usr/app
+
+networks:
+  coopido-network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  frontend:
