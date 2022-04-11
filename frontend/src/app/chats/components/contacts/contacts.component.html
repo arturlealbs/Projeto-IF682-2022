@@ -1,0 +1,15 @@
+<div class="ui segment title">
+  <span class="ui large text"> Contatos </span>
+</div>
+<div class="ui middle aligned selection list contacts">
+    <div class="item" *ngFor="let contact of contacts" 
+      (click) = "chooseContact(contact.username)">
+      <img class="ui tiny image" src="{{contact.image}}">
+      <div class="content">
+        <div class="header"> {{contact.username}} </div>
+        <div class="description">
+          <p> {{ contact.lastMessage}} </p>
+        </div>
+      </div>
+    </div>
+</div>    
