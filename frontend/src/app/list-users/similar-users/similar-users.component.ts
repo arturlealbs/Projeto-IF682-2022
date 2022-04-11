@@ -1,26 +1,17 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import User from '../types/User'
-import Rate from '../types/rate';
+import { Component } from '@angular/core';
+import { Rate } from '../types/rate';
+import User from '../types/user';
+
 @Component({
   selector: 'app-similar-users',
   templateUrl: './similar-users.component.html',
   styleUrls: ['./similar-users.component.scss']
 })
-export class SimilarUsersComponent implements AfterViewInit {
+export class SimilarUsersComponent {
+  slideConfig = {"slidesToShow": 4, "slidesToScroll": 4}
 
   constructor() { }
   
-  ngAfterViewInit(): void {
-    const cards = $('.ui.cards') as any
-    cards.slick({
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 3,    
-    });
-  }
-  
-
-
   showUserModal = (user: User) => {
     this.userInModal = user;
     const userModal = $('.ui.modal') as any

@@ -9,9 +9,6 @@ import { HomeModule } from './home/home.module';
 import { ChatsModule } from './chats/chats.module';
 import { SharedModule } from './shared/shared.module';
 
-import { HeaderComponent } from './shared/components/header/header.component';
-import { NotificationsComponent } from './shared/components/notifications/notifications.component';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,8 +18,6 @@ import { NotificationsComponent } from './shared/components/notifications/notifi
 		CoreModule,
     HomeModule,
     ChatsModule,
-    HeaderComponent,
-    NotificationsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

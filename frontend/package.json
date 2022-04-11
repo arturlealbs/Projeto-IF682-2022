@@ -22,7 +22,7 @@
     "@angular/router": "~13.2.0",
     "fomantic-ui": "^2.8.8",
     "fomantic-ui-css": "^2.8.8",
-    "ngx-slick-carousel": "^0.5.1",
+    "ngx-slick-carousel": "^0.6.0",
     "ngx-socket-io": "^4.2.0",
     "socket.io-client": "^4.4.1",
     "rxjs": "~7.5.0",
