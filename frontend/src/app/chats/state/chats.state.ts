@@ -2,7 +2,7 @@ import { BehaviorSubject, map, Observable, Subscription } from "rxjs";
 import { Injectable } from "@angular/core";
 
 import Message from "../types/message";
-import Contact from "../types/contact";
+import { Contact } from "../types/contact";
 import { User, defaultUser } from "../../shared/types/User";
 
 @Injectable({ providedIn: 'root' })

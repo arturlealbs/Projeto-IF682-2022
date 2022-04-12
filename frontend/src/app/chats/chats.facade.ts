@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import Message from './types/message';
-import Contact from './types/contact';
+import { Contact } from './types/contact';
 import { User } from '../shared/types/User';
 
 @Injectable()

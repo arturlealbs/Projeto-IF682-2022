@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
         firstName: user.firstName, 
         profileImg: user.response.picture.data.url
       });
+      this.homeFacade.getFacebookProfileData(
+        user.id, user.authToken
+      );
       this.router.navigate(['/signin']);
     });
   }

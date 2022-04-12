@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'notifications', 
-    loadChildren: () => import('./shared/components/notifications/notifications.component').then(m => m.NotificationsComponent)
+    component: NotificationsComponent
   },
 ];
 

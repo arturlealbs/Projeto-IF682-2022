@@ -8,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 
 export class HeaderComponent implements OnInit {
 
+  notificationCount: number = 4;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    console.log("logout");
   }
 
 }

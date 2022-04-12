@@ -23,6 +23,12 @@ import {
   SocialLoginModule, 
 } from 'angularx-social-login';
 
+const fbLoginOptions = {
+  scope: 'email,public_profile,user_age_range,user_birthday,user_gender', // ,user_photos
+  return_scopes: true,
+  enable_profile_selector: true
+};
+
 @NgModule({
 	providers: [
     HomeFacade, 
@@ -36,7 +42,8 @@ import {
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider(
-              environment.facebookID
+              environment.facebookID,
+              fbLoginOptions
             )
           }
         ]
