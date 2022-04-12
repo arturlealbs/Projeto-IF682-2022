@@ -12,12 +12,22 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SigninComponent } from './pages/signin/signin.component';
 
+import { ProfileComponent } from './pages/profile/profile.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+
 import { environment } from '../../environments/environment';
 import { 
   SocialAuthServiceConfig,
   FacebookLoginProvider, 
   SocialLoginModule, 
 } from 'angularx-social-login';
+
+const fbLoginOptions = {
+  scope: 'email,public_profile,user_age_range,user_birthday,user_gender', // ,user_photos
+  return_scopes: true,
+  enable_profile_selector: true
+};
 
 @NgModule({
 	providers: [
@@ -32,7 +42,8 @@ import {
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider(
-              environment.facebookID
+              environment.facebookID,
+              fbLoginOptions
             )
           }
         ]
@@ -42,7 +53,8 @@ import {
   declarations: [
     HomeComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    ProfileComponent
   ],
   imports: [
     SocialLoginModule,
@@ -50,6 +62,8 @@ import {
     FormsModule,
 		SharedModule,
 		HomeRoutingModule,
+    MatSelectModule,
+    MatIconModule
   ]
 })
 export class HomeModule { }

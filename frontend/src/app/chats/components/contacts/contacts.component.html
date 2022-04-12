@@ -1,9 +1,15 @@
-<div class="ui segment title">
-  <span class="ui large text"> Contatos </span>
+<div class="ui segment profile">
+  <img class="ui mini avatar circular image" [src]="profile.profileImg">
+  <div>
+    <strong> {{ profile.username }} </strong> <br>
+    <div class="ui horizontal label green">
+      Online
+    </div>
+  </div>
 </div>
 <div class="ui middle aligned selection list contacts">
     <div class="item" *ngFor="let contact of contacts" 
-      (click) = "chooseContact(contact.username)">
+      (click) = "chooseContact(contact)">
       <img class="ui tiny image" src="{{contact.image}}">
       <div class="content">
         <div class="header"> {{contact.username}} </div>

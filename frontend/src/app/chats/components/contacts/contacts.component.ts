@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import Contact from '../../types/contact';
+import { defaultUser, User } from '../../../shared/types/User';
+import { Contact } from '../../types/contact';
 
 @Component({
   selector: 'app-contacts',
@@ -10,16 +11,19 @@ export class ContactsComponent implements OnInit {
   
   @Input()
   contacts: Contact[] = [];
+  
+  @Input()
+  profile: User = defaultUser;
 
   @Output()
-  chooseContactEvent = new EventEmitter<string>();
+  chooseContactEvent = new EventEmitter<Contact>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  chooseContact(username: string) {
-    this.chooseContactEvent.emit(username);
+  chooseContact(newContact: Contact) {
+    this.chooseContactEvent.emit(newContact);
   }
 }

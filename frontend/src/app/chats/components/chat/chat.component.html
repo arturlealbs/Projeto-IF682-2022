@@ -1,10 +1,10 @@
 <div class="ui secondary attached stackable menu">
   <div class="ui container">
     <div class="ui item">
-      <img class="ui mini avatar circular image" [src]="profile.profileImg">
+      <img class="ui mini avatar circular image" [src]="contact.image">
       <div>
-        <strong> {{ contactUsername }} </strong> <br>
-        <div class="ui horizontal label {{(online) ? 'green' : 'red'}}">
+        <strong> {{ contact.username }} </strong> <br>
+        <div class="ui horizontal label {{onlineStatus()}}">
           {{(online) ? 'Online' : 'Offline'}}
         </div>
       </div>
@@ -21,10 +21,10 @@
 </div>
 
 <div class="ui fluid container items messages">
-  <div class="item {{ (chatMessage.from === contactUsername) ? 'left' : 'right' }}" 
+  <div class="item {{messageSide(chatMessage)}}" 
     *ngFor = "let chatMessage of messages">
     <a class="ui avatar tiny image">
-      <img src="https://fomantic-ui.com/images/avatar/large/stevie.jpg">
+      <img src="{{contactImage(chatMessage)}}">
     </a>
     <div class="content">
       <a class="header">  {{ chatMessage.from }} </a>
@@ -38,7 +38,7 @@
  
   <div class="item preview" *ngIf = "hasPreview()">
     <a class="ui avatar tiny image">
-      <img src="https://fomantic-ui.com/images/avatar/large/stevie.jpg">
+      <img src="contact.image">
     </a>
     <div class="content">
       <a class="header">  {{ preview?.from }} </a>

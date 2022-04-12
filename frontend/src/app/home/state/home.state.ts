@@ -24,8 +24,16 @@ export class HomeState {
     return this.profile.asObservable();
   }
 
+  public getCurrentProfile(): User|null {
+    return this.profile.getValue();
+  }
+
   public getFacebookProfile(): Observable<FacebookUser> {
     return this.facebookProfile.asObservable();
+  }
+  
+  public getCurrentFacebookProfile(): FacebookUser {
+    return this.facebookProfile.getValue();
   }
 
   public setFacebookProfile(profile: FacebookUser) {

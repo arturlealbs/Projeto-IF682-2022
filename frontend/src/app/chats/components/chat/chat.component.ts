@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { defaultUser, User } from '../../../shared/types/User';
+import { Contact, defaultContact } from '../../types/contact';
 import ChatMessage from '../../types/chat-message';
 import Message from '../../types/message';
 
@@ -22,7 +24,7 @@ export class ChatComponent {
   profile: User = defaultUser;
 
   @Input()
-  contactUsername: string = "Contact";
+  contact: Contact = new defaultContact();
 
   @Output()
   sendMessageEvent = new EventEmitter<string>();
@@ -47,5 +49,18 @@ export class ChatComponent {
   sendMessage() {
     this.sendMessageEvent.emit(this.message.text);
     this.message.text = '';
+  }
+
+  messageSide(message: ChatMessage): string {
+    return message.from === this.contact.username ?  'left' : 'right';
+  }
+  
+  contactImage(message: ChatMessage): string {
+    return message.from === this.contact.username ?  
+      this.contact.image : this.profile.profileImg;
+  }
+
+  onlineStatus(): string {
+    return this.online ? 'green' : 'red';
   }
 }

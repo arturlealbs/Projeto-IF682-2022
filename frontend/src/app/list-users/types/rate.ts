@@ -1,10 +1,6 @@
-import User from "../types/User";
-import Actions from './actions'
+import User from "./user";
 
-
-interface Rate {
+export interface Rate {
     user?: User,
     action?: string
-}
-
-export default Rate
+};

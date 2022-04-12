@@ -3,9 +3,9 @@ import ChatMessage from '../../types/chat-message';
 import { ChatsFacade } from '../../chats.facade';
 import { Subscription } from 'rxjs';
 
-import Message from '../../types/message';
-import Contact from '../../types/contact';
 import { defaultUser, User } from '../../../shared/types/User';
+import { Contact, defaultContact } from '../../types/contact';
+import Message from '../../types/message';
 
 @Component({
   selector: 'app-chat-page',
@@ -20,7 +20,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   public chatMessages: ChatMessage[] = [];
 
   public profile: User = defaultUser;
-  public contactUsername: string = "Daniel";
+  public contact: Contact = new defaultContact();
   
   private _messageSub!: Subscription;
   private _previewSub!: Subscription;
@@ -34,7 +34,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.chatFacade.setCurrentChat(this.contactUsername);
+    this.chatFacade.setCurrentChat(this.contact.username);
 
     const mObservable = this.chatFacade.getCurrentMessages();
     this._messageSub = mObservable.subscribe(messages => {
@@ -103,15 +103,15 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   sendPreview(value: string) {
-    this.chatFacade.sendPreview(this.contactUsername, value);
+    this.chatFacade.sendPreview(this.contact.username, value);
   }
 
   sendMessage(value: string) {
-    this.chatFacade.sendMessage(this.contactUsername, value);
+    this.chatFacade.sendMessage(this.contact.username, value);
   }
 
-  chooseContact(username: string) {
-    this.contactUsername = username;
-    this.chatFacade.setCurrentChat(username);
+  chooseContact(newContact: Contact) {
+    this.contact = newContact;
+    this.chatFacade.setCurrentChat(newContact.username);
   }
 }

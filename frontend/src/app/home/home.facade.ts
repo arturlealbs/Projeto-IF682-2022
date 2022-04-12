@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HomeState } from './state/home.state';
 import { HomeApi } from './api/home.api';
 
-import { User } from '../shared/types/User';
+import { defaultUser, User } from '../shared/types/User';
 import { FacebookUser } from './types/facebook-user';
 
 @Injectable()
@@ -28,5 +28,19 @@ export class HomeFacade {
 
     setFacebookProfile(profile: FacebookUser) {
         this.state.setFacebookProfile(profile);
+    }
+
+    getFacebookProfileData(facebookID: string, accessToken: string) {
+        this.api.getProfileData(facebookID, accessToken).subscribe(data => {
+            const profile = this.state.getCurrentFacebookProfile();
+            if (profile) {
+                this.setFacebookProfile({
+                    ...profile, 
+                    gender: data.gender,
+                    age: data.age_range.min,
+                    birthday: data.birthday, 
+                });
+            }
+        });
     }
 }
