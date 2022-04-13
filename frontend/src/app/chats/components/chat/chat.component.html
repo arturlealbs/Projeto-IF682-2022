@@ -1,0 +1,61 @@
+<div class="ui secondary attached stackable menu">
+  <div class="ui container">
+    <div class="ui item">
+      <img class="ui mini avatar circular image" [src]="contact.image">
+      <div>
+        <strong> {{ contact.username }} </strong> <br>
+        <div class="ui horizontal label {{onlineStatus()}}">
+          {{(online) ? 'Online' : 'Offline'}}
+        </div>
+      </div>
+    </div>
+    <div class="right item">
+      <div class="ui input">
+        <input type="text" placeholder="Pesquisar...">
+      </div>
+      <button class="ui icon button right item">
+        <i class="ellipsis horizontal icon"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="ui fluid container items messages">
+  <div class="item {{messageSide(chatMessage)}}" 
+    *ngFor = "let chatMessage of messages">
+    <a class="ui avatar tiny image">
+      <img src="{{contactImage(chatMessage)}}">
+    </a>
+    <div class="content">
+      <a class="header">  {{ chatMessage.from }} </a>
+      <div class="description" 
+        *ngFor = "let messageText of chatMessage.messages">
+        <p> {{ messageText.text }} </p>
+        <span> {{ messageText.timestamp }} </span>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="item preview" *ngIf = "hasPreview()">
+    <a class="ui avatar tiny image">
+      <img src="contact.image">
+    </a>
+    <div class="content">
+      <a class="header">  {{ preview?.from }} </a>
+      <div class="description">
+        <p> {{ preview?.text }} </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui fluid icon input">
+  <input (keyup)='sendPreview($event)' 
+    placeholder='Digite aqui...'
+    [(ngModel)]="message.text"
+    (keyup.enter)="sendMessage()"
+  />
+  <button class="ui icon button" (click)='sendMessage()'>
+    <i class="paper plane icon"></i>
+  </button>
+</div>

@@ -1,0 +1,28 @@
+<header>
+    <nav class="navbar navbar-dark shadow-md">
+        <div class="Title">
+            <button routerLink = '/' type = "button" class = "logo">
+                Coopido
+            </button>
+        </div>
+        <button routerLink="/profile" type="button" class="ntfc-button">
+            <i class="fas fa-user"></i>
+        </button>
+        <button routerLink="/chats" type="button" class="ntfc-button">
+            <i class="fas fa-comments"></i>
+        </button>
+        <button routerLink="/list" type="button" class="ntfc-button">
+            <i class="fas fa-user-friends"></i>
+        </button>
+        <button routerLink = '/notifications' type="button" class="ntfc-button">
+            <i class="fas fa-bell"></i>
+            <div style= font-size:10px; class="badge bg-danger">
+                {{ notificationCount }}
+            </div>
+        </button>
+        <button routerLink="/login" type="button" 
+            (click)="logout()" class="ntfc-button">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    </nav>
+</header>

@@ -1,0 +1,17 @@
+.notification {
+    display: flex;
+    align-items: center;
+    position: relative;
+    vertical-align: bottom;
+    word-wrap: break-word;
+    flex-direction: column;
+
+    table {
+        margin-top: 1em;
+        width: 70%;
+
+        td {
+            vertical-align: middle;
+        }
+    }
+}
