@@ -8,13 +8,44 @@ import { ProfileService } from './services/profile.service';
 import { HeaderComponent } from './components/header/header.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 
+import { environment } from '../../environments/environment';
+import { 
+  SocialAuthServiceConfig,
+  FacebookLoginProvider, 
+  SocialLoginModule, 
+} from '@abacritt/angularx-social-login';
+
+const fbLoginOptions = {
+  scope: 'email,public_profile,user_age_range,user_birthday,user_gender', // ,user_photos
+  return_scopes: true,
+  enable_profile_selector: true
+};
+
 @NgModule({
-  providers: [ProfileService],
+  providers: [
+    ProfileService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              environment.facebookID,
+              fbLoginOptions
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    },
+  ],
   declarations: [
     HeaderComponent,
     NotificationsComponent
   ],
   imports: [
+    SocialLoginModule,
     CommonModule,
     RouterModule,
     BrowserModule,

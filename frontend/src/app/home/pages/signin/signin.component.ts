@@ -17,16 +17,19 @@ export class SigninComponent implements OnInit {
     private homeFacade: HomeFacade,
 	  private router: Router,
   ) { 
-    this.homeFacade.getFacebookProfile().subscribe(profile => {
+    this.homeFacade.getProfile().subscribe(profile => {
       this.profile = {...this.profile, ...profile};
     });
   }
 
   ngOnInit(): void {
+    const token = localStorage.getItem("TOKEN");
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
   }
 
   public register() {
-    console.log("Registrando")
     this.homeFacade.setProfile(this.profile);
     this.router.navigate(['/']);
     return false;

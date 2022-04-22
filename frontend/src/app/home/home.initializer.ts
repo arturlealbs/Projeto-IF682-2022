@@ -7,19 +7,7 @@ export const homeInitializer = (
 	router: Router,
 	homeFacade: HomeFacade,
 	profileService: ProfileService
-) => () => {
-	profileService.getProfile().subscribe(profile => {
-		if (profile === null) {
-			// router.navigate(['/login']);
-		} 
-	});
-
-	homeFacade.getProfile().subscribe(profile => {
-		if (profile !== null) {
-			profileService.setProfile(profile);
-		}
-	});
-};
+) => () => {};
 
 export const homeInitializerProvider = {
 	provide: APP_INITIALIZER,

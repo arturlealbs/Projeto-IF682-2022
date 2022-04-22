@@ -1,6 +1,9 @@
+:host {
+    height: 100%;
+}
 .chat-page-container {
     display: flex;
-    height: calc(100vh - 3.6em);
+    height: 100%;
 }
 .chat-component {
     display: flex;

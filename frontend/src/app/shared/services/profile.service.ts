@@ -1,25 +1,51 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { User } from '../types/User';
+
+import { 
+  SocialAuthService, 
+  FacebookLoginProvider,
+} from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  private username: BehaviorSubject<string> = new BehaviorSubject<string>("");
   private profile: BehaviorSubject<User|null> = new BehaviorSubject<User|null>(null);
 
-  constructor() {}
+  constructor(
+    private socialAuthService: SocialAuthService,
+  ) {
+    this.socialAuthService.authState.subscribe((user) => {
+      if (!user) return;
 
-  public getUsername(): Observable<string> {
-    return this.username.asObservable()
+      localStorage.setItem("TOKEN", user.authToken);
+      this.setProfile({
+        id: user.id,
+        interests: [],
+        name: user.name,
+        email: user.email,
+        username: user.name,
+        lastName: user.lastName,
+        firstName: user.firstName,
+        profileImg: user.response.picture.data.url,
+      });
+    });
   }
 
-  public setUsername(username: string) {
-    this.username.next(username);
+  public signIn(): void {
+    this.socialAuthService.signIn(
+      FacebookLoginProvider.PROVIDER_ID
+    );
   }
-  
+
+  public signOut(): void {
+    localStorage.removeItem("TOKEN");
+    this.socialAuthService.signOut();
+    this.profile.next(null);
+  }
+
   public getProfile(): Observable<User|null> {
     return this.profile.asObservable()
   }
