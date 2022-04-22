@@ -34,7 +34,7 @@ input CreateUserInput {
   genderOfInterest: [Gender!]!
 
   """User's interests and hobbies"""
-  interest: [String!]!
+  interests: [String!]!
 
   """Languages the user speaks"""
   languages: [String!]
@@ -123,7 +123,7 @@ input UpdateUserInput {
   genderOfInterest: [Gender!]
 
   """User's interests and hobbies"""
-  interest: [String!]
+  interests: [String!]
 
   """Languages the user speaks"""
   languages: [String!]
@@ -176,7 +176,7 @@ type User {
   genderOfInterest: [Gender!]!
 
   """User's interests and hobbies"""
-  interest: [String!]!
+  interests: [String!]!
 
   """Languages the user speaks"""
   languages: [String!]

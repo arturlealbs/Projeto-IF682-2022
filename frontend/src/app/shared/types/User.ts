@@ -10,20 +10,28 @@ export interface User {
     age?: number;
     bio?: string;
     gender?: string;
-    birthday?: string;
+    birthDate?: string;
     occupation?: string;
     education?: string;
     interests: string[];
+
+    city?: string;
+    state?: string;
+    address?: string;
+    workWith?: string;
+    phoneNumber?: string;
+    languages?: string[];
+    genderOfInterest?: string;
 }
 
 export const defaultUser: User = {
     id: "",
     name: "",
     email: "",
-    gender: "",
+    gender: "male",
     username: "",
     lastName: "",
-    birthday: "",
+    birthDate: "",
     firstName: "",
     education: "",
     profileImg: "",

@@ -28,7 +28,7 @@ export class HomeFacade {
                 this.setProfile({
                     ...profile, 
                     gender: data.gender,
-                    birthday: data.birthday, 
+                    birthDate: data.birthday, 
                     age: data.age_range.min,
                 });
             }

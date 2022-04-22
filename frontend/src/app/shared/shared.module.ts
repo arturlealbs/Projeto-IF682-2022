@@ -7,47 +7,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileService } from './services/profile.service';
 import { HeaderComponent } from './components/header/header.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { SocialModule } from './modules/social.module';
+import { GraphQLModule } from './modules/graphql.module';
+import { UsersService } from './services/users.service';
 
-import { environment } from '../../environments/environment';
-import { 
-  SocialAuthServiceConfig,
-  FacebookLoginProvider, 
-  SocialLoginModule, 
-} from '@abacritt/angularx-social-login';
-
-const fbLoginOptions = {
-  scope: 'email,public_profile,user_age_range,user_birthday,user_gender', // ,user_photos
-  return_scopes: true,
-  enable_profile_selector: true
-};
 
 @NgModule({
   providers: [
     ProfileService,
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider(
-              environment.facebookID,
-              fbLoginOptions
-            )
-          }
-        ]
-      } as SocialAuthServiceConfig,
-    },
+    UsersService,
   ],
   declarations: [
     HeaderComponent,
     NotificationsComponent
   ],
   imports: [
-    SocialLoginModule,
-    CommonModule,
     RouterModule,
+    SocialModule,
+    CommonModule,
+    GraphQLModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,

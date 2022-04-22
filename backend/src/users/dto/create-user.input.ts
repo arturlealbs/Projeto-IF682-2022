@@ -40,7 +40,7 @@ export class CreateUserInput {
   address: string;
 
   @Field((type) => [String], { description: "User's interests and hobbies" })
-  interest: string[];
+  interests: string[];
 
   @Field((type) => [Gender], {
     description: 'Genders of people that the user wants to meet',

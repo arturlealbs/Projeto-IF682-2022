@@ -18,7 +18,7 @@ export class User {
     state,
     gender,
     address,
-    interest,
+    interests,
     workWith,
     birthDate,
     education,
@@ -36,7 +36,7 @@ export class User {
     this.state = state;
     this.gender = gender;
     this.address = address;
-    this.interest = interest;
+    this.interests = interests;
     this.workWith = workWith;
     this.birthDate = birthDate;
     this.education = education;
@@ -79,7 +79,7 @@ export class User {
   address: string;
 
   @Field((type) => [String], { description: "User's interests and hobbies" })
-  interest: string[];
+  interests: string[];
 
   @Field((type) => [Gender], {
     description: 'Genders of people that the user wants to meet',

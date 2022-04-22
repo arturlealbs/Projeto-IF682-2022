@@ -41,7 +41,7 @@ export class User {
   address: string;
 
   @Prop({ type: [String], required: true })
-  interest: string[];
+  interests: string[];
 
   @Prop({ type: [String], required: true })
   genderOfInterest: Gender[];
