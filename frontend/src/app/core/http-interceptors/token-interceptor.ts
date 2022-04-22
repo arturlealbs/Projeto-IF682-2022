@@ -6,20 +6,23 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const MOCK_VALUE = 'mock';
-
 @Injectable()
-export class MockInterceptor implements HttpInterceptor {
+export class TokenInterceptor implements HttpInterceptor {
 	intercept(req: HttpRequest<any>, next: HttpHandler) {
+		const token = localStorage.getItem('TOKEN');
+		if (!token) {
+			return next.handle(req);
+		}
+
 		const cacheReq = req.clone({
-			setHeaders: { MockValue: MOCK_VALUE },
+			setHeaders: { Authorization: token },
 		});
 		return next.handle(cacheReq);
 	}
 }
 
-export const MockInterceptorProvider = {
+export const TokenInterceptorProvider = {
 	provide: HTTP_INTERCEPTORS,
-	useClass: MockInterceptor,
+	useClass: TokenInterceptor,
 	multi: true,
 };

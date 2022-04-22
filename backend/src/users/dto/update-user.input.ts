@@ -47,7 +47,7 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
     description: "User's interests and hobbies",
     nullable: true,
   })
-  interest?: string[];
+  interests?: string[];
 
   @Field((type) => [Gender], {
     description: 'Genders of people that the user wants to meet',

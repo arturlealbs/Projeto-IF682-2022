@@ -23,7 +23,7 @@ describe('UsersService', () => {
     city: '',
     state: '',
     address: '',
-    interest: [],
+    interests: [],
     genderOfInterest: [],
   };
   class mockRepository {

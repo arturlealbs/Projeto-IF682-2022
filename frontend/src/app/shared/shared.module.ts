@@ -7,16 +7,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileService } from './services/profile.service';
 import { HeaderComponent } from './components/header/header.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { SocialModule } from './modules/social.module';
+import { GraphQLModule } from './modules/graphql.module';
+import { UsersService } from './services/users.service';
+
 
 @NgModule({
-  providers: [ProfileService],
+  providers: [
+    ProfileService,
+    UsersService,
+  ],
   declarations: [
     HeaderComponent,
     NotificationsComponent
   ],
   imports: [
-    CommonModule,
     RouterModule,
+    SocialModule,
+    CommonModule,
+    GraphQLModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,

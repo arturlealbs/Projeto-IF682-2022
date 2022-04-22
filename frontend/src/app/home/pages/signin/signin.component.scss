@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+:host {
+  height: 100%;
+}
+
 .base {
   display: flex;
   align-items: center;
