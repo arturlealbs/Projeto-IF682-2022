@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HomeApi } from './api/home.api';
 import { HomeFacade } from './home.facade';
@@ -11,10 +13,9 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SigninComponent } from './pages/signin/signin.component';
-
+import { PolicyComponent } from './pages/policy/policy.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import {MatSelectModule} from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
 	providers: [
@@ -26,7 +27,9 @@ import { MatIconModule } from '@angular/material/icon';
     HomeComponent,
     LoginComponent,
     SigninComponent,
-    ProfileComponent
+    ProfileComponent,
+    PolicyComponent,
+    PrivacyComponent
   ],
   imports: [
     CommonModule,

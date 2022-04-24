@@ -1,9 +1,12 @@
-import { ProfileComponent } from './pages/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SigninComponent } from './pages/signin/signin.component';
+import { PolicyComponent } from './pages/policy/policy.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 const routes: Routes = [
   {
@@ -22,6 +25,14 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent
   },
+  {
+    path: 'privacy',
+    component: PrivacyComponent
+  },
+  {
+    path: 'policy',
+    component: PolicyComponent
+  }
 ];
 
 @NgModule({
