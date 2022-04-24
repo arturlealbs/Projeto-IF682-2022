@@ -2,7 +2,7 @@
 .profile-container {
     margin: 0;
     height: calc(100vh - 3.6em);
-    background-color: #FF9898;
+    background-color: var(--claro);
 }
 
 /* Profile main informations */
@@ -12,7 +12,7 @@
     width: 20%;
     padding: 8px;
     margin: 10px 10px 10px 10px;
-    background-color: #FEE0DF;
+    background-color: var(--base-clara);
     border-radius: 5px;
 }
 
@@ -68,7 +68,7 @@
     border: 2px solid #63222D;
     width: 100%;
     word-wrap: break-word;
-    background-color: #FEE0DF;
+    background-color: var(--base-clara);
     border-radius: 10px;
     
     h2 {
@@ -92,10 +92,6 @@
         overflow: auto;
     }
 }
-
-
-
-
 
 /* Buttons */
 
