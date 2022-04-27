@@ -1,6 +1,5 @@
 export interface User {
     id: string;
-    name: string;
     email: string;
     username: string;
     profileImg: string;
@@ -11,31 +10,34 @@ export interface User {
     bio?: string;
     gender?: string;
     birthDate?: string;
-    occupation?: string;
     education?: string;
     interests: string[];
 
-    city?: string;
-    state?: string;
-    address?: string;
-    workWith?: string;
+    city: string;
+    state: string;
+    address: string;
+    occupation?: string;
     phoneNumber?: string;
     languages?: string[];
-    genderOfInterest?: string;
+    genderOfInterest: string;
 }
 
 export const defaultUser: User = {
     id: "",
-    name: "",
     email: "",
-    gender: "male",
     username: "",
     lastName: "",
+    interests: [],
     birthDate: "",
     firstName: "",
-    education: "",
     profileImg: "",
     occupation: "",
     age: 18, bio: "",
-    interests: [],
+    
+    city: "UNKNOWN",
+    state: "UNKNOWN",
+    address: "UNKNOWN",
+    gender: "MALE",
+    genderOfInterest: "FEMALE",
+    education: "ensinoFundamental",
 }
