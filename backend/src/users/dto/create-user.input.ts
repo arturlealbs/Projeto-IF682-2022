@@ -6,8 +6,14 @@ import { Gender } from '../types/gender';
 
 @InputType()
 export class CreateUserInput {
+  @Field({ description: 'User ID' })
+  id?: string;
+
   @Field({ description: 'Unique user e-mail' })
   email: string;
+
+  @Field({ description: 'Profile image URL' })
+  profileImg: string;
 
   @Field({ description: 'Unique user name to identify' })
   username: string;
@@ -42,13 +48,13 @@ export class CreateUserInput {
   @Field((type) => [String], { description: "User's interests and hobbies" })
   interests: string[];
 
-  @Field((type) => [Gender], {
+  @Field((type) => Gender, {
     description: 'Genders of people that the user wants to meet',
   })
-  genderOfInterest: Gender[];
+  genderOfInterest: Gender;
 
   @Field({ description: "User's occupation", nullable: true })
-  workWith?: string;
+  occupation?: string;
 
   @Field({ description: "User's phone number", nullable: true })
   phoneNumber?: string;

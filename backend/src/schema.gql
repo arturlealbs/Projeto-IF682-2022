@@ -31,7 +31,10 @@ input CreateUserInput {
   gender: Gender!
 
   """Genders of people that the user wants to meet"""
-  genderOfInterest: [Gender!]!
+  genderOfInterest: Gender!
+
+  """User ID"""
+  id: String!
 
   """User's interests and hobbies"""
   interests: [String!]!
@@ -42,17 +45,20 @@ input CreateUserInput {
   """Last part of full name"""
   lastName: String!
 
+  """User's occupation"""
+  occupation: String
+
   """User's phone number"""
   phoneNumber: String
+
+  """Profile image URL"""
+  profileImg: String!
 
   """User's state"""
   state: String!
 
   """Unique user name to identify"""
   username: String!
-
-  """User's occupation"""
-  workWith: String
 }
 
 """The education levels."""
@@ -68,28 +74,29 @@ enum Education {
 
 """The biological gender."""
 enum Gender {
+  BOTH
   FEMALE
   MALE
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): UserOrError!
-  removeUser(searchUserInput: SearchUserInput!): UserOrError!
+  removeUser: UserOrError!
   updateUser(updateUserInput: UpdateUserInput!): UserOrError!
 }
 
 type Query {
-  user(searchUserInput: SearchUserInput!): UserOrError!
+  session: TokenOrError!
+  user: UserOrError!
   users: [User!]!
 }
 
-input SearchUserInput {
-  """Unique user e-mail"""
-  email: String
-
-  """Unique user name to identify"""
-  username: String
+type Token {
+  """Token string"""
+  token: String!
 }
+
+union TokenOrError = Token | UserError
 
 input UpdateUserInput {
   """User's address (neighborhood, street, etc)"""
@@ -120,7 +127,10 @@ input UpdateUserInput {
   gender: Gender
 
   """Genders of people that the user wants to meet"""
-  genderOfInterest: [Gender!]
+  genderOfInterest: Gender
+
+  """User ID"""
+  id: String
 
   """User's interests and hobbies"""
   interests: [String!]
@@ -131,17 +141,20 @@ input UpdateUserInput {
   """Last part of full name"""
   lastName: String
 
+  """User's occupation"""
+  occupation: String
+
   """User's phone number"""
   phoneNumber: String
+
+  """Profile image URL"""
+  profileImg: String
 
   """User's state"""
   state: String
 
   """Unique user name to identify"""
   username: String
-
-  """User's occupation"""
-  workWith: String
 }
 
 type User {
@@ -173,7 +186,7 @@ type User {
   gender: Gender!
 
   """Genders of people that the user wants to meet"""
-  genderOfInterest: [Gender!]!
+  genderOfInterest: Gender!
 
   """User's interests and hobbies"""
   interests: [String!]!
@@ -184,17 +197,20 @@ type User {
   """Last part of full name"""
   lastName: String!
 
+  """User's occupation"""
+  occupation: String
+
   """User's phone number"""
   phoneNumber: String
+
+  """Profile image URL"""
+  profileImg: String!
 
   """User's state"""
   state: String!
 
   """Unique user name to identify"""
   username: String!
-
-  """User's occupation"""
-  workWith: String
 }
 
 type UserError {

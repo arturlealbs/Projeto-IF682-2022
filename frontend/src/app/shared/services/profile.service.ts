@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { User } from '../types/User';
+import { defaultUser, User } from '../types/User';
 
 import { 
   SocialAuthService, 
@@ -22,9 +22,8 @@ export class ProfileService {
 
       localStorage.setItem("TOKEN", user.authToken);
       this.setProfile({
+        ...defaultUser,
         id: user.id,
-        interests: [],
-        name: user.name,
         email: user.email,
         username: user.name,
         lastName: user.lastName,

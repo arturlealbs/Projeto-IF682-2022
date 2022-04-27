@@ -1,1 +1,23 @@
-{}
+{
+  "name": "projeto-if682",
+  "version": "1.0.0",
+  "description": "A social media project",
+  "main": "index.js",
+  "scripts": {
+		"start": "yarn --cwd backend start",
+		"heroku-postbuild": "npm install yarn && cd backend && yarn -i"
+	},
+	"engines": {
+		"node": "16.x"
+	},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JDaniloC/Projeto-IF682.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JDaniloC/Projeto-IF682/issues"
+  },
+  "homepage": "https://github.com/JDaniloC/Projeto-IF682#readme"
+}

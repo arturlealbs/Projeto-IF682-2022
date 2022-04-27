@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User, defaultUser } from '../../../shared/types/User';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { User, defaultUser } from 'src/app/shared/types/User';
 import { HomeFacade } from '../../home.facade';
 
 @Component({
@@ -15,6 +16,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private homeFacade: HomeFacade,
+    private usersService: UsersService,
 	  private router: Router,
   ) { 
     this.homeFacade.getProfile().subscribe(profile => {
@@ -31,7 +33,18 @@ export class SigninComponent implements OnInit {
 
   public register() {
     this.homeFacade.setProfile(this.profile);
-    this.router.navigate(['/']);
+    this.usersService.createUser(this.profile).subscribe(async ({ data }) => {
+      if (data?.createUser) {
+        if (data.createUser.title) {
+          alert(data.createUser.title + '\n' + data.createUser.reason);
+        }
+        const { token } = await this.usersService.getToken();
+        if (token) {
+          localStorage.setItem("TOKEN", token);
+          this.router.navigate(['/']);
+        }
+      }
+    })
     return false;
   }
 }
