@@ -1,7 +1,5 @@
 export const environment = {
   production: true,
-  sockets: {
-    url: 'http://localhost:3000',
-  },
+  backendUrl: 'http://backend:3000',
   facebookID: '1086039068912591',
 };

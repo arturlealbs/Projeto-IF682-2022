@@ -1,66 +1,82 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongooseModule } from '@nestjs/mongoose';
+import { HttpModule } from '@nestjs/axios';
+
+import { AuthService } from '../services/auth.service';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
+
+import { CreateUserInput } from './dto/create-user.input';
 import * as Schema from './schemas/user.schema';
 import {
   closeInMongodConnection,
   rootMongooseTestModule,
 } from '../test-utils/mongo';
 
-import { CreateUserInput } from './dto/create-user.input';
-import { User } from './entities/user.entity';
 import { UserError } from './entities/error.entity';
+import { User } from './entities/user.entity';
+
 import { Education } from './types/education';
 import { Gender } from './types/gender';
 
 describe('UsersResolver', () => {
   let resolver: UsersResolver;
   let service: UsersService;
+
+  const EMAIL = 'test@email.com';
+  const defaultTokenInfo = {
+    email: EMAIL,
+    auth: true,
+    message: '',
+  };
+
   const userInput: CreateUserInput = {
-    email: 'test@email.com',
+    email: EMAIL,
     username: 'test',
+    profileImg: '',
     gender: Gender.MALE,
     birthDate: '',
     address: '',
     state: '',
     city: '',
     age: 20,
-    interest: [],
+    interests: [],
     lastName: '',
-    workWith: '',
+    occupation: '',
     firstName: '',
-    genderOfInterest: [],
+    genderOfInterest: Gender.FEMALE,
   };
   const mockUser: Schema.User = new User({
     username: 'test',
-    email: 'test@email.com',
+    email: EMAIL,
     gender: Gender.MALE,
     phoneNumber: '',
+    profileImg: '',
     birthDate: '',
     firstName: '',
     lastName: '',
-    workWith: '',
+    occupation: '',
     address: '',
     state: '',
     city: '',
     age: 20,
-    interest: [],
+    interests: [],
     languages: [],
     bio: undefined,
-    genderOfInterest: [],
+    genderOfInterest: Gender.FEMALE,
     education: Education.ensinoFundamental,
   });
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
+        HttpModule,
         rootMongooseTestModule(),
         MongooseModule.forFeature([
           { name: 'users', schema: Schema.UserSchema },
         ]),
       ],
-      providers: [UsersResolver, UsersService],
+      providers: [UsersResolver, UsersService, AuthService],
     }).compile();
 
     service = module.get<UsersService>(UsersService);
@@ -79,7 +95,7 @@ describe('UsersResolver', () => {
     it('create a new user', async () => {
       spyFind.mockClear().mockImplementation(() => Promise.resolve(null));
 
-      const result = await resolver.createUser(userInput);
+      const result = await resolver.createUser(EMAIL, userInput);
 
       expect(spyCreate).toHaveBeenCalledWith(userInput);
       expect(spyFind).toBeCalledTimes(2);
@@ -90,7 +106,7 @@ describe('UsersResolver', () => {
       spyCreate.mockClear();
       spyFind.mockClear().mockImplementation(() => Promise.resolve(mockUser));
 
-      const result = await resolver.createUser(userInput);
+      const result = await resolver.createUser(EMAIL, userInput);
       const error = new UserError('Duplicated', 'E-mail already used');
 
       expect(spyCreate).toBeCalledTimes(0);
@@ -104,12 +120,19 @@ describe('UsersResolver', () => {
         return email ? null : Promise.resolve(mockUser);
       });
 
-      const result = await resolver.createUser(userInput);
+      const result = await resolver.createUser(EMAIL, userInput);
       const error = new UserError('Duplicated', 'Username already used');
 
       expect(spyCreate).toBeCalledTimes(0);
       expect(spyFind).toBeCalledTimes(2);
       expect(result).toStrictEqual(error);
+    });
+  });
+
+  describe('session', () => {
+    it('must return a token', async () => {
+      const result = await resolver.session('TOKEN', EMAIL);
+      expect(result).toEqual({ token: 'TOKEN' });
     });
   });
 
@@ -131,42 +154,27 @@ describe('UsersResolver', () => {
 
     it('find user successfully', async () => {
       spy.mockClear().mockImplementation(() => Promise.resolve(mockUser));
-      const searchInput = {
-        email: mockUser.email,
-      };
+      const result = await resolver.findOne(defaultTokenInfo);
 
-      const result = await resolver.findOne(searchInput);
-
-      expect(spy).toHaveBeenCalledWith(searchInput);
+      expect(spy).toHaveBeenCalledWith({ email: EMAIL });
       expect(result).toEqual(mockUser);
     });
 
     it('fail to find user', async () => {
       spy.mockClear().mockImplementation(() => Promise.resolve(null));
-      const searchInput = {
-        email: mockUser.username,
+      const tokenInfo = {
+        email: 'EMAIL',
+        auth: true,
+        message: '',
       };
 
-      const result = await resolver.findOne(searchInput);
+      const result = await resolver.findOne(tokenInfo);
       const error = new UserError(
         'User not found',
-        `User ${searchInput.email} undefined not found`,
+        `User ${tokenInfo.email} not found`,
       );
 
-      expect(spy).toHaveBeenCalledWith(searchInput);
-      expect(result).toEqual(error);
-    });
-
-    it('error on missing email and username', async () => {
-      spy.mockClear().mockImplementation(() => Promise.resolve(mockUser));
-
-      const result = await resolver.findOne({});
-      const error = new UserError(
-        'Missing identifier',
-        'You must provide either email or username',
-      );
-
-      expect(spy).toBeCalledTimes(0);
+      expect(spy).toHaveBeenCalledWith({ email: 'EMAIL' });
       expect(result).toEqual(error);
     });
   });
@@ -177,16 +185,12 @@ describe('UsersResolver', () => {
       .mockImplementation(() => Promise.resolve(mockUser));
 
     it('update user successfully', async () => {
-      const updateInput = {
-        email: mockUser.email,
-        username: mockUser.username,
-      };
       const updatedUser = mockUser;
       updatedUser.age = 30;
 
-      const result = await resolver.updateUser(updatedUser);
+      const result = await resolver.updateUser(defaultTokenInfo, updatedUser);
 
-      expect(spy).toHaveBeenCalledWith(updateInput, updatedUser);
+      expect(spy).toHaveBeenCalledWith({ email: EMAIL }, updatedUser);
       expect(result).toEqual(updatedUser);
     });
 
@@ -196,26 +200,13 @@ describe('UsersResolver', () => {
         email: mockUser.username,
       };
 
-      const result = await resolver.updateUser(searchInput);
+      const result = await resolver.updateUser(defaultTokenInfo, searchInput);
       const error = new UserError(
         'User not found',
-        `User ${searchInput.email} undefined not found`,
+        `User ${defaultTokenInfo.email} not found`,
       );
 
-      expect(spy).toHaveBeenCalledWith(searchInput, searchInput);
-      expect(result).toEqual(error);
-    });
-
-    it('error on missing email and username', async () => {
-      spy.mockClear();
-
-      const result = await resolver.updateUser({});
-      const error = new UserError(
-        'Missing identifier',
-        'You must provide either email or username',
-      );
-
-      expect(spy).toBeCalledTimes(0);
+      expect(spy).toHaveBeenCalledWith({ email: EMAIL }, searchInput);
       expect(result).toEqual(error);
     });
   });
@@ -227,42 +218,22 @@ describe('UsersResolver', () => {
 
     it('deletes user successfully', async () => {
       spy.mockClear().mockImplementation(() => Promise.resolve(mockUser));
-      const removeInput = {
-        email: mockUser.email,
-        username: mockUser.username,
-      };
-      const result = await resolver.removeUser(removeInput);
+      const result = await resolver.removeUser(defaultTokenInfo);
 
-      expect(spy).toHaveBeenCalledWith(removeInput);
+      expect(spy).toHaveBeenCalledWith({ email: EMAIL });
       expect(result).toEqual(mockUser);
     });
 
     it('fail to find user', async () => {
       spy.mockClear().mockImplementation(() => Promise.resolve(null));
-      const searchInput = {
-        email: mockUser.username,
-      };
 
-      const result = await resolver.removeUser(searchInput);
+      const result = await resolver.removeUser(defaultTokenInfo);
       const error = new UserError(
         'User not found',
-        `User ${searchInput.email} undefined not found`,
+        `User ${defaultTokenInfo.email} not found`,
       );
 
-      expect(spy).toHaveBeenCalledWith(searchInput);
-      expect(result).toEqual(error);
-    });
-
-    it('error on missing email and username', async () => {
-      spy.mockClear();
-
-      const result = await resolver.removeUser({});
-      const error = new UserError(
-        'Missing identifier',
-        'You must provide either email or username',
-      );
-
-      expect(spy).toBeCalledTimes(0);
+      expect(spy).toHaveBeenCalledWith({ email: EMAIL });
       expect(result).toEqual(error);
     });
   });

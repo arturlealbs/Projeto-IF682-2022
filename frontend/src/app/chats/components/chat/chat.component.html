@@ -38,7 +38,7 @@
  
   <div class="item preview" *ngIf = "hasPreview()">
     <a class="ui avatar tiny image">
-      <img src="contact.image">
+      <img [src]="contact.image">
     </a>
     <div class="content">
       <a class="header">  {{ preview?.from }} </a>

@@ -7,11 +7,8 @@ import { Gender } from '../types/gender';
 
 @InputType()
 export class UpdateUserInput extends PartialType(CreateUserInput) {
-  @Field({ description: 'Unique user e-mail', nullable: true })
-  email?: string;
-
-  @Field({ description: 'Unique user name to identify', nullable: true })
-  username?: string;
+  @Field({ description: 'Profile image URL', nullable: true })
+  profileImg?: string;
 
   @Field({ description: 'First part of full name', nullable: true })
   firstName?: string;
@@ -47,16 +44,16 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
     description: "User's interests and hobbies",
     nullable: true,
   })
-  interest?: string[];
+  interests?: string[];
 
-  @Field((type) => [Gender], {
+  @Field((type) => Gender, {
     description: 'Genders of people that the user wants to meet',
     nullable: true,
   })
-  genderOfInterest?: Gender[];
+  genderOfInterest?: Gender;
 
   @Field({ description: "User's occupation", nullable: true })
-  workWith?: string;
+  occupation?: string;
 
   @Field({ description: "User's phone number", nullable: true })
   phoneNumber?: string;

@@ -1,23 +1,19 @@
 import { APP_INITIALIZER } from '@angular/core';
-import { HomeFacade } from 'src/app/home/home.facade';
+
+import { UsersService } from '../shared/services/users.service';
 import { ProfileService } from '../shared/services/profile.service';
-import { Router } from '@angular/router';
 
 export const homeInitializer = (
-	router: Router,
-	homeFacade: HomeFacade,
-	profileService: ProfileService
+	usersService: UsersService,
+	profileService: ProfileService,
 ) => () => {
-	profileService.getProfile().subscribe(profile => {
-		if (profile === null) {
-			// router.navigate(['/login']);
-		} 
-	});
-
-	homeFacade.getProfile().subscribe(profile => {
-		if (profile !== null) {
-			profileService.setProfile(profile);
-		}
+	profileService.getProfile().subscribe(async (profile) => {
+        const token = localStorage.getItem('TOKEN');
+		
+        if (!profile && token) {
+            const profile = await usersService.getUser();
+            profileService.setProfile(profile);
+        }
 	});
 };
 
@@ -25,5 +21,5 @@ export const homeInitializerProvider = {
 	provide: APP_INITIALIZER,
 	useFactory: homeInitializer,
 	multi: true,
-	deps: [Router, HomeFacade, ProfileService],
+	deps: [UsersService, ProfileService],
 };

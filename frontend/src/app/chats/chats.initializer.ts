@@ -7,7 +7,10 @@ export const chatsInitializer = (
 	profileService: ProfileService
 ) => () => {
 	profileService.getProfile().subscribe(profile => {
-		if (profile) chatsFacade.setProfile(profile);
+		if (profile) {
+			chatsFacade.setProfile(profile)
+			chatsFacade.fetchContacts();
+		};
 	});
 };
 

@@ -12,14 +12,15 @@ export class User {
     username,
     lastName,
     firstName,
+    profileImg,
     age,
     bio,
     city,
     state,
     gender,
     address,
-    interest,
-    workWith,
+    interests,
+    occupation,
     birthDate,
     education,
     languages,
@@ -30,14 +31,15 @@ export class User {
     this.username = username;
     this.lastName = lastName;
     this.firstName = firstName;
+    this.profileImg = profileImg;
     this.age = age;
     this.bio = bio;
     this.city = city;
     this.state = state;
     this.gender = gender;
     this.address = address;
-    this.interest = interest;
-    this.workWith = workWith;
+    this.interests = interests;
+    this.occupation = occupation;
     this.birthDate = birthDate;
     this.education = education;
     this.languages = languages;
@@ -56,6 +58,9 @@ export class User {
 
   @Field({ description: 'Last part of full name' })
   lastName: string;
+
+  @Field({ description: 'Profile image URL' })
+  profileImg: string;
 
   @Field((type) => Int, { description: "User's age" })
   age: number;
@@ -79,15 +84,15 @@ export class User {
   address: string;
 
   @Field((type) => [String], { description: "User's interests and hobbies" })
-  interest: string[];
+  interests: string[];
 
-  @Field((type) => [Gender], {
+  @Field((type) => Gender, {
     description: 'Genders of people that the user wants to meet',
   })
-  genderOfInterest: Gender[];
+  genderOfInterest: Gender;
 
   @Field({ description: "User's occupation", nullable: true })
-  workWith?: string;
+  occupation?: string;
 
   @Field({ description: "User's phone number", nullable: true })
   phoneNumber?: string;

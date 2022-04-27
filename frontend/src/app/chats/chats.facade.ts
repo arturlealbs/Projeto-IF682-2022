@@ -7,14 +7,17 @@ import { Injectable } from '@angular/core';
 import Message from './types/message';
 import { Contact } from './types/contact';
 import { User } from '../shared/types/User';
+import { UsersService } from '../shared/services/users.service';
 
 @Injectable()
 export class ChatsFacade {
 	constructor(
 		private readonly state: ChatsState,
+		private usersService: UsersService,
 		private messageService: MessageService
 	) {
 		this.messageService.messages.subscribe(message => {
+			this.state.setPreview(null);
 			this.state.addMessage(message);
 		});
 		this.messageService.preview.subscribe(message => {
@@ -64,5 +67,21 @@ export class ChatsFacade {
 			text: message,
 			to: contact,
 		});
+	}
+
+	public fetchContacts() {
+		const username = this.state.getUsername();
+		this.usersService.getContacts().then(contacts => {
+			this.state.setContacts(contacts.map(item => {
+				const contact = item.infos.filter(info => (
+					info.username !== username
+				))[0];
+				return {
+					image: contact.profileImg,
+					lastMessage: "",
+					...contact
+				};
+			}));
+		})
 	}
 }

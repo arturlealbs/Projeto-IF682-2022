@@ -31,10 +31,13 @@ input CreateUserInput {
   gender: Gender!
 
   """Genders of people that the user wants to meet"""
-  genderOfInterest: [Gender!]!
+  genderOfInterest: Gender!
+
+  """User ID"""
+  id: String!
 
   """User's interests and hobbies"""
-  interest: [String!]!
+  interests: [String!]!
 
   """Languages the user speaks"""
   languages: [String!]
@@ -42,17 +45,20 @@ input CreateUserInput {
   """Last part of full name"""
   lastName: String!
 
+  """User's occupation"""
+  occupation: String
+
   """User's phone number"""
   phoneNumber: String
+
+  """Profile image URL"""
+  profileImg: String!
 
   """User's state"""
   state: String!
 
   """Unique user name to identify"""
   username: String!
-
-  """User's occupation"""
-  workWith: String
 }
 
 """The education levels."""
@@ -68,27 +74,62 @@ enum Education {
 
 """The biological gender."""
 enum Gender {
+  BOTH
   FEMALE
   MALE
 }
 
 type Mutation {
+  createRelationship(contact: String!): Relationship!
   createUser(createUserInput: CreateUserInput!): UserOrError!
-  removeUser(searchUserInput: SearchUserInput!): UserOrError!
+  removeRelationship(contact: String!): Relationship!
+  removeUser: UserOrError!
+  updateRelationship(updateRelationshipInput: UpdateRelationshipInput!): Relationship!
   updateUser(updateUserInput: UpdateUserInput!): UserOrError!
 }
 
 type Query {
-  user(searchUserInput: SearchUserInput!): UserOrError!
+  relationship(contact: String!): Relationship!
+  relationships: [Relation!]!
+  session: TokenOrError!
+  user: UserOrError!
   users: [User!]!
 }
 
-input SearchUserInput {
-  """Unique user e-mail"""
-  email: String
+type Relation {
+  """If was blocked or not"""
+  blocked: Boolean!
 
-  """Unique user name to identify"""
-  username: String
+  """Relationship e-mails"""
+  contacts: [String!]!
+
+  """Users information"""
+  infos: [UserInfo!]!
+}
+
+type Relationship {
+  """If was blocked or not"""
+  blocked: Boolean!
+
+  """Relationship e-mails"""
+  contacts: [String!]!
+}
+
+type Token {
+  """Token string"""
+  token: String!
+}
+
+union TokenOrError = Token | UserError
+
+input UpdateRelationshipInput {
+  blocked: Boolean!
+
+  """The relationship e-mail"""
+  contactEmail: String
+
+  """User e-mail"""
+  email: String
 }
 
 input UpdateUserInput {
@@ -120,10 +161,13 @@ input UpdateUserInput {
   gender: Gender
 
   """Genders of people that the user wants to meet"""
-  genderOfInterest: [Gender!]
+  genderOfInterest: Gender
+
+  """User ID"""
+  id: String
 
   """User's interests and hobbies"""
-  interest: [String!]
+  interests: [String!]
 
   """Languages the user speaks"""
   languages: [String!]
@@ -131,17 +175,20 @@ input UpdateUserInput {
   """Last part of full name"""
   lastName: String
 
+  """User's occupation"""
+  occupation: String
+
   """User's phone number"""
   phoneNumber: String
+
+  """Profile image URL"""
+  profileImg: String
 
   """User's state"""
   state: String
 
   """Unique user name to identify"""
   username: String
-
-  """User's occupation"""
-  workWith: String
 }
 
 type User {
@@ -173,10 +220,10 @@ type User {
   gender: Gender!
 
   """Genders of people that the user wants to meet"""
-  genderOfInterest: [Gender!]!
+  genderOfInterest: Gender!
 
   """User's interests and hobbies"""
-  interest: [String!]!
+  interests: [String!]!
 
   """Languages the user speaks"""
   languages: [String!]
@@ -184,17 +231,20 @@ type User {
   """Last part of full name"""
   lastName: String!
 
+  """User's occupation"""
+  occupation: String
+
   """User's phone number"""
   phoneNumber: String
+
+  """Profile image URL"""
+  profileImg: String!
 
   """User's state"""
   state: String!
 
   """Unique user name to identify"""
   username: String!
-
-  """User's occupation"""
-  workWith: String
 }
 
 type UserError {
@@ -203,6 +253,29 @@ type UserError {
 
   """The error title"""
   title: String
+}
+
+type UserInfo {
+  """User's description of himself"""
+  bio: String
+
+  """Unique user e-mail"""
+  email: String!
+
+  """First part of full name"""
+  firstName: String!
+
+  """User's gender"""
+  gender: Gender!
+
+  """Last part of full name"""
+  lastName: String!
+
+  """Profile image URL"""
+  profileImg: String!
+
+  """Unique user name to identify"""
+  username: String!
 }
 
 union UserOrError = User | UserError

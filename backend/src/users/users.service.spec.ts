@@ -23,8 +23,8 @@ describe('UsersService', () => {
     city: '',
     state: '',
     address: '',
-    interest: [],
-    genderOfInterest: [],
+    interests: [],
+    genderOfInterest: 'FEMALE',
   };
   class mockRepository {
     static findOne({ email }) {

@@ -1,5 +1,5 @@
-import { MockInterceptorProvider } from "./mock-interceptor";
+import { TokenInterceptorProvider } from "./token-interceptor";
 
 export const HttpInterceptorsProvider = [
-    MockInterceptorProvider
+    TokenInterceptorProvider
 ]

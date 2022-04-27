@@ -34,7 +34,6 @@ export class AppGateway {
     @ConnectedSocket() client: Socket,
     @MessageBody() data: string,
   ) {
-    console.log(client.id, data);
     this.server.emit('messages', data);
   }
 
@@ -43,7 +42,14 @@ export class AppGateway {
     @ConnectedSocket() client: Socket,
     @MessageBody() data: string,
   ) {
-    console.log(client.id, data);
     this.server.emit('preview', data);
+  }
+
+  @SubscribeMessage('notifications')
+  handleNotifications(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: string,
+  ) {
+    this.server.emit('notifications', data);
   }
 }

@@ -4,25 +4,38 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfileService } from './services/profile.service';
+
 import { HeaderComponent } from './components/header/header.component';
-import { NotificationsComponent } from './components/notifications/notifications.component';
+
+import { GraphQLModule } from './modules/graphql.module';
+import { SocialModule } from './modules/social.module';
+import { SocketIoModule } from 'ngx-socket-io';
+
+import { UsersService } from './services/users.service';
+import { ProfileService } from './services/profile.service';
+import { NotificationService } from './services/notification.service';
+
+import config from './config/socket';
+
 
 @NgModule({
-  providers: [ProfileService],
-  declarations: [
-    HeaderComponent,
-    NotificationsComponent
+  providers: [
+    NotificationService,
+    ProfileService,
+    UsersService,
   ],
+  declarations: [HeaderComponent],
   imports: [
-    CommonModule,
     RouterModule,
+    SocialModule,
+    CommonModule,
+    GraphQLModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SocketIoModule.forRoot(config)
   ],
   exports: [
-    NotificationsComponent,
     HeaderComponent,
     CommonModule,
     BrowserModule,

@@ -1,0 +1,33 @@
+.container {
+    font-family: Montserrat,sans-serif;
+    color: #576d96;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+    margin: auto;
+    max-width: 900px;
+    padding: 2em 0;
+
+    h2 {
+        padding-bottom: 20px;
+        font-weight: 600;
+        font-size: 20px;
+        color: #576d96;
+        font-style: normal;
+        letter-spacing: -.05em;
+        margin: 0;
+    }
+
+    p {
+        font-size: 16px;
+        margin-top: 0;
+        margin-bottom: 1rem;
+
+        a {
+            color: #055af9;
+            text-decoration: none;
+            background-color: transparent;
+        }
+    }
+}
