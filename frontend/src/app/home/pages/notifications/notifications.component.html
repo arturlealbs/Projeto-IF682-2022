@@ -1,0 +1,20 @@
+<div class="notification">
+    <table class="table table-responsive">
+        <tbody>
+            <tr *ngFor="let notification of notifications">
+                <td>
+                    <img src="{{notification.image}}" alt="Notification image">
+                </td>
+                <td>{{notification.text}}</td>
+                <td>{{notification.time}}</td>
+                <td>
+                    <button type="button" 
+                        class="btn-close" 
+                        aria-label="Close"
+                        (click)="delete(notification)">
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

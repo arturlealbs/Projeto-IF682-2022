@@ -6,7 +6,7 @@ import { UserSchema } from './schemas/user.schema';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
 
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Module({
   imports: [

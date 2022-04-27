@@ -7,6 +7,11 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
+
+import { 
+  AuthGuardService as AuthGuard 
+} from '../core/auth-guard/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -22,17 +27,23 @@ const routes: Routes = [
     component: SigninComponent
   },
   {
-    path: 'profile',
-    component: ProfileComponent
-  },
-  {
     path: 'privacy',
     component: PrivacyComponent
   },
   {
     path: 'policy',
     component: PolicyComponent
-  }
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard], 
+    component: ProfileComponent
+  },
+  {
+    path: 'notifications', 
+    canActivate: [AuthGuard], 
+    component: NotificationsComponent
+  },
 ];
 
 @NgModule({

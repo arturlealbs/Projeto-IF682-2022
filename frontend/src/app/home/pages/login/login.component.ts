@@ -20,15 +20,17 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.profileService.getProfile().subscribe(async (user) => {
+    this.profileService.getLoginProfile().subscribe(async (user) => {
       if (!user) return;
        
       const FBToken = localStorage.getItem("TOKEN") as string;
 
       const { token } = await this.usersService.getToken();
-      console.log(token);
+
       if (token) {
         localStorage.setItem("TOKEN", token);
+        const newProfile = await this.usersService.getUser();
+        this.profileService.setProfile(newProfile);
         return this.router.navigate(['/']);
       }
 

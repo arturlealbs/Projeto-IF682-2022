@@ -1,13 +1,20 @@
 import { Apollo, QueryRef } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 
-import { getTokenResponse, createResponse, TokenOrError } from '../types/Responses';
+import { 
+  GetTokenResponse, 
+  CreateResponse, 
+  Relationships,
+  TokenOrError,
+  Relationship,
+} from '../types/Responses';
 import { User } from '../types/User';
 import { 
-  GET_USER_BY_EMAIL_OR_USERNAME_QUERY, 
   CREATE_USER_MUTATION,
+  GET_RELATIONSHIPS,
   GET_TOKEN_QUERY,
-  GET_USER_LIST
+  GET_USER_LIST,
+  GET_USER, 
 } from '../types/Queries';
 
 @Injectable({
@@ -15,29 +22,31 @@ import {
 })
 export class UsersService {
 
-  private getTokenQuery: QueryRef<getTokenResponse, {}>;
-  private findUserQuery: QueryRef<{ user: User }, { 
-    email?: String, username?: String
-  }>;
-
+  private getTokenQuery: QueryRef<GetTokenResponse, {}>;
+  private findUserQuery: QueryRef<{ user: User }>;
   private getUsersQuery: QueryRef<{ users: User[] }, {}>;
+  private getRelationshipsQuery: QueryRef<Relationships, {}>;
 
   constructor(private apollo: Apollo) { 
-    this.getTokenQuery = this.apollo.watchQuery<getTokenResponse>({
+    this.getTokenQuery = this.apollo.watchQuery<GetTokenResponse>({
       query: GET_TOKEN_QUERY,
     });
 
     this.findUserQuery = this.apollo.watchQuery<{user: User}>({
-      query: GET_USER_BY_EMAIL_OR_USERNAME_QUERY,
+      query: GET_USER,
     });
 
     this.getUsersQuery = this.apollo.watchQuery<{users: User[]}>({
       query: GET_USER_LIST,
     });
+    
+    this.getRelationshipsQuery = this.apollo.watchQuery<Relationships>({
+      query: GET_RELATIONSHIPS,
+    });
   }
 
   createUser(user: User) {
-    return this.apollo.mutate<createResponse>({
+    return this.apollo.mutate<CreateResponse>({
       mutation: CREATE_USER_MUTATION,
       variables: { user },
     });
@@ -48,13 +57,18 @@ export class UsersService {
     return result.data.session;
   }
 
-  async findUsers(email?: string, username?: string): Promise<User> {
-    const result = await this.findUserQuery.refetch({ email, username });
+  async getUser(): Promise<User> {
+    const result = await this.findUserQuery.refetch();
     return result.data.user;
   }
 
   async findAll(): Promise<User[]> {
     const result = await this.getUsersQuery.refetch();
     return result.data.users;
+  }
+  
+  async getContacts(): Promise<Relationship[]> {
+    const result = await this.getRelationshipsQuery.refetch();
+    return result.data.relationships;
   }
 }

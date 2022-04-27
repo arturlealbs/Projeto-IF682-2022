@@ -10,9 +10,9 @@ import { UserError } from './entities/error.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 
-import { FacebookGuard } from './guards/facebook.guard';
+import { FacebookGuard } from '../guards/facebook.guard';
 import { UsersService } from './users.service';
-import { JWTGuard } from './guards/jwt.guard';
+import { JWTGuard } from '../guards/jwt.guard';
 import TokenInfo from './types/token-info';
 
 @Resolver(() => UserOrError)

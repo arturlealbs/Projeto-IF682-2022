@@ -3,9 +3,9 @@ import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import { Observable, of, tap } from 'rxjs';
 
-import { FBToken } from '../types/fb-token';
+import { FBToken } from '../users/types/fb-token';
 import { JwtPayload, verify as jwtVerify, sign as jwtSign } from 'jsonwebtoken';
-import TokenInfo from '../types/token-info';
+import TokenInfo from '../users/types/token-info';
 
 @Injectable()
 export class AuthService {

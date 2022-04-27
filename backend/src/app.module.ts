@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 
 import { AppGateway } from './app.gateway';
 import { join } from 'path';
+import { RelationshipsModule } from './relationships/relationships.module';
 
 const envConfig = ConfigModule.forRoot();
 
@@ -29,6 +30,7 @@ const envConfig = ConfigModule.forRoot();
     }),
     envConfig,
     UsersModule,
+    RelationshipsModule,
   ],
   controllers: [],
   providers: [AppGateway],

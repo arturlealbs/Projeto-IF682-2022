@@ -28,11 +28,30 @@ export const GET_TOKEN_QUERY = gql`
     }
 `;
 
-export const GET_USER_BY_EMAIL_OR_USERNAME_QUERY = gql`
+export const GET_RELATIONSHIPS = gql`
+    query GetRelationships {
+        relationships {
+          contacts
+          blocked
+          infos {
+            email
+            username
+            firstName
+            lastName
+            gender
+            profileImg
+            bio
+            }
+        }
+      }
+`;
+
+export const GET_USER = gql`
     query GetUser {
         user {
             ...on User {
                 email
+                profileImg
                 firstName
                 lastName
                 username
