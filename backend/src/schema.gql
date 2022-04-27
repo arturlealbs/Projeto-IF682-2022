@@ -80,15 +80,39 @@ enum Gender {
 }
 
 type Mutation {
+  createRelationship(contact: String!): Relationship!
   createUser(createUserInput: CreateUserInput!): UserOrError!
+  removeRelationship(contact: String!): Relationship!
   removeUser: UserOrError!
+  updateRelationship(updateRelationshipInput: UpdateRelationshipInput!): Relationship!
   updateUser(updateUserInput: UpdateUserInput!): UserOrError!
 }
 
 type Query {
+  relationship(contact: String!): Relationship!
+  relationships: [Relation!]!
   session: TokenOrError!
   user: UserOrError!
   users: [User!]!
+}
+
+type Relation {
+  """If was blocked or not"""
+  blocked: Boolean!
+
+  """Relationship e-mails"""
+  contacts: [String!]!
+
+  """Users information"""
+  infos: [UserInfo!]!
+}
+
+type Relationship {
+  """If was blocked or not"""
+  blocked: Boolean!
+
+  """Relationship e-mails"""
+  contacts: [String!]!
 }
 
 type Token {
@@ -97,6 +121,16 @@ type Token {
 }
 
 union TokenOrError = Token | UserError
+
+input UpdateRelationshipInput {
+  blocked: Boolean!
+
+  """The relationship e-mail"""
+  contactEmail: String
+
+  """User e-mail"""
+  email: String
+}
 
 input UpdateUserInput {
   """User's address (neighborhood, street, etc)"""
@@ -219,6 +253,29 @@ type UserError {
 
   """The error title"""
   title: String
+}
+
+type UserInfo {
+  """User's description of himself"""
+  bio: String
+
+  """Unique user e-mail"""
+  email: String!
+
+  """First part of full name"""
+  firstName: String!
+
+  """User's gender"""
+  gender: Gender!
+
+  """Last part of full name"""
+  lastName: String!
+
+  """Profile image URL"""
+  profileImg: String!
+
+  """Unique user name to identify"""
+  username: String!
 }
 
 union UserOrError = User | UserError

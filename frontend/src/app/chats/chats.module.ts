@@ -12,7 +12,7 @@ import { chatsInitializerProvider } from './chats.initializer';
 import { ChatsState } from './state/chats.state';
 import { ChatsFacade } from './chats.facade';
 
-import config from './config/socket';
+import config from '../shared/config/socket';
 import { MessageService } from './services/message.service';
 
 @NgModule({

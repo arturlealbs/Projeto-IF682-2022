@@ -12,56 +12,8 @@ export class ChatsState {
 
   private readonly preview = new BehaviorSubject<Message|null>(null);
   private readonly currentMessages = new BehaviorSubject<Message[]>([]);
-  private readonly messages = new BehaviorSubject<Message[]>([
-    {
-      to: 'Daniel',
-      from: 'Danilo',
-      text: 'Olá, tudo bem?',
-      timestamp: new Date().getTime(),
-    },
-    {
-      to: 'Danilo',
-      from: 'Daniel',
-      text: 'Isso é um texto qualquer',
-      timestamp: new Date().getTime(),
-    },
-    {
-      to: 'Danilo',
-      from: 'Daniel',
-      text: 'Outro texto qualquer',
-      timestamp: new Date().getTime(),
-    },
-    {
-      to: 'Daniel',
-      from: 'Danilo',
-      text: 'Essa é a última mensagem salva',
-      timestamp: new Date().getTime(),
-    },
-    {
-      to: 'Another',
-      from: 'Danilo',
-      text: 'Essa mensagem precisa ser filtrada',
-      timestamp: new Date().getTime(),
-    },
-  ]);
-  
-  private readonly contacts = new BehaviorSubject<Contact[]>([
-    {
-      username: 'Daniel',
-      lastMessage: "Uma mensagem muito grande para caber nesse local",
-      image: "https://fomantic-ui.com/images/avatar/small/daniel.jpg"
-    },
-    {
-      username: 'Helen',
-      lastMessage: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut justo a dui rutrum vulputate. Nunc commodo quam purus, non molestie nulla tincidunt at. Pellentesque volutpat nulla quis massa sagittis volutpat. Duis malesuada nibh sed nibh auctor efficitur. Integer condimentum ut magna quis pellentesque. Quisque quis turpis laoreet, molestie lorem eu, cursus orci. Aliquam volutpat lorem mauris, ac tincidunt neque fringilla non. Morbi eget tristique sem, vel bibendum arcu.",
-      image: "https://fomantic-ui.com/images/avatar/small/helen.jpg"
-    },
-    {
-      username: 'Christian',
-      lastMessage: "Última mensagem enviada",
-      image: "https://fomantic-ui.com/images/avatar/small/christian.jpg"
-    }
-  ]);
+  private readonly messages = new BehaviorSubject<Message[]>([]);
+  private readonly contacts = new BehaviorSubject<Contact[]>([]);
 
   public setChatMessages(username: string) {
     if (this.messageSubscription) {
@@ -76,6 +28,12 @@ export class ChatsState {
   }
 
   public addMessage(message: Message) {
+    this.contacts.next(this.contacts.getValue().map(contacts => {
+      if (contacts.username === message.from) {
+        contacts.lastMessage = message.text;
+      }
+      return contacts;
+    }));
     this.messages.next([...this.messages.getValue(), message]);
   }
 
@@ -83,7 +41,7 @@ export class ChatsState {
     return this.currentMessages.asObservable();
   }
 
-  public setPreview(message: Message) {
+  public setPreview(message: Message|null) {
     return this.preview.next(message);
   }
   
@@ -96,6 +54,10 @@ export class ChatsState {
 
   public getContacts(): Observable<Contact[]> {
     return this.contacts.asObservable();
+  }
+  
+  public setContacts(newContacts: Contact[]) {
+    return this.contacts.next(newContacts);
   }
 
   public getUsername(): string {
