@@ -1,1 +1,1 @@
-back: npm start
+back: npm run start:prod

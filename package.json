@@ -4,8 +4,8 @@
   "description": "A social media project",
   "main": "index.js",
   "scripts": {
-		"start": "yarn --cwd backend start",
-		"heroku-postbuild": "npm install yarn && cd backend && yarn -i"
+		"start": "yarn --cwd backend start:prod",
+		"heroku-postbuild": "npm install -g @nestjs/cli yarn && cd backend && yarn -i && yarn build"
 	},
 	"engines": {
 		"node": "16.x"
