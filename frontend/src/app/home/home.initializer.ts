@@ -9,7 +9,6 @@ export const homeInitializer = (
 	homeFacade: HomeFacade,
 	usersService: UsersService
 ) => () => {
-
 };
 
 export const homeInitializerProvider = {

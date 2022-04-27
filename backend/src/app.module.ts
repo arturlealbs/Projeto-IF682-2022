@@ -21,6 +21,7 @@ const envConfig = ConfigModule.forRoot();
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      context: ({ req }) => ({ headers: req.headers }),
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'static'),

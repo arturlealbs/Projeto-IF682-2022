@@ -22,6 +22,9 @@ export class User {
   @Prop({ required: true })
   age: number;
 
+  @Prop({ required: true })
+  profileImg: string;
+
   @Prop()
   bio?: string;
 
@@ -43,11 +46,11 @@ export class User {
   @Prop({ type: [String], required: true })
   interests: string[];
 
-  @Prop({ type: [String], required: true })
-  genderOfInterest: Gender[];
+  @Prop({ type: String, required: true })
+  genderOfInterest: Gender;
 
   @Prop()
-  workWith?: string;
+  occupation?: string;
 
   @Prop()
   phoneNumber?: string;
