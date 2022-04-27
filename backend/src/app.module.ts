@@ -5,11 +5,11 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 
+import { RelationshipsModule } from './relationships/relationships.module';
 import { UsersModule } from './users/users.module';
 
 import { AppGateway } from './app.gateway';
 import { join } from 'path';
-import { RelationshipsModule } from './relationships/relationships.module';
 
 const envConfig = ConfigModule.forRoot();
 

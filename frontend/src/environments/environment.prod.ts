@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://backend:3000',
+  backendUrl: 'https://coopido.herokuapp.com',
   facebookID: '1086039068912591',
 };
