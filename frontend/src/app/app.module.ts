@@ -9,6 +9,7 @@ import { HomeModule } from './home/home.module';
 import { ChatsModule } from './chats/chats.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ListUsersModule } from './list-users/list-users.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 		CoreModule,
     HomeModule,
     ChatsModule,
+    ListUsersModule,
     HttpClientModule,
   ],
   providers: [],
