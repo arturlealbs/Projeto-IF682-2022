@@ -24,7 +24,11 @@ export class ProfileService {
       localStorage.setItem("TOKEN", user.authToken);
       this.loginProfile.next({
         ...defaultUser, 
-        ...user, 
+        id: user.id,
+        email: user.email,
+        username: user.name,
+        lastName: user.lastName,
+        firstName: user.firstName,
         profileImg: user.response.picture.data.url
       });
     });

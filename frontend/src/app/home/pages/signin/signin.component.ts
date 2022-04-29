@@ -34,8 +34,9 @@ export class SigninComponent implements OnInit {
   }
 
   public register() {
-    this.homeFacade.setProfile(this.profile);
+    console.log(this.profile)
     this.usersService.createUser(this.profile).subscribe(async ({ data }) => {
+      this.homeFacade.setProfile(this.profile);
       if (data?.createUser) {
         if (data.createUser.title) {
           alert(data.createUser.title + '\n' + data.createUser.reason);

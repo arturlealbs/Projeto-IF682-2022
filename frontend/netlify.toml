@@ -1,3 +1,11 @@
 [[redirects]]
   from = "/*"
-  to = "/*"
+  to = "/:route"
+
+[[redirects]]
+  from = "/policy"
+  to = "/policy"
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy"
