@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/*"
-  to = "/:route"
+  from = "/"
+  to = "/"
 
 [[redirects]]
   from = "/policy"
