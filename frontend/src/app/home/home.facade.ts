@@ -30,6 +30,7 @@ export class HomeFacade {
                     gender: data.gender.toUpperCase(),
                     birthDate: data.birthday, 
                     age: data.age_range.min,
+                    profileImg: data.picture.data.url
                 });
             }
         });

@@ -10,12 +10,22 @@
       </div>
     </div>
     <div class="right item">
+      <div class="ui icon item dropdown">
+        <!-- This is very very wrong: I'm mixing Fomantic + Bootstrap -->
+        <i class="ellipsis horizontal large icon" id="chatOptions" 
+        data-bs-toggle="dropdown" aria-expanded="false"></i>
+        <ul class="dropdown-menu" aria-labelledby="chatOptions">
+          <li>
+            <a class="dropdown-item" href="#">
+              <i class="exclamation triangle large icon"></i>
+              Denunciar esse perfil
+            </a>
+          </li>
+        </ul>
+      </div>
       <div class="ui input">
         <input type="text" placeholder="Pesquisar...">
       </div>
-      <button class="ui icon button right item">
-        <i class="ellipsis horizontal icon"></i>
-      </button>
     </div>
   </div>
 </div>
@@ -58,4 +68,40 @@
   <button class="ui icon button" (click)='sendMessage()'>
     <i class="paper plane icon"></i>
   </button>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" 
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" 
+  aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h2 class="modal-title" id="staticBackdropLabel"> Reportar usuário </h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" 
+                    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Selecione a opção
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#"> Perfil Falso/SPAM </a></li>
+                    <li><a class="dropdown-item" href="#"> Descrição imprópria </a></li>
+                    <li><a class="dropdown-item" href="#"> Menor de idade </a></li>
+                    <li><a class="dropdown-item" href="#"> Assédio ou agressão </a></li>
+                    <li><a class="dropdown-item" href="#"> Linguagem imprópria </a></li>
+                    <li><a class="dropdown-item" href="#"> Descriminação </a></li>
+                  </ul>
+              </div>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Fechar </button>
+          <button type="button" class="btn btn-secondary" data-bs-container="body" 
+            data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">
+              Reportar
+            </button>
+          </div>
+      </div>
+  </div>
 </div>
