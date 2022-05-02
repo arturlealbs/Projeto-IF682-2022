@@ -108,6 +108,18 @@ export class User {
     nullable: true,
   })
   languages?: string[];
+
+  @Field((type) => [User], {
+    description: 'People the user liked',
+    defaultValue: [],
+  })
+  usersLiked?: User[]
+
+  @Field((type) => [User], {
+    description: 'People the user disliked',
+    defaultValue: []
+  })
+  usersDisliked?: User[]
 }
 
 export const UserOrError = createUnionType({

@@ -4,3 +4,9 @@
     float: right;
     margin-top: 1rem;
 }
+
+::ng-deep .modal {
+    position: initial !important;
+    height: auto;
+    padding: 0 0 1em;
+}

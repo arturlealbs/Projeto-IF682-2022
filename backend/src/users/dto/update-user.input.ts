@@ -69,4 +69,6 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
     nullable: true,
   })
   languages?: string[];
+
+  
 }

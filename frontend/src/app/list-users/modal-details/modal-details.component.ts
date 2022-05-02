@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {FuiBaseModal, ComponentModalConfig, ModalSize, FuiModalService} from "ngx-fomantic-ui"
-import User from '../types/user'
+import { User } from '../../shared/types/User';
 interface IConfirmModalContext {
     userInModal: User;
 }
@@ -22,6 +22,7 @@ export class ModalDetails extends ComponentModalConfig<IConfirmModalContext, voi
       this.isClosable = true;
       this.transitionDuration = 200;
       this.size = size;
+      this.isCentered = true;
       
   }
 }

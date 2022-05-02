@@ -60,6 +60,12 @@ export class User {
 
   @Prop({ type: [String] })
   languages?: string[];
+
+  @Prop({ type: [User] })
+  usersLiked: User[]
+
+  @Prop({ type: [User] })
+  usersDisliked: User[]
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
