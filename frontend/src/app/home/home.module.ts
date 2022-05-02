@@ -16,6 +16,7 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { PolicyComponent } from './pages/policy/policy.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
 
 @NgModule({
 	providers: [
@@ -29,7 +30,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     SigninComponent,
     ProfileComponent,
     PolicyComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    NotificationsComponent
   ],
   imports: [
     CommonModule,

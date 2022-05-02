@@ -13,22 +13,23 @@ import {
 export class ProfileService {
 
   private profile: BehaviorSubject<User|null> = new BehaviorSubject<User|null>(null);
+  private loginProfile: BehaviorSubject<User|null> = 
+    new BehaviorSubject<User|null>(null);
 
   constructor(
     private socialAuthService: SocialAuthService,
   ) {
     this.socialAuthService.authState.subscribe((user) => {
       if (!user) return;
-
       localStorage.setItem("TOKEN", user.authToken);
-      this.setProfile({
-        ...defaultUser,
+      this.loginProfile.next({
+        ...defaultUser, 
         id: user.id,
         email: user.email,
         username: user.name,
         lastName: user.lastName,
         firstName: user.firstName,
-        profileImg: user.response.picture.data.url,
+        profileImg: user.response.picture.data.url
       });
     });
   }
@@ -47,6 +48,10 @@ export class ProfileService {
 
   public getProfile(): Observable<User|null> {
     return this.profile.asObservable()
+  }
+  
+  public getLoginProfile(): Observable<User|null> {
+    return this.loginProfile.asObservable()
   }
 
   public setProfile(profile: User) {

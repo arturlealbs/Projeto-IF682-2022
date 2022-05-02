@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HttpModule } from '@nestjs/axios';
 
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
 
@@ -131,7 +131,7 @@ describe('UsersResolver', () => {
 
   describe('session', () => {
     it('must return a token', async () => {
-      const result = await resolver.session('TOKEN');
+      const result = await resolver.session('TOKEN', EMAIL);
       expect(result).toEqual({ token: 'TOKEN' });
     });
   });

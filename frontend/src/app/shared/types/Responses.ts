@@ -1,11 +1,11 @@
 import { User } from '../types/User';
 
-export interface UserOrError extends User {
+interface UserOrError extends User {
     title?: string;
     reason?: string;
 }
 
-export interface createResponse { 
+export interface CreateResponse { 
     createUser: UserOrError;
     loading: boolean;
 }
@@ -16,6 +16,26 @@ export interface TokenOrError {
     reason?: string;
 }
 
-export interface getTokenResponse { 
+export interface GetTokenResponse { 
     session: TokenOrError
+}
+
+interface UserInfo {
+    email: string;
+    username: string;
+    lastName: string;
+    firstName: string;
+    profileImg: string;
+    gender: string;
+    bio: string;
+}
+
+export interface Relationship {
+    contacts: string[];
+    blocked: boolean;
+    infos: UserInfo[]
+}
+
+export interface Relationships {
+    relationships: Relationship[]
 }

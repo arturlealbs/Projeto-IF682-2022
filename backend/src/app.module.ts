@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 
+import { RelationshipsModule } from './relationships/relationships.module';
 import { UsersModule } from './users/users.module';
 
 import { AppGateway } from './app.gateway';
@@ -29,6 +30,7 @@ const envConfig = ConfigModule.forRoot();
     }),
     envConfig,
     UsersModule,
+    RelationshipsModule,
   ],
   controllers: [],
   providers: [AppGateway],

@@ -1,1 +1,1 @@
-back: nest start
+back: npm run start:prod

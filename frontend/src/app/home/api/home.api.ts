@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FacebookProfile } from "../state/facebook-data";
+import { FacebookProfile } from "../types/facebook-data";
 
 @Injectable()
 export class HomeApi {
