@@ -111,6 +111,9 @@ type Relationship {
   """If was blocked or not"""
   blocked: Boolean!
 
+  """Who was blocked"""
+  blockedEmail: String!
+
   """Relationship e-mails"""
   contacts: [String!]!
 }

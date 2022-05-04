@@ -17,6 +17,7 @@ export class RelationshipsService {
     const { email, contactEmail } = createRelationshipInput;
     const createdUser = new this.relationModel({
       contacts: [email, contactEmail],
+      blockedEmail: '',
       blocked: false,
     });
     return createdUser.save();
@@ -65,8 +66,13 @@ export class RelationshipsService {
     return userList.exec();
   }
 
-  update(updateRelationshipInput: UpdateRelationshipInput) {
+  async update(updateRelationshipInput: UpdateRelationshipInput) {
     const { email, contactEmail, blocked } = updateRelationshipInput;
+
+    const oldRelationship = await this.findOne({ email, contactEmail });
+    if (oldRelationship.blockedEmail === email) return;
+
+    const blockedEmail = blocked ? contactEmail : '';
     return this.relationModel
       .findOneAndUpdate(
         {
@@ -75,7 +81,10 @@ export class RelationshipsService {
             { contacts: [contactEmail, email] },
           ],
         },
-        { blocked },
+        {
+          blocked,
+          blockedEmail,
+        },
         {
           new: true,
         },

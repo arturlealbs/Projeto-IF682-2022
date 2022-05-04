@@ -101,3 +101,12 @@ export const GET_USER_LIST = gql`
         }
     }
 `;
+
+export const UPDATE_RELATIONSHIP = gql`
+    mutation UpdateRelationship($relationship: UpdateRelationshipInput!) {
+        updateRelationship(updateRelationshipInput: $relationship) {
+            contacts
+            blocked
+        }
+    }
+`;

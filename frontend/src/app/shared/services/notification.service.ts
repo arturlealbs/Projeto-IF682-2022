@@ -11,28 +11,7 @@ export class NotificationService {
   notification = this.socket.fromEvent<Notification>("notifications");
 
   private notifications: BehaviorSubject<Notification[]> =
-  new BehaviorSubject<Notification[]>([
-    {
-      image: "https://img.myloview.com.br/adesivos/man-icon-vector-user-person-profile-avatar-in-flat-color-glyph-pictogram-illustration-400-163243024.jpg",
-      text: "Uau! Parece que voce e [user] deram Match!",
-      time: "14:36"
-    },
-    {
-      image: "https://img.myloview.com.br/adesivos/man-icon-vector-user-person-profile-avatar-in-flat-color-glyph-pictogram-illustration-400-163243024.jpg",
-      text: "Uau! Parece que voce e [user] deram Match!",
-      time: "14:36"
-    },
-    {
-      image: "https://img.myloview.com.br/adesivos/man-icon-vector-user-person-profile-avatar-in-flat-color-glyph-pictogram-illustration-400-163243024.jpg",
-      text: "Uau! Parece que voce e [user] deram Match!",
-      time: "14:36"
-    },
-    {
-      image: "https://img.myloview.com.br/adesivos/man-icon-vector-user-person-profile-avatar-in-flat-color-glyph-pictogram-illustration-400-163243024.jpg",
-      text: "Uau! Parece que voce e [user] deram Match!",
-      time: "14:36"
-    },
-  ]);
+  new BehaviorSubject<Notification[]>([]);
 
   constructor(private socket: Socket) {
     this.notification.subscribe(notification => {
@@ -46,5 +25,9 @@ export class NotificationService {
 
   public getNotifications(): Observable<Notification[]> {
     return this.notifications.asObservable();
+  }
+
+  public sendNotification(notification: Notification) {
+    this.socket.emit("notifications", notification);
   }
 }

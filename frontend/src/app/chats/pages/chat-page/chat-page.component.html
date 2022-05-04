@@ -13,8 +13,10 @@
         [online]="online"
         [contact]="contact"
         [messages]="chatMessages"
+        (reportContactEvent)="reportContact($event)"
         (sendMessageEvent)="sendMessage($event)"
         (sendPreviewEvent)="sendPreview($event)"
+        (unlockContactEvent)="unlockContact()"
     >
     </app-chat>
 </div>

@@ -8,9 +8,9 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./header.component.scss'],
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  notificationCount: number = 4;
+  notificationCount: number = 0;
 
   constructor(
     private profileService: ProfileService,
@@ -21,11 +21,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
-
   logout() {
-    localStorage.removeItem('TOKEN');
     this.profileService.signOut();
   }
 

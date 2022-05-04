@@ -48,3 +48,13 @@
 .preview .content .description {
     color: #888;
 }
+
+.modal-body {
+    display: flex;
+    flex-wrap: wrap;
+    
+    button {
+        flex: 1;
+        margin: 1px;
+    }
+}

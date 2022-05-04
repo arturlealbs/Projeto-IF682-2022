@@ -28,6 +28,10 @@
     }
 }
 
+.blocked {
+    filter: grayscale(1);
+}
+
 .item {
     .description {
         width: 100%; 
