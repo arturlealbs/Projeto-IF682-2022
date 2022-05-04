@@ -1,6 +1,6 @@
 <div class="ui link card" id="{{ user?.username }}" (click)="requestShowModal()">
     <div class="ui image">
-        <img src="../../../assets/example_user.png">
+        <img src="{{ user?.profileImg }}">
     </div>
     <div class="ui content">
         <div class="header">{{ user?.username }}</div>

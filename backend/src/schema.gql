@@ -59,6 +59,12 @@ input CreateUserInput {
 
   """Unique user name to identify"""
   username: String!
+
+  """A list of users that the user has disliked"""
+  usersDisliked: [String!]
+
+  """A list of users that the user has liked"""
+  usersLiked: [String!]
 }
 
 """The education levels."""
@@ -226,6 +232,12 @@ input UpdateUserInput {
 
   """Unique user name to identify"""
   username: String
+
+  """A list of users that the user has disliked"""
+  usersDisliked: [String!]
+
+  """A list of users that the user has liked"""
+  usersLiked: [String!]
 }
 
 type User {

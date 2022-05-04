@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import {FuiBaseModal, ComponentModalConfig, ModalSize, FuiModalService} from "ngx-fomantic-ui"
+import {FuiBaseModal, ComponentModalConfig, ModalSize } from "ngx-fomantic-ui"
 import { User } from '../../shared/types/User';
 interface IConfirmModalContext {
     userInModal: User;

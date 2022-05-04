@@ -82,6 +82,7 @@ export const GET_USER_LIST = gql`
     query GetUserList {
         users {
             email
+            profileImg
             firstName
             lastName
             username

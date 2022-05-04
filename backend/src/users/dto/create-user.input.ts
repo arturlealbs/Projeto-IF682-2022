@@ -71,4 +71,16 @@ export class CreateUserInput {
     nullable: true,
   })
   languages?: string[];
+
+  @Field((type) => [String], {
+    description: 'A list of users that the user has liked',
+    nullable: true,
+  })
+  usersLiked?: string[];
+
+  @Field((type) => [String], {
+    description: 'A list of users that the user has disliked',
+    nullable: true,
+  })
+  usersDisliked?: string[];
 }

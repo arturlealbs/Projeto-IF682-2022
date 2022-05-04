@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Rate } from '../types/rate';
-import { User, defaultUser } from '../../shared/types/User';
+import { User } from '../../shared/types/User';
 import { FuiModalService } from 'ngx-fomantic-ui';
 import { ModalDetails } from '../modal-details/modal-details.component';
 
@@ -10,7 +10,11 @@ import { ModalDetails } from '../modal-details/modal-details.component';
   styleUrls: ['./similar-users.component.scss'],
 })
 export class SimilarUsersComponent {
-  constructor(public modalService: FuiModalService) {}
+  @Input()
+  users: User[] = [];
+
+  userInModal?: User;
+
   slideConfig = {
     slidesToShow: 5,
     slidesToScroll: 3,
@@ -50,6 +54,8 @@ export class SimilarUsersComponent {
     ],
   };
 
+  constructor(public modalService: FuiModalService) {}
+
   showUserModal = (user: User) => {
     this.modalService
       .open(
@@ -63,9 +69,4 @@ export class SimilarUsersComponent {
     const { user } = rate;
     console.log(`You ${rate.action}d ${user?.username}`);
   };
-
-  userInModal?: User;
-  users = [
-    defaultUser, defaultUser, defaultUser, defaultUser, defaultUser, defaultUser, defaultUser
-  ];
 }

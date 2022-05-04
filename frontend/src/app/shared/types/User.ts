@@ -18,10 +18,11 @@ export interface User {
     address: string;
     occupation?: string;
     phoneNumber?: string;
-    languages?: string[];
     genderOfInterest: string;
-    usersLiked: User[]
-    usersDisliked: User[]
+    
+    usersLiked: User[];
+    languages?: string[];
+    usersDisliked: User[];
 }
 
 export const defaultUser: User = {
@@ -36,13 +37,13 @@ export const defaultUser: User = {
     occupation: "",
     age: 18, bio: "",
     
+    usersLiked: [],
+    usersDisliked: [],
     city: "UNKNOWN",
     state: "UNKNOWN",
     address: "UNKNOWN",
     gender: "MALE",
     genderOfInterest: "FEMALE",
     education: "ensinoFundamental",
-    usersLiked: [],
-    usersDisliked: [],
 
 }

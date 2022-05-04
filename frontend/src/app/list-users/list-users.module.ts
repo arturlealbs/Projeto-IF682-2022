@@ -9,7 +9,16 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { PageComponent } from './page/page.component';
 import { FuiModalModule } from 'ngx-fomantic-ui';
 
+import { ListUsersState } from './state/list-users.state';
+import { ListUsersFacade } from './list-users.facade';
+import { listUsersInitializerProvider } from './list-users.initializer';
+
 @NgModule({
+  providers: [
+    ListUsersState,
+    ListUsersFacade,
+    listUsersInitializerProvider,
+  ],
   declarations: [
     PageComponent,
     SimilarUsersComponent,
