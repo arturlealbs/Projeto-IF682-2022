@@ -4,6 +4,7 @@ import { ObjectType, Field, Int, createUnionType } from '@nestjs/graphql';
 import { Education } from '../types/education';
 import { UserError } from './error.entity';
 import { Gender } from '../types/gender';
+import { Interests } from '../types/interests';
 
 @ObjectType()
 export class User {
@@ -83,8 +84,8 @@ export class User {
   @Field({ description: "User's address (neighborhood, street, etc)" })
   address: string;
 
-  @Field((type) => [String], { description: "User's interests and hobbies" })
-  interests: string[];
+  @Field((type) => [Interests], { description: "User's interests and hobbies" })
+  interests?: Interests[];
 
   @Field((type) => Gender, {
     description: 'Genders of people that the user wants to meet',
@@ -109,17 +110,17 @@ export class User {
   })
   languages?: string[];
 
-  @Field((type) => [User], {
-    description: 'People the user liked',
+  @Field((type) => [String], {
+    description: 'List of e-mails of users that the user liked',
     defaultValue: [],
   })
-  usersLiked?: User[]
+  usersLiked?: string[];
 
-  @Field((type) => [User], {
-    description: 'People the user disliked',
-    defaultValue: []
+  @Field((type) => [String], {
+    description: 'List of e-mails of users who disliked the user',
+    defaultValue: [],
   })
-  usersDisliked?: User[]
+  usersDisliked?: string[];
 }
 
 export const UserOrError = createUnionType({

@@ -4,6 +4,7 @@ import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 import { CreateUserInput } from './create-user.input';
 import { Education } from '../types/education';
 import { Gender } from '../types/gender';
+import { Interests } from '../types/interests';
 
 @InputType()
 export class UpdateUserInput extends PartialType(CreateUserInput) {
@@ -40,11 +41,11 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
   })
   address?: string;
 
-  @Field((type) => [String], {
+  @Field((type) => [Interests], {
     description: "User's interests and hobbies",
     nullable: true,
   })
-  interests?: string[];
+  interests?: Interests[];
 
   @Field((type) => Gender, {
     description: 'Genders of people that the user wants to meet',

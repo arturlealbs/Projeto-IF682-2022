@@ -65,8 +65,11 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'users' })
-  findAll() {
-    return this.usersService.findAll();
+  @UseGuards(JWTGuard)
+  findAll(@Context('tokenInfo') tokenInfo: TokenInfo) {
+    return this.usersService.findAll({
+      email: tokenInfo.email,
+    });
   }
 
   @Query(() => UserOrError, { name: 'user' })
