@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Rate } from '../types/rate';
-import { User } from '../../shared/types/User';
+import { Rate } from '../../types/rate';
+import { User } from 'src/app/shared/types/User';
 import { FuiModalService } from 'ngx-fomantic-ui';
 import { ModalDetails } from '../modal-details/modal-details.component';
 
