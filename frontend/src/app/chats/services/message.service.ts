@@ -12,6 +12,12 @@ export class MessageService {
 
   constructor(private socket: Socket) {}
 
+  renewToken(newToken: string) {
+    this.socket.ioSocket.io.opts.extraHeaders.authorization = newToken;
+    this.socket.disconnect();
+    this.socket.connect();
+  }
+
   sendMessage(message: Message) {
     this.socket.emit('messages', message);
   }

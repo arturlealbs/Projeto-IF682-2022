@@ -37,7 +37,7 @@ input CreateUserInput {
   id: String!
 
   """User's interests and hobbies"""
-  interests: [String!]!
+  interests: [Interests!]!
 
   """Languages the user speaks"""
   languages: [String!]
@@ -54,11 +54,20 @@ input CreateUserInput {
   """Profile image URL"""
   profileImg: String!
 
+  """Login provider"""
+  provider: String!
+
   """User's state"""
   state: String!
 
   """Unique user name to identify"""
   username: String!
+
+  """A list of users that the user has disliked"""
+  usersDisliked: [String!]
+
+  """A list of users that the user has liked"""
+  usersLiked: [String!]
 }
 
 """The education levels."""
@@ -77,6 +86,40 @@ enum Gender {
   BOTH
   FEMALE
   MALE
+}
+
+"""The interests list."""
+enum Interests {
+  ART
+  ARTISTS
+  BASKETBALL
+  BEAUTY
+  BOOKS
+  BUSINESS
+  CHILDREN
+  COOKING
+  CULTURE
+  DANCE
+  ECONOMY
+  FASHION
+  FINANCE
+  FOOD
+  GAMES
+  GEOGRAPHY
+  HEALTH
+  HISTORY
+  LANGUAGES
+  LITERATURE
+  MOVIES
+  MUSIC
+  PHILOSOPHY
+  PHOTOGRAPHY
+  POLITICS
+  RELIGION
+  SOCCER
+  SPORTS
+  TECHNOLOGY
+  TRAVEL
 }
 
 type Mutation {
@@ -110,6 +153,9 @@ type Relation {
 type Relationship {
   """If was blocked or not"""
   blocked: Boolean!
+
+  """Who was blocked"""
+  blockedEmail: String!
 
   """Relationship e-mails"""
   contacts: [String!]!
@@ -167,7 +213,7 @@ input UpdateUserInput {
   id: String
 
   """User's interests and hobbies"""
-  interests: [String!]
+  interests: [Interests!]
 
   """Languages the user speaks"""
   languages: [String!]
@@ -184,11 +230,20 @@ input UpdateUserInput {
   """Profile image URL"""
   profileImg: String
 
+  """Login provider"""
+  provider: String
+
   """User's state"""
   state: String
 
   """Unique user name to identify"""
   username: String
+
+  """A list of users that the user has disliked"""
+  usersDisliked: [String!]
+
+  """A list of users that the user has liked"""
+  usersLiked: [String!]
 }
 
 type User {
@@ -223,7 +278,7 @@ type User {
   genderOfInterest: Gender!
 
   """User's interests and hobbies"""
-  interests: [String!]!
+  interests: [Interests!]!
 
   """Languages the user speaks"""
   languages: [String!]
@@ -245,6 +300,12 @@ type User {
 
   """Unique user name to identify"""
   username: String!
+
+  """List of e-mails of users who disliked the user"""
+  usersDisliked: [String!]!
+
+  """List of e-mails of users that the user liked"""
+  usersLiked: [String!]!
 }
 
 type UserError {

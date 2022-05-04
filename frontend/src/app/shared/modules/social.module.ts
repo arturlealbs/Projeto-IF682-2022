@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { 
   SocialAuthServiceConfig,
   FacebookLoginProvider, 
+  GoogleLoginProvider,
   SocialLoginModule, 
 } from '@abacritt/angularx-social-login';
 
@@ -10,6 +11,9 @@ const fbLoginOptions = {
   scope: 'email,public_profile,user_age_range,user_birthday,user_gender', // ,user_photos
   return_scopes: true,
   enable_profile_selector: true
+};
+const ggLoginOptions = {
+  scope: 'profile email'
 };
 
 @NgModule({
@@ -24,6 +28,13 @@ const fbLoginOptions = {
             provider: new FacebookLoginProvider(
               environment.facebookID,
               fbLoginOptions
+            )
+          },
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.googleID,
+              ggLoginOptions
             )
           }
         ]

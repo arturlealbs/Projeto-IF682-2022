@@ -3,7 +3,9 @@ import ChatMessage from '../../types/chat-message';
 import { ChatsFacade } from '../../chats.facade';
 import { Subscription } from 'rxjs';
 
-import { defaultUser, User } from '../../../shared/types/User';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { defaultUser, User } from 'src/app/shared/types/User';
 import { Contact, defaultContact } from '../../types/contact';
 import Message from '../../types/message';
 
@@ -26,7 +28,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   private _previewSub!: Subscription;
 
   constructor(
-    private chatFacade: ChatsFacade
+    private chatFacade: ChatsFacade,
+    private usersService: UsersService,
+    private notificationService: NotificationService
   ) {
     this.chatFacade.getProfile().subscribe(profile => {
       this.profile = profile;
@@ -103,15 +107,52 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   }
 
   sendPreview(value: string) {
-    this.chatFacade.sendPreview(this.contact.username, value);
+    this.chatFacade.sendPreview(this.contact.email, value);
   }
 
   sendMessage(value: string) {
-    this.chatFacade.sendMessage(this.contact.username, value);
+    this.chatFacade.sendMessage(this.contact.email, value);
+    this.chatFacade.sendPreview(this.contact.email, "");
+  }
+
+  capitalizedName(username: string): string {
+    return username.split(" ").map(
+      (name) => name.charAt(0).toUpperCase() + name.slice(1)
+    ).join(" ");
+  }
+
+  reportContact(reason: string) {
+    this.usersService.updateRelationship(
+      this.contact.email, true
+    ).subscribe().unsubscribe();
+    
+    const username = this.capitalizedName(this.profile.username);
+    this.notificationService.sendNotification({
+      to: this.contact.email,
+      image: this.profile.profileImg,
+      timestamp: new Date().toLocaleString(),
+      text: `${username} reportou você pela seguinte razão: ${reason}.`
+    });
+    this.chatFacade.fetchContacts();
+  }
+  
+  unlockContact() {
+    this.usersService.updateRelationship(
+      this.contact.email, false
+    ).subscribe().unsubscribe();
+    
+    const username = this.capitalizedName(this.profile.username);
+    this.notificationService.sendNotification({
+      to: this.contact.email,
+      image: this.profile.profileImg,
+      timestamp: new Date().toLocaleString(),
+      text: `${username} gostaria de fazer as pazes.`
+    });
+    this.chatFacade.fetchContacts();
   }
 
   chooseContact(newContact: Contact) {
     this.contact = newContact;
-    this.chatFacade.setCurrentChat(newContact.username);
+    this.chatFacade.setCurrentChat(newContact.email);
   }
 }

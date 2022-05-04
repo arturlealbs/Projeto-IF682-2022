@@ -2,12 +2,20 @@
   <div id="form-base">
 
     <div id="logo">
+      <img class="modal-picture" src="../../../assets/logo-clara.svg" id="icon">
       <p>Coopido</p>
     </div>
 
     <form>
       <div class="login-signin">
-        <input type="button" value="Log In"  (click)="signin()">
+        <button  (click)="fbLogin()">
+          <i class="facebook big icon"></i>
+          LogIn com Facebook
+        </button>
+        <button (click)="GGLogin()">
+          <i class="google big icon"></i>
+          LogIn com Google
+        </button>
       </div>
     </form>
   </div>  

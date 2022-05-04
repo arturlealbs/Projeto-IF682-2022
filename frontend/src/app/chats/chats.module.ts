@@ -13,10 +13,16 @@ import { ChatsState } from './state/chats.state';
 import { ChatsFacade } from './chats.facade';
 
 import config from '../shared/config/socket';
+import { SharedModule } from '../shared/shared.module';
 import { MessageService } from './services/message.service';
 
 @NgModule({
-  providers: [ChatsState, MessageService, ChatsFacade, chatsInitializerProvider],
+  providers: [
+    ChatsState,
+    ChatsFacade,
+    MessageService,
+    chatsInitializerProvider
+  ],
   declarations: [
     ChatComponent,
     ContactsComponent,
@@ -25,6 +31,7 @@ import { MessageService } from './services/message.service';
   imports: [
     FormsModule,
     CommonModule,
+    SharedModule,
 		ChatsRoutingModule,
     SocketIoModule.forRoot(config)
   ]

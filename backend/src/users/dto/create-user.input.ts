@@ -3,11 +3,15 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
 import { Education } from '../types/education';
 import { Gender } from '../types/gender';
+import { Interests } from '../types/interests';
 
 @InputType()
 export class CreateUserInput {
   @Field({ description: 'User ID' })
   id?: string;
+
+  @Field({ description: 'Login provider' })
+  provider?: string;
 
   @Field({ description: 'Unique user e-mail' })
   email: string;
@@ -45,8 +49,8 @@ export class CreateUserInput {
   @Field({ description: "User's address (neighborhood, street, etc)" })
   address: string;
 
-  @Field((type) => [String], { description: "User's interests and hobbies" })
-  interests: string[];
+  @Field((type) => [Interests], { description: "User's interests and hobbies" })
+  interests?: Interests[];
 
   @Field((type) => Gender, {
     description: 'Genders of people that the user wants to meet',
@@ -70,4 +74,16 @@ export class CreateUserInput {
     nullable: true,
   })
   languages?: string[];
+
+  @Field((type) => [String], {
+    description: 'A list of users that the user has liked',
+    nullable: true,
+  })
+  usersLiked?: string[];
+
+  @Field((type) => [String], {
+    description: 'A list of users that the user has disliked',
+    nullable: true,
+  })
+  usersDisliked?: string[];
 }

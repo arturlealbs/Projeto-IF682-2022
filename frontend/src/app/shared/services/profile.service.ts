@@ -1,11 +1,13 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { defaultUser, User } from '../types/User';
+import { User } from '../types/User';
 
 import { 
   SocialAuthService, 
   FacebookLoginProvider,
+  GoogleLoginProvider,
 } from '@abacritt/angularx-social-login';
+import { SocialUser } from '../types/social-user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +15,34 @@ import {
 export class ProfileService {
 
   private profile: BehaviorSubject<User|null> = new BehaviorSubject<User|null>(null);
-  private loginProfile: BehaviorSubject<User|null> = 
-    new BehaviorSubject<User|null>(null);
+  private loginProfile: BehaviorSubject<SocialUser|null> = 
+    new BehaviorSubject<SocialUser|null>(null);
 
   constructor(
     private socialAuthService: SocialAuthService,
   ) {
     this.socialAuthService.authState.subscribe((user) => {
       if (!user) return;
+      console.log(user);
       localStorage.setItem("TOKEN", user.authToken);
+      const profileImg = user.provider !== "GOOGLE" ?
+        user.response.picture.data.url : user.photoUrl;
       this.loginProfile.next({
-        ...defaultUser, 
-        ...user, 
-        profileImg: user.response.picture.data.url
+        profileImg,
+        id: user.id,
+        email: user.email,
+        username: user.name,
+        provider: user.provider,
+        lastName: user.lastName,
+        firstName: user.firstName,
       });
     });
   }
 
-  public signIn(): void {
+  public signIn(facebook: boolean = false): void {
     this.socialAuthService.signIn(
-      FacebookLoginProvider.PROVIDER_ID
+      facebook ? FacebookLoginProvider.PROVIDER_ID
+      : GoogleLoginProvider.PROVIDER_ID
     );
   }
 
@@ -46,7 +56,7 @@ export class ProfileService {
     return this.profile.asObservable()
   }
   
-  public getLoginProfile(): Observable<User|null> {
+  public getLoginProfile(): Observable<SocialUser|null> {
     return this.loginProfile.asObservable()
   }
 

@@ -22,7 +22,7 @@ export class HomeFacade {
     }
 
     getFacebookProfileData(facebookID: string, accessToken: string) {
-        this.api.getProfileData(facebookID, accessToken).subscribe(data => {
+        this.api.getFacebookData(facebookID, accessToken).subscribe(data => {
             const profile = this.state.getCurrentProfile();
             if (profile) {
                 this.setProfile({
@@ -30,6 +30,24 @@ export class HomeFacade {
                     gender: data.gender.toUpperCase(),
                     birthDate: data.birthday, 
                     age: data.age_range.min,
+                    profileImg: data.picture.data.url
+                });
+            }
+        });
+    }
+    
+    getGoogleProfileData(accessToken: string) {
+        this.api.getGoogleData(accessToken).subscribe(data => {
+            const profile = this.state.getCurrentProfile();
+            const resizedImage = data.picture.slice(
+                0, data.picture.length - 5) + 's200-c';
+            if (profile) {
+                this.setProfile({
+                    ...profile, 
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    username: data.username,
+                    profileImg: resizedImage,
                 });
             }
         });

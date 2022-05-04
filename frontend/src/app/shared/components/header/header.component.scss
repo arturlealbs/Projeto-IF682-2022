@@ -1,19 +1,28 @@
 .ntfc-button{
     background-color: transparent;
-    color: aliceblue;
+    color: var(--base-clara);
     border: none;
     border-radius: 20%;
-    font-size: 30px;
+    font-size: 28px;
     border-radius: 50%;
 }
 .navbar {
-    background-color: #63222D;
+    background-color: var(--escuro);
     padding: .5em 5em;
+}
+.img {
+    background-color: transparent;
 }
 .logo{
     background-color: transparent;
     color: var(--base-clara);
-    font-weight: bold;
+    font-family: 'Lobster';
     border: none;
-    font-size: 30px;    
+    font-size: 30px;
+    text-align: center;
+    vertical-align: middle;   
+}
+
+#icon {
+    width: 10%;
 }

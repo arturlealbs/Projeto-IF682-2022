@@ -2,7 +2,7 @@ FROM node:17-alpine
 
 WORKDIR /usr/app
 COPY package.json package-lock.json ./
-RUN npm install --ignore-scripts
+RUN npm install --ignore-scripts --legacy-peer-deps
 COPY . .
 RUN npm install @angular/cli -g
 

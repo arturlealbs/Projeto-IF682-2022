@@ -1,5 +1,6 @@
-# Projeto-IF682
-Boilerplate for Software Engineering Project in the IF682 class.
+![Coopido image](.github/index.png)
+
+A Software Engineering Project in the IF682 class. Building a social media application to help people to find love.
 
 ## How to run this project
 
@@ -9,6 +10,9 @@ You need to create a .env file in the [backend](./backend/) folder with the foll
 
 ```env
 DB_URI=mongodb+srv:// # Database URI connection
+FB_TOKEN=123|ABC      # Facebook token
+DB_NAME=coopido       # Database name
+SECRET=secret         # Secret key
 ```
 
 ### Using NPM
@@ -23,7 +27,7 @@ npm start
 In another terminal, install the frontend dependencies and run it.
 ```bash
 cd frontend
-npm install
+npm install --legacy-peer-deps
 npm start
 ```
 

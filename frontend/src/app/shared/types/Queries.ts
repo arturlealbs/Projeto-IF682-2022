@@ -82,6 +82,7 @@ export const GET_USER_LIST = gql`
     query GetUserList {
         users {
             email
+            profileImg
             firstName
             lastName
             username
@@ -98,6 +99,15 @@ export const GET_USER_LIST = gql`
             languages
             phoneNumber
             genderOfInterest
+        }
+    }
+`;
+
+export const UPDATE_RELATIONSHIP = gql`
+    mutation UpdateRelationship($relationship: UpdateRelationshipInput!) {
+        updateRelationship(updateRelationshipInput: $relationship) {
+            contacts
+            blocked
         }
     }
 `;

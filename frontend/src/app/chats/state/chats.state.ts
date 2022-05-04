@@ -60,8 +60,8 @@ export class ChatsState {
     return this.contacts.next(newContacts);
   }
 
-  public getUsername(): string {
-    return this.profile.getValue().username;
+  public getProfileEmail(): string {
+    return this.profile.getValue().email;
   }
 
   public getProfile(): Observable<User> {

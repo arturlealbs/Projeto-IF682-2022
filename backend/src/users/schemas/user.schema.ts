@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Education } from '../types/education';
+import { Interests } from '../types/interests';
 import { Gender } from '../types/gender';
 import { Document } from 'mongoose';
 
@@ -31,7 +32,7 @@ export class User {
   @Prop({ required: true })
   gender: Gender;
 
-  @Prop({ required: true })
+  @Prop()
   birthDate: string;
 
   @Prop({ required: true })
@@ -43,8 +44,8 @@ export class User {
   @Prop({ required: true })
   address: string;
 
-  @Prop({ type: [String], required: true })
-  interests: string[];
+  @Prop()
+  interests?: Interests[];
 
   @Prop({ type: String, required: true })
   genderOfInterest: Gender;
@@ -60,6 +61,12 @@ export class User {
 
   @Prop({ type: [String] })
   languages?: string[];
+
+  @Prop({ type: [String] })
+  usersLiked: string[];
+
+  @Prop({ type: [String] })
+  usersDisliked: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

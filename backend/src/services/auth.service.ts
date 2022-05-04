@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
-import { Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 
 import { FBToken } from '../users/types/fb-token';
 import { JwtPayload, verify as jwtVerify, sign as jwtSign } from 'jsonwebtoken';
@@ -18,6 +18,20 @@ export class AuthService {
         access_token: process.env.FB_TOKEN,
       },
     });
+  }
+
+  getGGEmail(token: string) {
+    // It's not secure yet
+    return this.httpService
+      .get('https://www.googleapis.com/oauth2/v3/tokeninfo', {
+        params: {
+          access_token: token,
+        },
+      })
+      .pipe(
+        tap((response: AxiosResponse) => of(response.data.email)),
+        catchError(() => of({ data: null })),
+      );
   }
 
   getFBEmail(userID: string, token: string) {

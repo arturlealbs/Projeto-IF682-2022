@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../shared/types/User';
+import { ListUsersFacade } from '../list-users.facade';
 
 @Component({
   selector: 'app-page',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageComponent implements OnInit {
 
-  constructor() { }
+  userList: User[] = []
+
+  constructor(
+    listUserFacade: ListUsersFacade
+  ) { 
+    listUserFacade.getUserList().subscribe((userList) => {
+      this.userList = userList;
+    })
+  }
 
   ngOnInit(): void {
   }

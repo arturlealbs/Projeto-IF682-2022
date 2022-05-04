@@ -1,5 +1,6 @@
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import { UsersService } from 'src/app/shared/services/users.service';
+import { defaultUser } from 'src/app/shared/types/User';
 import { HomeFacade } from '../../home.facade';
 
 import { Component, OnInit } from '@angular/core';
@@ -23,8 +24,7 @@ export class LoginComponent implements OnInit {
     this.profileService.getLoginProfile().subscribe(async (user) => {
       if (!user) return;
        
-      const FBToken = localStorage.getItem("TOKEN") as string;
-
+      const loginToken = localStorage.getItem("TOKEN") as string;
       const { token } = await this.usersService.getToken();
 
       if (token) {
@@ -34,13 +34,21 @@ export class LoginComponent implements OnInit {
         return this.router.navigate(['/']);
       }
 
-      this.homeFacade.getFacebookProfileData(user.id, FBToken);
-      this.homeFacade.setProfile(user);
+      if (user.provider === "GOOGLE") {
+        this.homeFacade.getGoogleProfileData(loginToken);
+      } else {
+        this.homeFacade.getFacebookProfileData(user.id, loginToken);
+      }
+      this.homeFacade.setProfile({...defaultUser, ...user});
       return this.router.navigate(['/signin']);
     });
   }
 
-  signin(): void {
+  fbLogin(): void {
+    this.profileService.signIn(true);
+  }
+  
+  GGLogin(): void {
     this.profileService.signIn();
   }
 

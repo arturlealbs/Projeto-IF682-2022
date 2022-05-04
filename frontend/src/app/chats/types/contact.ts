@@ -3,6 +3,7 @@ export interface Contact {
     firstName: string;
     lastName: string;
     username: string;
+    blocked: boolean;
     gender: string;
     image: string;
     email: string;
@@ -11,6 +12,7 @@ export interface Contact {
 
 export class defaultContact implements Contact {
     lastMessage: string = '';
+    blocked: boolean = false;
     firstName: string = '';
     username: string = '';
     lastName: string = '';

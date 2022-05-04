@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { defaultUser, User } from '../../../shared/types/User';
 import { Contact } from '../../types/contact';
 
@@ -7,7 +7,7 @@ import { Contact } from '../../types/contact';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
-export class ContactsComponent implements OnInit {
+export class ContactsComponent {
   
   @Input()
   contacts: Contact[] = [];
@@ -20,7 +20,10 @@ export class ContactsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  capitalizedName(username: string): string {
+    return username.split(" ").map(
+      (name) => name.charAt(0).toUpperCase() + name.slice(1)
+    ).join(" ");
   }
 
   chooseContact(newContact: Contact) {

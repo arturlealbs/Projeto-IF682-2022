@@ -1,61 +1,65 @@
 <div class="profile-container">
-    <div class="profile">
-        <img src="http://blog.analiberato.com/wp-content/uploads/2019/04/pose-blogueira-look-do-dia-5.jpg" class="img-thumbnail">
-        <p><mat-icon>person</mat-icon>Bárbara Gomes Pereira da Silva, 19 anos</p>
-    </div>
-  
-    <button type="button" class="return-button btn-primary btn-lg"> 
-        <mat-icon>chevron_left</mat-icon> Back to the users list
-    </button>
-        
     <div class="personal">
-        <h1><mat-icon>account_circle</mat-icon>User Profile</h1>
-        <div class="interests">
-            <span class="badge badge-pill badge-secondary"
-                *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]">
-                Interest {{i}}
-            </span>
-        </div>
-        <div class="info">
-            <h2 id="title"> 
-                <mat-icon> description </mat-icon> 
-                Description
-            </h2>
-            <p id="text">Here we have a description</p>
-        </div>
-
-        <button type="button" class="btn btn-primary button-report" 
-            data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            <mat-icon> report </mat-icon>
-            Report this Profile
-        </button>
-    </div>
-
-        <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h2 class="modal-title" id="staticBackdropLabel">Report a user</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1><mat-icon>account_circle</mat-icon> Perfil do usuário </h1>
+        <div class="profile-infos">
+            <div class="profile">
+                <img [src]="profile.profileImg" class="img-thumbnail">
+                <p>
+                    <mat-icon>person</mat-icon>
+                    {{capitalizedName()}} <br>
+                    <mat-icon>cake</mat-icon>
+                    {{profile.birthDate}} ({{getAge()}} anos) <br>
+                    <mat-icon>school</mat-icon>
+                    {{getEducation()}} <br>
+                    <mat-icon>domain</mat-icon>
+                    {{profile.occupation}} <br>
+                    <mat-icon>phone_forwarded</mat-icon>
+                    {{profile.phoneNumber}} <br>
+                </p>
+            </div>
+            <div class="infos">
+                <div class="info" style="flex:3">
+                    <h2 id="title"> 
+                        <mat-icon> description </mat-icon> 
+                        Bio
+                    </h2>
+                    <p id="text">
+                        Eu, {{profile.firstName}} {{profile.lastName}},
+                        {{profile.bio}}
+                    </p>
                 </div>
-                <div class="modal-body">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Select an option</button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                          <li><a class="dropdown-item" href="#">Fake Profile / Spam </a></li>
-                          <li><a class="dropdown-item" href="#">Inappropriated Description</a></li>
-                          <li><a class="dropdown-item" href="#">User undereighteen</a></li>
-                        </ul>
-                    </div>
+                <div class="info">
+                    <h2 id="title"> 
+                        <mat-icon>favorite</mat-icon>
+                        Sexo e interesse
+                    </h2>
+                    <p id="text">
+                        <b> {{getGender(this.profile.gender)}} </b>
+                        interessado em pessoas 
+                        <span *ngIf = "profile.genderOfInterest !== 'BOTH'">
+                            do sexo <b> {{getGender(profile.genderOfInterest)}} </b>
+                        </span>
+                        <span *ngIf = "profile.genderOfInterest === 'BOTH'">
+                            de ambos os sexos
+                        </span>
+                    </p>
                 </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-secondary" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Top popover">
-                    Report
-                  </button>
+                <div class="info">
+                    <h2 id="title"> 
+                        <mat-icon>location_on</mat-icon>
+                        Endereço
+                    </h2>
+                    <p id="text">
+                        {{profile.address}}, {{profile.city}}, {{profile.state}}
+                    </p>
                 </div>
             </div>
+        </div>
+        <div class="interests">
+            <span class="badge badge-pill badge-secondary"
+                *ngFor="let interest of profile.interests">
+                {{interest}}
+            </span>
         </div>
     </div>
 </div>
