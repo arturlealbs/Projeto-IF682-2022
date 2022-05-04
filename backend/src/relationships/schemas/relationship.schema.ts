@@ -8,6 +8,9 @@ export class Relationship {
   @Prop({ type: [String], required: true })
   contacts: string[];
 
+  @Prop({ type: String })
+  blockedEmail: string;
+
   @Prop({ required: true })
   blocked: boolean;
 }

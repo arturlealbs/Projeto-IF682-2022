@@ -32,6 +32,12 @@ export class ChatComponent {
   @Output()
   sendPreviewEvent = new EventEmitter<string>();
   
+  @Output()
+  reportContactEvent = new EventEmitter<string>();
+  
+  @Output()
+  unlockContactEvent = new EventEmitter<string>();
+  
   message: { text: string } = {
     text: ''
   }
@@ -50,13 +56,35 @@ export class ChatComponent {
     this.sendMessageEvent.emit(this.message.text);
     this.message.text = '';
   }
+  
+  reportContact(event: any) {
+    const reason = event.target.innerText;
+    this.reportContactEvent.emit(reason);
+  }
+  
+  unlockContact() {
+    this.unlockContactEvent.emit();
+  }
+
+  capitalizedName(username: string): string {
+    return username.split(" ").map(
+      (name) => name.charAt(0).toUpperCase() + name.slice(1)
+    ).join(" ");
+  }
+
+  getContactUsername(email: string | undefined) {
+    if (!email) return '';
+    const username = email === this.contact.email ? 
+      this.contact.username : this.profile.username;
+    return this.capitalizedName(username);
+  }
 
   messageSide(message: ChatMessage): string {
-    return message.from === this.contact.username ?  'left' : 'right';
+    return message.from === this.contact.email ?  'left' : 'right';
   }
   
   contactImage(message: ChatMessage): string {
-    return message.from === this.contact.username ?  
+    return message.from === this.contact.email ?  
       this.contact.image : this.profile.profileImg;
   }
 

@@ -8,7 +8,7 @@ export class HomeApi {
   public constructor(private readonly http: HttpClient) { }
 
   public getProfileData(facebookID:string, accessToken: string, 
-    fields: string[] = ["age_range", "birthday", "gender"]
+    fields: string[] = ["age_range", "birthday", "gender", "picture.type(large)"],
   ): Observable<FacebookProfile> {
     const fieldString = fields.join(",");
     return this.http.get<FacebookProfile>(

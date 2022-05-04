@@ -14,7 +14,8 @@ import {
   GET_RELATIONSHIPS,
   GET_TOKEN_QUERY,
   GET_USER_LIST,
-  GET_USER, 
+  GET_USER,
+  UPDATE_RELATIONSHIP, 
 } from '../types/Queries';
 
 @Injectable({
@@ -49,6 +50,16 @@ export class UsersService {
     return this.apollo.mutate<CreateResponse>({
       mutation: CREATE_USER_MUTATION,
       variables: { user },
+    });
+  }
+  
+  updateRelationship(contactEmail: string, blocked: boolean) {
+    return this.apollo.mutate<CreateResponse>({
+      mutation: UPDATE_RELATIONSHIP,
+      variables: { relationship: {
+        contactEmail,
+        blocked
+      } },
     });
   }
 

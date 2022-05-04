@@ -1,5 +1,6 @@
 export interface Notification {
+    timestamp: string;
     image: string;
     text: string;
-    time: string;
+    to: string;
 }

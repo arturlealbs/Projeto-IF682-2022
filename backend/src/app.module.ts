@@ -3,11 +3,14 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 
 import { RelationshipsModule } from './relationships/relationships.module';
 import { UsersModule } from './users/users.module';
 
+import { ChatService } from './services/chat.service';
+import { AuthService } from './services/auth.service';
 import { AppGateway } from './app.gateway';
 import { join } from 'path';
 
@@ -29,10 +32,11 @@ const envConfig = ConfigModule.forRoot();
       exclude: ['/graphql/**', '/messages/**'],
     }),
     envConfig,
+    HttpModule,
     UsersModule,
     RelationshipsModule,
   ],
   controllers: [],
-  providers: [AppGateway],
+  providers: [AuthService, ChatService, AppGateway],
 })
 export class AppModule {}

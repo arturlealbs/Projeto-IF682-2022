@@ -3,19 +3,36 @@
     <div class="ui item">
       <img class="ui mini avatar circular image" [src]="contact.image">
       <div>
-        <strong> {{ contact.username }} </strong> <br>
+        <strong> {{ capitalizedName(contact.username) }} </strong> <br>
         <div class="ui horizontal label {{onlineStatus()}}">
           {{(online) ? 'Online' : 'Offline'}}
         </div>
       </div>
     </div>
     <div class="right item">
+      <div class="ui icon item dropdown">
+        <!-- This is very very wrong: I'm mixing Fomantic + Bootstrap -->
+        <i class="ellipsis horizontal large icon" id="chatOptions" 
+        data-bs-toggle="dropdown" aria-expanded="false"></i>
+        <ul class="dropdown-menu" aria-labelledby="chatOptions">
+          <li>
+            <button type="button" class="btn dropdown-item" 
+              *ngIf="!contact.blocked" data-bs-toggle="modal" 
+              data-bs-target="#staticBackdrop">
+              <i class="exclamation triangle large icon"></i>
+              Denunciar esse perfil
+            </button>
+            <button type="button" class="btn dropdown-item"
+              *ngIf="contact.blocked" (click)="unlockContact()">
+              <i class="lock open large icon"></i>
+              Desbloquear esse perfil
+            </button>
+          </li>
+        </ul>
+      </div>
       <div class="ui input">
         <input type="text" placeholder="Pesquisar...">
       </div>
-      <button class="ui icon button right item">
-        <i class="ellipsis horizontal icon"></i>
-      </button>
     </div>
   </div>
 </div>
@@ -27,7 +44,7 @@
       <img src="{{contactImage(chatMessage)}}">
     </a>
     <div class="content">
-      <a class="header">  {{ chatMessage.from }} </a>
+      <a class="header">  {{ getContactUsername(chatMessage.from) }} </a>
       <div class="description" 
         *ngFor = "let messageText of chatMessage.messages">
         <p> {{ messageText.text }} </p>
@@ -41,9 +58,19 @@
       <img [src]="contact.image">
     </a>
     <div class="content">
-      <a class="header">  {{ preview?.from }} </a>
+      <a class="header">  {{ getContactUsername(preview?.from) }} </a>
       <div class="description">
         <p> {{ preview?.text }} </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item preview" *ngIf = "contact.blocked">
+    <i class="ban large icon"></i>
+    <div class="content">
+      <a class="header">  Aviso! </a>
+      <div class="description">
+        <p> Este usuário está bloqueado! </p>
       </div>
     </div>
   </div>
@@ -58,4 +85,55 @@
   <button class="ui icon button" (click)='sendMessage()'>
     <i class="paper plane icon"></i>
   </button>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" 
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" 
+  aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h2 class="modal-title" id="staticBackdropLabel"> 
+            Reportar usuário 
+          </h2>
+          <button type="button" class="btn-close" 
+            data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <button type="button" data-bs-dismiss="modal"
+              (click)="reportContact($event)"
+              class="btn btn-warning"> 
+              Perfil Falso/SPAM 
+            </button>
+            <button type="button" data-bs-dismiss="modal"
+              (click)="reportContact($event)"
+              class="btn btn-warning"> 
+              Descrição imprópria 
+            </button>
+            <button type="button" data-bs-dismiss="modal"
+              (click)="reportContact($event)"
+              class="btn btn-warning"> 
+              Menor de idade 
+            </button>
+            <button type="button" data-bs-dismiss="modal"
+              (click)="reportContact($event)"
+              class="btn btn-warning"> 
+              Assédio ou agressão 
+            </button>
+            <button type="button" data-bs-dismiss="modal"
+              (click)="reportContact($event)"
+              class="btn btn-warning"> 
+              Linguagem imprópria 
+            </button>
+            <button type="button" data-bs-dismiss="modal"
+              (click)="reportContact($event)"
+              class="btn btn-warning"> 
+              Descriminação 
+            </button>
+          </div>
+          <div class="modal-footer">
+            O usuário deixará de poder enviar mensagens a você.
+          </div>
+      </div>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="ui segment profile">
   <img class="ui mini avatar circular image" [src]="profile.profileImg">
   <div>
-    <strong> {{ profile.username }} </strong> <br>
+    <strong> {{ capitalizedName(profile.username) }} </strong> <br>
     <div class="ui horizontal label green">
       Online
     </div>
@@ -10,9 +10,12 @@
 <div class="ui middle aligned selection list contacts">
     <div class="item" *ngFor="let contact of contacts" 
       (click) = "chooseContact(contact)">
-      <img class="ui tiny image" src="{{contact.image}}">
+      <img class="ui tiny image {{contact.blocked?'blocked':''}}"
+        src="{{contact.image}}">
       <div class="content">
-        <div class="header"> {{contact.username}} </div>
+        <div class="header"> 
+          {{ capitalizedName(contact.username) }} 
+        </div>
         <div class="description">
           <p> {{ contact.lastMessage}} </p>
         </div>

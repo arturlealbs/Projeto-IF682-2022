@@ -1,6 +1,7 @@
 <header>
     <nav class="navbar navbar-dark shadow-md">
         <div class="Title">
+            <img class="modal-picture" src="../../../assets/logo-clara.svg" id="icon">
             <button routerLink = '/' type = "button" class = "logo">
                 Coopido
             </button>
@@ -16,13 +17,14 @@
         </button>
         <button routerLink = '/notifications' type="button" class="ntfc-button">
             <i class="fas fa-bell"></i>
-            <div style= font-size:10px; class="badge bg-danger">
+            <div *ngIf = "notificationCount > 0"
+                style= font-size:10px; class="badge bg-danger">
                 {{ notificationCount }}
             </div>
         </button>
         <button routerLink="/login" type="button" 
             (click)="logout()" class="ntfc-button">
-            <i class="fas fa-sign-out-alt"></i>
+            <i class="fas fa-sign-in-alt"></i>
         </button>
     </nav>
 </header>

@@ -30,7 +30,7 @@ export const defaultUser: User = {
     username: "",
     lastName: "",
     interests: [],
-    birthDate: "",
+    birthDate: "01/01/1900",
     firstName: "",
     profileImg: "",
     occupation: "",

@@ -49,35 +49,36 @@ export class ChatsFacade {
 		this.state.setChatMessages(username);
 	}
 
-	public sendMessage(contact: string, message: string) {
-		const username = this.state.getUsername();
+	public sendMessage(contactEmail: string, message: string) {
+		const profileEmail = this.state.getProfileEmail();
 		this.messageService.sendMessage({
 			timestamp: Date.now(),
-			from: username,
+			from: profileEmail,
+			to: contactEmail,
 			text: message,
-			to: contact,
 		});
 	}
 
-	public sendPreview(contact: string, message: string) {
-		const username = this.state.getUsername();
+	public sendPreview(contactEmail: string, message: string) {
+		const profileEmail = this.state.getProfileEmail();
 		this.messageService.sendPreview({
 			timestamp: Date.now(),
-			from: username,
+			from: profileEmail,
+			to: contactEmail,
 			text: message,
-			to: contact,
 		});
 	}
 
 	public fetchContacts() {
-		const username = this.state.getUsername();
+		const profileEmail = this.state.getProfileEmail();
 		this.usersService.getContacts().then(contacts => {
 			this.state.setContacts(contacts.map(item => {
 				const contact = item.infos.filter(info => (
-					info.username !== username
+					info.email !== profileEmail
 				))[0];
 				return {
 					image: contact.profileImg,
+					blocked: item.blocked,
 					lastMessage: "",
 					...contact
 				};

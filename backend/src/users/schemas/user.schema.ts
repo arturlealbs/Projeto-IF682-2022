@@ -32,7 +32,7 @@ export class User {
   @Prop({ required: true })
   gender: Gender;
 
-  @Prop({ required: true })
+  @Prop()
   birthDate: string;
 
   @Prop({ required: true })

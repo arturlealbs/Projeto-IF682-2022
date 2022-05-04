@@ -18,5 +18,6 @@ import { AuthService } from '../services/auth.service';
     ]),
   ],
   providers: [RelationshipsResolver, RelationshipsService, AuthService],
+  exports: [RelationshipsService],
 })
 export class RelationshipsModule {}
