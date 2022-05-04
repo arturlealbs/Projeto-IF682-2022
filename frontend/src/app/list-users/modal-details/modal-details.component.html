@@ -1,0 +1,31 @@
+<div class="ui header">
+    <img class="modal-picture" src="../../../assets/example_user.png">
+    {{ modal.context.userInModal?.username }}
+</div>
+<div class="ui content">
+    <div class="ui grid">
+        <div class="eight wide column profile-items">
+        <p><i class="ui user icon profile-field"></i> Nome:</p>
+        <p><i class="ui calendar icon profile-field"></i> Idade:</p>
+        <p><i class="ui soccer icon profile-field"></i> Gostos:</p>
+        <p><i class="ui book icon profile-field"></i> Escolaridade:</p>
+        <p><i class="ui building icon profile-field"></i> Ocupação:</p>
+        <p><i class="ui address book icon profile-field"></i> Bio:</p>
+        </div>
+        <div class="eight wide column profile-items">
+        <p>{{ modal.context.userInModal?.username }}</p>
+        <p>{{ modal.context.userInModal?.age }}</p>
+        <p>{{ modal.context.userInModal?.interests?.slice(0,3)?.join(', ') }}</p>
+        <p>{{ modal.context.userInModal?.education }}</p>
+        <p>{{ modal.context.userInModal?.occupation }}</p>
+        <p>{{ modal.context.userInModal?.bio }}</p>
+        </div>
+    </div>
+    <div class="modal-bottom">
+        <div class="ui labeled icon button profile-button">
+        Visitar o perfil
+        <i class="external link icon"></i>
+        </div>
+    </div>
+
+</div>

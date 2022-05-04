@@ -3,7 +3,7 @@
         <img src="../../../assets/example_user.png">
     </div>
     <div class="ui content">
-        <div class="header">{{ user?.name }}</div>
+        <div class="header">{{ user?.username }}</div>
         <div class="description">{{ user?.bio }}</div>
         <div class="ui two buttons">
             <div class="ui icon button" (click)="requestRateUser('like'); $event.stopPropagation()"><i class="ui green big heart icon"></i></div>

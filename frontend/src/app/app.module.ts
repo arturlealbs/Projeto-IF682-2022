@@ -9,6 +9,7 @@ import { HomeModule } from './home/home.module';
 import { ChatsModule } from './chats/chats.module';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FomanticUIModule } from 'ngx-fomantic-ui';
 import { ListUsersModule } from './list-users/list-users.module';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ListUsersModule } from './list-users/list-users.module';
     ChatsModule,
     ListUsersModule,
     HttpClientModule,
+    FomanticUIModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

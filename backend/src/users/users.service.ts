@@ -16,9 +16,25 @@ export class UsersService {
     return createdUser.save();
   }
 
-  findAll(): Promise<User[]> {
-    const userList = this.userModel.find();
-    return userList.exec();
+  async findAll(searchUserInput: SearchUserInput): Promise<User[]> {
+    // This can be done with a single query
+    const userLogged = await this.findOne({ email: searchUserInput.email });
+    const { interests } = userLogged;
+    const interests_num = interests.length;
+    const THRESHOLD = 0.5;
+
+    let userList = await this.userModel.find().exec();
+
+    for (const user of userList) {
+      const common_interests = user.interests.filter((i) =>
+        interests.includes(i),
+      );
+      if (common_interests.length < interests_num * THRESHOLD) {
+        userList = userList.filter((user) => user !== user);
+      }
+    }
+
+    return userList;
   }
 
   findOne(searchUserInput: SearchUserInput): Promise<User> {

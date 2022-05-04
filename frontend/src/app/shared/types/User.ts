@@ -20,6 +20,8 @@ export interface User {
     phoneNumber?: string;
     languages?: string[];
     genderOfInterest: string;
+    usersLiked: User[]
+    usersDisliked: User[]
 }
 
 export const defaultUser: User = {
@@ -40,4 +42,7 @@ export const defaultUser: User = {
     gender: "MALE",
     genderOfInterest: "FEMALE",
     education: "ensinoFundamental",
+    usersLiked: [],
+    usersDisliked: [],
+
 }

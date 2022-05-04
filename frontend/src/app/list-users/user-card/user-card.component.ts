@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Rate } from '../types/rate';
-import User from "../types/user"
+import { User } from '../../shared/types/User';
 @Component({
   selector: 'app-user-card',
   templateUrl: './user-card.component.html',

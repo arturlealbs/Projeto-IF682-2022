@@ -37,7 +37,7 @@ input CreateUserInput {
   id: String!
 
   """User's interests and hobbies"""
-  interests: [String!]!
+  interests: [Interests!]!
 
   """Languages the user speaks"""
   languages: [String!]
@@ -77,6 +77,40 @@ enum Gender {
   BOTH
   FEMALE
   MALE
+}
+
+"""The interests list."""
+enum Interests {
+  ART
+  ARTISTS
+  BASKETBALL
+  BEAUTY
+  BOOKS
+  BUSINESS
+  CHILDREN
+  COOKING
+  CULTURE
+  DANCE
+  ECONOMY
+  FASHION
+  FINANCE
+  FOOD
+  GAMES
+  GEOGRAPHY
+  HEALTH
+  HISTORY
+  LANGUAGES
+  LITERATURE
+  MOVIES
+  MUSIC
+  PHILOSOPHY
+  PHOTOGRAPHY
+  POLITICS
+  RELIGION
+  SOCCER
+  SPORTS
+  TECHNOLOGY
+  TRAVEL
 }
 
 type Mutation {
@@ -170,7 +204,7 @@ input UpdateUserInput {
   id: String
 
   """User's interests and hobbies"""
-  interests: [String!]
+  interests: [Interests!]
 
   """Languages the user speaks"""
   languages: [String!]
@@ -226,7 +260,7 @@ type User {
   genderOfInterest: Gender!
 
   """User's interests and hobbies"""
-  interests: [String!]!
+  interests: [Interests!]!
 
   """Languages the user speaks"""
   languages: [String!]
@@ -248,6 +282,12 @@ type User {
 
   """Unique user name to identify"""
   username: String!
+
+  """List of e-mails of users who disliked the user"""
+  usersDisliked: [String!]!
+
+  """List of e-mails of users that the user liked"""
+  usersLiked: [String!]!
 }
 
 type UserError {
