@@ -12,3 +12,10 @@ export interface FacebookProfile {
         }
     }
 }
+
+export interface GoogleProfile {
+	username: string,
+	firstName: string,
+	lastName: string,
+	picture: string,
+}

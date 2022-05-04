@@ -10,6 +10,9 @@ export class CreateUserInput {
   @Field({ description: 'User ID' })
   id?: string;
 
+  @Field({ description: 'Login provider' })
+  provider?: string;
+
   @Field({ description: 'Unique user e-mail' })
   email: string;
 

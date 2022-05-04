@@ -26,6 +26,13 @@ export class FacebookGuard implements CanActivate {
       ctx.email = data.email;
       ctx.token = this.authService.createJWTToken(data.email);
       return true;
+    } else {
+      const { data } = await firstValueFrom(this.authService.getGGEmail(token));
+      if (data) {
+        ctx.email = data.email;
+        ctx.token = this.authService.createJWTToken(data.email);
+        return true;
+      }
     }
     return false;
   }
