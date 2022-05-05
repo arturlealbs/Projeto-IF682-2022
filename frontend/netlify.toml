@@ -1,7 +1,4 @@
 [[redirects]]
-  from = "/policy"
-  to = "/policy"
-
-[[redirects]]
-  from = "/privacy"
-  to = "/privacy"
+  from = "/*"
+  to = "/"
+  status = "200"
