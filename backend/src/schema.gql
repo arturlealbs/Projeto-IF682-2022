@@ -239,11 +239,11 @@ input UpdateUserInput {
   """Unique user name to identify"""
   username: String
 
-  """A list of users that the user has disliked"""
-  usersDisliked: [String!]
+  """List of e-mails of users who disliked the user"""
+  usersDisliked: [String!]!
 
-  """A list of users that the user has liked"""
-  usersLiked: [String!]
+  """List of e-mails of users that the user liked"""
+  usersLiked: [String!]!
 }
 
 type User {

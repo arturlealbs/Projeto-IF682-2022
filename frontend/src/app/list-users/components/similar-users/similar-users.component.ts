@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Rate } from '../../types/rate';
-import { User } from 'src/app/shared/types/User';
+import { defaultUser, User } from 'src/app/shared/types/User';
 import { FuiModalService } from 'ngx-fomantic-ui';
 import { ModalDetails } from '../modal-details/modal-details.component';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
 
 @Component({
   selector: 'app-similar-users',
@@ -14,6 +16,7 @@ export class SimilarUsersComponent {
   users: User[] = [];
 
   userInModal?: User;
+  currentProfile: User = defaultUser;
 
   slideConfig = {
     slidesToShow: 5,
@@ -54,7 +57,17 @@ export class SimilarUsersComponent {
     ],
   };
 
-  constructor(public modalService: FuiModalService) {}
+  constructor(public modalService: FuiModalService,
+              public userService: UsersService,
+              public profileService: ProfileService
+            ) {
+
+              this.profileService.getProfile().subscribe((data) => {
+                if (data) {
+                  this.currentProfile = data
+                }
+              })
+            }
 
   showUserModal = (user: User) => {
     this.modalService
@@ -65,8 +78,23 @@ export class SimilarUsersComponent {
       )
   };
 
-  rateUser = (rate: Rate) => {
+
+  async rateUser (rate: Rate) {
     const { user } = rate;
     console.log(`You ${rate.action}d ${user?.username}`);
+    if (rate.action === 'like' && user?.email) {
+      let {usersDisliked, usersLiked} = this.currentProfile
+      console.log(usersDisliked, usersLiked)
+      usersLiked = usersLiked.concat(user.email)
+      this.userService.updateUser(
+        usersLiked, usersDisliked
+      )
+        console.log((await this.userService.getUser()).usersLiked)
+      }
+      
+      console.log("weird")
+      
+    this.users = this.users.filter(u => u !== user)
+
   };
 }

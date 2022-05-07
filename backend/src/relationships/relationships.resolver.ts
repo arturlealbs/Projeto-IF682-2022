@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { UpdateRelationshipInput } from './dto/update-relationship.input';
+import { UpdateUserInput } from 'src/users/dto/update-user.input';
 import { RelationshipInput } from './dto/relationship.input';
 import { RelationshipsService } from './relationships.service';
 import { Relationship } from './entities/relationship.entity';
@@ -55,6 +56,8 @@ export class RelationshipsResolver {
     input.email = tokenInfo.email;
     return this.relationshipsService.update(input);
   }
+
+
 
   @Mutation(() => Relationship)
   @UseGuards(JWTGuard)

@@ -33,7 +33,8 @@ export class UsersService {
         userList = userList.filter((user) => user !== user);
       }
     }
-
+    userList = userList.filter(u => u.email != userLogged.email)
+    console.log("USER LIST", userList)
     return userList;
   }
 
