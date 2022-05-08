@@ -240,10 +240,10 @@ input UpdateUserInput {
   username: String
 
   """List of e-mails of users who disliked the user"""
-  usersDisliked: [String!]!
+  usersDisliked: [String!]
 
   """List of e-mails of users that the user liked"""
-  usersLiked: [String!]!
+  usersLiked: [String!]
 }
 
 type User {

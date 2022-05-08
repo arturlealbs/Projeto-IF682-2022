@@ -18,23 +18,25 @@ export class UsersService {
 
   async findAll(searchUserInput: SearchUserInput): Promise<User[]> {
     // This can be done with a single query
+    const THRESHOLD = 0.5;
     const userLogged = await this.findOne({ email: searchUserInput.email });
     const { interests } = userLogged;
-    const interests_num = interests.length;
-    const THRESHOLD = 0.5;
+    const min_interests = interests.length * THRESHOLD;
 
-    let userList = await this.userModel.find().exec();
+    let userList = await this.userModel
+      .find({
+        email: { $ne: searchUserInput.email },
+      })
+      .exec();
 
     for (const user of userList) {
       const common_interests = user.interests.filter((i) =>
         interests.includes(i),
       );
-      if (common_interests.length < interests_num * THRESHOLD) {
+      if (common_interests.length > min_interests) {
         userList = userList.filter((user) => user !== user);
       }
     }
-    userList = userList.filter(u => u.email != userLogged.email)
-    console.log("USER LIST", userList)
     return userList;
   }
 
@@ -53,11 +55,8 @@ export class UsersService {
     searchUserInput: SearchUserInput,
     updateUserInput: UpdateUserInput,
   ): Promise<User> {
-    return this.userModel
-      .findOneAndUpdate(searchUserInput, updateUserInput, {
-        new: true,
-      })
-      .exec();
+    this.userModel.findOneAndUpdate(searchUserInput, updateUserInput).exec();
+    return this.userModel.findOne(searchUserInput).exec();
   }
 
   remove(searchUserInput: SearchUserInput): Promise<User> {
