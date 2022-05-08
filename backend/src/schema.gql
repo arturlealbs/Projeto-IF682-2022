@@ -122,9 +122,15 @@ enum Interests {
   TRAVEL
 }
 
+input LikeUserInput {
+  """New e-mail user liked"""
+  email: String!
+}
+
 type Mutation {
   createRelationship(contact: String!): Relationship!
   createUser(createUserInput: CreateUserInput!): UserOrError!
+  likeUser(likeUserInput: LikeUserInput!): Boolean!
   removeRelationship(contact: String!): Relationship!
   removeUser: UserOrError!
   updateRelationship(updateRelationshipInput: UpdateRelationshipInput!): Relationship!
@@ -242,7 +248,7 @@ input UpdateUserInput {
   """List of e-mails of users who disliked the user"""
   usersDisliked: [String!]
 
-  """List of e-mails of users that the user liked"""
+  """A list of users that the user has liked"""
   usersLiked: [String!]
 }
 

@@ -7,16 +7,18 @@ import {
   Relationships,
   TokenOrError,
   Relationship,
+  LikeResponse,
 } from '../types/Responses';
 import { User } from '../types/User';
 import { 
-  CREATE_USER_MUTATION,
   GET_RELATIONSHIPS,
   GET_TOKEN_QUERY,
   GET_USER_LIST,
   GET_USER,
+  CREATE_USER_MUTATION,
   UPDATE_RELATIONSHIP,
-  UPDATE_USER, 
+  UPDATE_USER,
+  LIKE_USER_MUTATION, 
 } from '../types/Queries';
 
 @Injectable({
@@ -57,20 +59,34 @@ export class UsersService {
   updateRelationship(contactEmail: string, blocked: boolean) {
     return this.apollo.mutate<CreateResponse>({
       mutation: UPDATE_RELATIONSHIP,
-      variables: { relationship: {
-        contactEmail,
-        blocked
-      } },
-    });
+      variables: { 
+        relationship: {
+          contactEmail,
+          blocked
+        } 
+      },
+    }).subscribe().unsubscribe();
   }
 
-  updateUser(usersLiked: string[], usersDisliked: string[]) {
+  updateUser(usersDisliked: string[]) {
     return this.apollo.mutate<CreateResponse>({
       mutation: UPDATE_USER,
-      variables: { user: {
-        usersLiked,
-        usersDisliked
-      } },
+      variables: { 
+        newUser: {
+          usersDisliked
+        } 
+      },
+    }).subscribe().unsubscribe();
+  }
+  
+  likeUser(email: string) {
+    return this.apollo.mutate<LikeResponse>({
+      mutation: LIKE_USER_MUTATION,
+      variables: { 
+        likedUser: {
+          email
+        } 
+      },
     });
   }
 

@@ -10,6 +10,10 @@ export interface CreateResponse {
     loading: boolean;
 }
 
+export interface LikeResponse {
+    likeUser: boolean;
+}
+
 export interface TokenOrError {
     token?: string;
     title?: string;

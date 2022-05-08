@@ -40,13 +40,11 @@ export class HomeFacade {
         this.api.getGoogleData(accessToken).subscribe(data => {
             const profile = this.state.getCurrentProfile();
             const resizedImage = data.picture.slice(
-                0, data.picture.length - 5) + 's200-c';
+                0, data.picture.length - 5);
             if (profile) {
+                console.log("getGoogleProfileData()", profile, data);
                 this.setProfile({
                     ...profile, 
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    username: data.username,
                     profileImg: resizedImage,
                 });
             }

@@ -5,6 +5,7 @@ import { FuiModalService } from 'ngx-fomantic-ui';
 import { ModalDetails } from '../modal-details/modal-details.component';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
+import { ChatsFacade } from 'src/app/chats/chats.facade';
 
 @Component({
   selector: 'app-similar-users',
@@ -59,6 +60,7 @@ export class SimilarUsersComponent {
 
   constructor(public modalService: FuiModalService,
               public userService: UsersService,
+              private chatsFacade: ChatsFacade,
               public profileService: ProfileService
             ) {
 
@@ -81,20 +83,22 @@ export class SimilarUsersComponent {
 
   async rateUser (rate: Rate) {
     const { user } = rate;
-    console.log(`You ${rate.action}d ${user?.username}`);
-    if (rate.action === 'like' && user?.email) {
-      let {usersDisliked, usersLiked} = this.currentProfile
-      console.log(usersDisliked, usersLiked)
-      usersLiked = usersLiked.concat(user.email)
-      this.userService.updateUser(
-        usersLiked, usersDisliked
-      )
-        console.log((await this.userService.getUser()).usersLiked)
-      }
-      
-      console.log("weird")
-      
-    this.users = this.users.filter(u => u !== user)
+    if (!user?.email) return;
+    
+    let { usersDisliked, usersLiked } = this.currentProfile;
+    if (rate.action === 'like') {
+      this.userService.likeUser(user.email).subscribe(({ data }) => {
+        if (data && data.likeUser) {
+          this.chatsFacade.fetchContacts();
+        }
+      });
+    } else {
+      usersDisliked = usersLiked.concat(user.email);
+      this.userService.updateUser(usersDisliked);  
+    }
+    this.users = this.users.filter(u => u !== user);
 
+    const newUser = await this.userService.getUser();
+    this.profileService.setProfile(newUser);
   };
 }

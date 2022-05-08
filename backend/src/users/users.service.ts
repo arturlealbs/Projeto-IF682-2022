@@ -6,10 +6,15 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { SearchUserInput } from './dto/search-user.input';
 import { User, UserDocument } from './schemas/user.schema';
+import { RelationshipsService } from '../relationships/relationships.service';
+import { LikeUserInput } from './dto/like-user.input';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('users') private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel('users') private userModel: Model<UserDocument>,
+    private relationshipService: RelationshipsService,
+  ) {}
 
   create(createUserInput: CreateUserInput): Promise<User> {
     const createdUser = new this.userModel(createUserInput);
@@ -17,15 +22,29 @@ export class UsersService {
   }
 
   async findAll(searchUserInput: SearchUserInput): Promise<User[]> {
-    // This can be done with a single query
     const THRESHOLD = 0.5;
     const userLogged = await this.findOne({ email: searchUserInput.email });
-    const { interests } = userLogged;
+    const { interests, usersLiked, usersDisliked } = userLogged;
     const min_interests = interests.length * THRESHOLD;
+    const excludeList = [...usersLiked, ...usersDisliked];
 
     let userList = await this.userModel
       .find({
-        email: { $ne: searchUserInput.email },
+        $and: [
+          {
+            email: {
+              $ne: searchUserInput.email,
+            },
+          },
+          {
+            email: {
+              $nin: excludeList,
+            },
+          },
+        ],
+        usersDisliked: {
+          $ne: searchUserInput.email,
+        },
       })
       .exec();
 
@@ -51,12 +70,34 @@ export class UsersService {
       .exec();
   }
 
-  update(
+  async update(
     searchUserInput: SearchUserInput,
     updateUserInput: UpdateUserInput,
   ): Promise<User> {
     this.userModel.findOneAndUpdate(searchUserInput, updateUserInput).exec();
     return this.userModel.findOne(searchUserInput).exec();
+  }
+
+  async likeUser(
+    searchUserInput: SearchUserInput,
+    likedUserInput: LikeUserInput,
+  ): Promise<boolean> {
+    const likedUser = await this.userModel.findOne(likedUserInput).exec();
+    if (likedUser.usersLiked.includes(searchUserInput.email)) {
+      this.relationshipService.create({
+        email: searchUserInput.email,
+        contactEmail: likedUser.email,
+      });
+      return true;
+    }
+    this.userModel
+      .findOneAndUpdate(searchUserInput, {
+        $push: {
+          usersLiked: likedUserInput.email,
+        },
+      })
+      .exec();
+    return false;
   }
 
   remove(searchUserInput: SearchUserInput): Promise<User> {

@@ -115,11 +115,23 @@ export const UPDATE_RELATIONSHIP = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($user: UpdateUserInput!) {
-    updateUser(updateUserInput: $user) {
-      usersLiked
-      usersDisliked
+  mutation UpdateUser($newUser: UpdateUserInput!) {
+    updateUser(updateUserInput: $newUser) {
+      ... on User {
+        usersLiked
+        usersDisliked
+      }
+      ... on UserError {
+        title
+        reason
+      }
     }
+  }
+`;
+
+export const LIKE_USER_MUTATION = gql`
+  mutation LikeUser($likedUser: LikeUserInput!) {
+    likeUser(likeUserInput: $likedUser)
   }
 `;
 

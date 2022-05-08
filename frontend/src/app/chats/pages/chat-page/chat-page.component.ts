@@ -124,7 +124,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   reportContact(reason: string) {
     this.usersService.updateRelationship(
       this.contact.email, true
-    ).subscribe().unsubscribe();
+    );
     
     const username = this.capitalizedName(this.profile.username);
     this.notificationService.sendNotification({
@@ -139,7 +139,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
   unlockContact() {
     this.usersService.updateRelationship(
       this.contact.email, false
-    ).subscribe().unsubscribe();
+    );
     
     const username = this.capitalizedName(this.profile.username);
     this.notificationService.sendNotification({

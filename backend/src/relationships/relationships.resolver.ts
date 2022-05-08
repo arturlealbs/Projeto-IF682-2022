@@ -57,8 +57,6 @@ export class RelationshipsResolver {
     return this.relationshipsService.update(input);
   }
 
-
-
   @Mutation(() => Relationship)
   @UseGuards(JWTGuard)
   removeRelationship(
