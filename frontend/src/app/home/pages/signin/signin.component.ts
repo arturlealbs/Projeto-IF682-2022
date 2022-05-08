@@ -22,6 +22,7 @@ export class SigninComponent implements OnInit {
 	  private router: Router,
   ) { 
     this.homeFacade.getProfile().subscribe(profile => {
+      console.log(profile);
       this.profile = {...this.profile, ...profile};
     });
   }
@@ -47,7 +48,7 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['/']);
         }
       }
-    })
+    });
     return false;
   }
 }

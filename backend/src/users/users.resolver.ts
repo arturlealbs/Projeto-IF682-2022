@@ -14,6 +14,7 @@ import { FacebookGuard } from '../guards/facebook.guard';
 import { UsersService } from './users.service';
 import { JWTGuard } from '../guards/jwt.guard';
 import TokenInfo from './types/token-info';
+import { LikeUserInput } from './dto/like-user.input';
 
 @Resolver(() => UserOrError)
 export class UsersResolver {
@@ -107,6 +108,21 @@ export class UsersResolver {
       );
     }
     return new User(updatedUser);
+  }
+
+  @Mutation(() => Boolean)
+  @UseGuards(JWTGuard)
+  async likeUser(
+    @Context('tokenInfo') tokenInfo: TokenInfo,
+    @Args('likeUserInput') likeUserInput: LikeUserInput,
+  ) {
+    likeUserInput = toLowerIdentifier(likeUserInput);
+
+    const hasMatch = await this.usersService.likeUser(
+      { email: tokenInfo.email },
+      likeUserInput,
+    );
+    return hasMatch;
   }
 
   @Mutation(() => UserOrError)

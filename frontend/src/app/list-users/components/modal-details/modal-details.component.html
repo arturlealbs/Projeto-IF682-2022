@@ -6,19 +6,19 @@
     <div class="ui grid">
         <div class="eight wide column profile-items">
         <p><i class="ui user icon profile-field"></i> Nome:</p>
-        <p><i class="ui calendar icon profile-field"></i> Idade:</p>
-        <p><i class="ui soccer icon profile-field"></i> Gostos:</p>
-        <p><i class="ui book icon profile-field"></i> Escolaridade:</p>
-        <p><i class="ui building icon profile-field"></i> Ocupação:</p>
-        <p><i class="ui address book icon profile-field"></i> Bio:</p>
+        <p *ngIf="modal.context.userInModal.age"><i class="ui calendar icon profile-field"></i> Idade:</p>
+        <p *ngIf="modal.context.userInModal.interests.length !== 0"><i class="ui soccer icon profile-field"></i> Gostos:</p>
+        <p *ngIf="modal.context.userInModal.education"><i class="ui book icon profile-field"></i> Escolaridade:</p>
+        <p *ngIf="modal.context.userInModal.occupation"><i class="ui building icon profile-field"></i> Ocupação:</p>
+        <p *ngIf="modal.context.userInModal.bio"><i class="ui address book icon profile-field"></i> Bio:</p>
         </div>
         <div class="eight wide column profile-items">
         <p>{{ modal.context.userInModal?.username }}</p>
-        <p>{{ modal.context.userInModal?.age }}</p>
-        <p>{{ modal.context.userInModal?.interests?.slice(0,3)?.join(', ') }}</p>
-        <p>{{ modal.context.userInModal?.education }}</p>
-        <p>{{ modal.context.userInModal?.occupation }}</p>
-        <p>{{ modal.context.userInModal?.bio }}</p>
+        <p *ngIf="modal.context.userInModal.age">{{ modal.context.userInModal?.age }}</p>
+        <p *ngIf="modal.context.userInModal.interests.length !== 0">{{ modal.context.userInModal?.interests?.slice(0,3)?.join(', ') }}</p>
+        <p *ngIf="modal.context.userInModal.education">{{ modal.context.userInModal?.education }}</p>
+        <p *ngIf="modal.context.userInModal.occupation">{{ modal.context.userInModal?.occupation }}</p>
+        <p *ngIf="modal.context.userInModal.bio">{{ modal.context.userInModal?.bio }}</p>
         </div>
     </div>
     <div class="modal-bottom">

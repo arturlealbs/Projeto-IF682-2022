@@ -1,8 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Rate } from '../../types/rate';
-import { User } from 'src/app/shared/types/User';
+import { defaultUser, User } from 'src/app/shared/types/User';
 import { FuiModalService } from 'ngx-fomantic-ui';
 import { ModalDetails } from '../modal-details/modal-details.component';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { ChatsFacade } from 'src/app/chats/chats.facade';
 
 @Component({
   selector: 'app-similar-users',
@@ -14,6 +17,7 @@ export class SimilarUsersComponent {
   users: User[] = [];
 
   userInModal?: User;
+  currentProfile: User = defaultUser;
 
   slideConfig = {
     slidesToShow: 5,
@@ -54,7 +58,18 @@ export class SimilarUsersComponent {
     ],
   };
 
-  constructor(public modalService: FuiModalService) {}
+  constructor(public modalService: FuiModalService,
+              public userService: UsersService,
+              private chatsFacade: ChatsFacade,
+              public profileService: ProfileService
+            ) {
+
+              this.profileService.getProfile().subscribe((data) => {
+                if (data) {
+                  this.currentProfile = data
+                }
+              })
+            }
 
   showUserModal = (user: User) => {
     this.modalService
@@ -65,8 +80,25 @@ export class SimilarUsersComponent {
       )
   };
 
-  rateUser = (rate: Rate) => {
+
+  async rateUser (rate: Rate) {
     const { user } = rate;
-    console.log(`You ${rate.action}d ${user?.username}`);
+    if (!user?.email) return;
+    
+    let { usersDisliked, usersLiked } = this.currentProfile;
+    if (rate.action === 'like') {
+      this.userService.likeUser(user.email).subscribe(({ data }) => {
+        if (data && data.likeUser) {
+          this.chatsFacade.fetchContacts();
+        }
+      });
+    } else {
+      usersDisliked = usersLiked.concat(user.email);
+      this.userService.updateUser(usersDisliked);  
+    }
+    this.users = this.users.filter(u => u !== user);
+
+    const newUser = await this.userService.getUser();
+    this.profileService.setProfile(newUser);
   };
 }

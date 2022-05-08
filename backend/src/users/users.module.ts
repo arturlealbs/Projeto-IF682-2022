@@ -7,10 +7,12 @@ import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
 
 import { AuthService } from '../services/auth.service';
+import { RelationshipsModule } from '../relationships/relationships.module';
 
 @Module({
   imports: [
     HttpModule,
+    RelationshipsModule,
     MongooseModule.forFeature([
       {
         name: 'users',
