@@ -27,6 +27,8 @@ export class User {
     languages,
     phoneNumber,
     genderOfInterest,
+    usersDisliked,
+    usersLiked,
   }: User) {
     this.email = email;
     this.username = username;
@@ -40,11 +42,13 @@ export class User {
     this.gender = gender;
     this.address = address;
     this.interests = interests;
-    this.occupation = occupation;
     this.birthDate = birthDate;
     this.education = education;
     this.languages = languages;
+    this.occupation = occupation;
+    this.usersLiked = usersLiked;
     this.phoneNumber = phoneNumber;
+    this.usersDisliked = usersDisliked;
     this.genderOfInterest = genderOfInterest;
   }
 

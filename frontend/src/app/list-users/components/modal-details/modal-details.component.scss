@@ -5,6 +5,16 @@
     margin-top: 1rem;
 }
 
+.buttons-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ui.content {
+    padding-bottom: 0;
+}
+
 ::ng-deep .modal {
     position: initial !important;
     height: auto;

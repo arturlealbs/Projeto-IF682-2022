@@ -6,11 +6,7 @@ import { defaultUser, User } from "../../shared/types/User";
 @Injectable({ providedIn: 'root' })
 export class ListUsersState {
   private userList: BehaviorSubject<User[]> = 
-    new BehaviorSubject<User[]>([
-      defaultUser, defaultUser, defaultUser, 
-      defaultUser, defaultUser, defaultUser, 
-      defaultUser
-    ]);
+    new BehaviorSubject<User[]>([]);
 
   public constructor() {}
 

@@ -12,6 +12,7 @@ import { FuiModalModule } from 'ngx-fomantic-ui';
 import { ListUsersState } from './state/list-users.state';
 import { ListUsersFacade } from './list-users.facade';
 import { listUsersInitializerProvider } from './list-users.initializer';
+import { ChatsModule } from '../chats/chats.module';
 
 @NgModule({
   providers: [
@@ -27,6 +28,7 @@ import { listUsersInitializerProvider } from './list-users.initializer';
   ],
   
   imports: [
+    ChatsModule,
     CommonModule,
     SlickCarouselModule,
     ListUsersRoutingModule,

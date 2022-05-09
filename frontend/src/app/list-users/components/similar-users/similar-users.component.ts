@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Rate } from '../../types/rate';
 import { User } from 'src/app/shared/types/User';
 import { FuiModalService } from 'ngx-fomantic-ui';
 import { ModalDetails } from '../modal-details/modal-details.component';
+
+import { ListUsersFacade } from '../../list-users.facade';
+import { Rate } from '../../types/rate';
 
 @Component({
   selector: 'app-similar-users',
@@ -54,7 +56,10 @@ export class SimilarUsersComponent {
     ],
   };
 
-  constructor(public modalService: FuiModalService) {}
+  constructor(
+    public modalService: FuiModalService,
+    private listUsersFacade: ListUsersFacade,
+  ) {}
 
   showUserModal = (user: User) => {
     this.modalService
@@ -65,8 +70,7 @@ export class SimilarUsersComponent {
       )
   };
 
-  rateUser = (rate: Rate) => {
-    const { user } = rate;
-    console.log(`You ${rate.action}d ${user?.username}`);
-  };
+  rateUser(rate: Rate) {
+    this.listUsersFacade.rateUser(rate)
+  }
 }

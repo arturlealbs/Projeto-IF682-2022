@@ -47,7 +47,7 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['/']);
         }
       }
-    })
+    });
     return false;
   }
 }

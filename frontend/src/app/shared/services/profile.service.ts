@@ -23,7 +23,6 @@ export class ProfileService {
   ) {
     this.socialAuthService.authState.subscribe((user) => {
       if (!user) return;
-      console.log(user);
       localStorage.setItem("TOKEN", user.authToken);
       const profileImg = user.provider !== "GOOGLE" ?
         user.response.picture.data.url : user.photoUrl;
