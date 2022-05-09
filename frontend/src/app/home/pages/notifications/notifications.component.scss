@@ -9,25 +9,32 @@
     vertical-align: bottom;
     word-wrap: break-word;
     flex-direction: column;
+    width: 100%;
 
-    table {
-        border-collapse: collapse;
+    div{
         margin-top: 1em;
-        width: 70%;
-        tr {
-            border-right: hidden;
-            border-radius: 8px;
-            background-color: var(--branco);
-            margin-bottom: 2em;
-        }
-        td {
-            border: var(--branco);
-            vertical-align: middle;
-            img {
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-            }
+        display: flex;
+        justify-content: space-between;
+        height: 5em;
+        border-right: hidden;
+        border-radius: 4px;
+        background-color: var(--branco);
+        width: 100%;
+        max-width: min(700px, 100%);
+        align-items: center;
+        padding: 0 1em;
+        box-shadow: 1px 1px 7px #666;
+        
+    }
+        
+    span{
+        font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+        font-size: 20px;
+        color: var(--escuro);
+        img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
         }
     }
 }
