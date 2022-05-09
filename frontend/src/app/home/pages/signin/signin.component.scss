@@ -11,10 +11,6 @@ a {
   height: 100%;
 }
 
-#fields {
-  display: flex;
-}
-
 .base {
   display: flex;
   align-items: center;
@@ -52,57 +48,6 @@ a {
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
-}
-
-.login-signin {
-  display:flex;
-  justify-content: center;
-  margin-top: 20px;
-  
-  button {
-    cursor: pointer;
-  }
-}
-
-input[type=button], 
-input[type=reset], 
-.login-signin button  {
-  background-color: var(--medio);
-  border: none;
-  color: white;
-  padding: 15px 50px;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  text-transform: uppercase;
-  font-size: 13px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 20px 20px;
-}
-
-input[type=button]:hover, 
-input[type=reset]:hover,
-.login-signin button:hover  {
-  background-color: var(--escuro);
-}
-
-input[type=text], input[type=number], select[type=text] {
-  background-color: var(--base-clara);
-  padding: 15px 32px;
-  text-align: start;
-  display: inline-block;
-  font-size: 16px;
-  margin: 5px;
-  width: 85%;
-  border: 2px solid var(--base-clara);
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
 }
 
 *:focus {

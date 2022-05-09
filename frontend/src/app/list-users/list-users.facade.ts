@@ -38,15 +38,16 @@ export class ListUsersFacade {
         this.state.setUserList(userList);
     }
 
-    matchPopUp(){
-        $('.alert').addClass("show");
-        $('.alert').removeClass("hide");
-        $('.alert').addClass("showAlert");
-        setTimeout(function(){
-          $('.alert').removeClass("show");
-          $('.alert').addClass("hide");
-        },5000);
-      };
+    matchPopUp() {
+      $('.alert').addClass("show");
+      $('.alert').removeClass("hide");
+      $('.alert').addClass("showAlert");
+      setTimeout(function(){
+        $('.alert').removeClass("show");
+        $('.alert').addClass("hide");
+      },5000);
+    };
+
     async rateUser (rate: Rate) {
         const { user } = rate;
         if (!user?.email) return;

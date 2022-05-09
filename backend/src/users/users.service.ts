@@ -52,7 +52,7 @@ export class UsersService {
       const common_interests = user.interests.filter((i) =>
         interests.includes(i),
       );
-      if (common_interests.length >= min_interests) {
+      if (common_interests.length < min_interests) {
         userList = userList.filter((user) => user !== user);
       }
     }
@@ -83,13 +83,6 @@ export class UsersService {
     likedUserInput: LikeUserInput,
   ): Promise<boolean> {
     const likedUser = await this.userModel.findOne(likedUserInput).exec();
-    if (likedUser.usersLiked.includes(searchUserInput.email)) {
-      this.relationshipService.create({
-        email: searchUserInput.email,
-        contactEmail: likedUser.email,
-      });
-      return true;
-    }
     this.userModel
       .findOneAndUpdate(searchUserInput, {
         $push: {
@@ -97,6 +90,13 @@ export class UsersService {
         },
       })
       .exec();
+    if (likedUser.usersLiked.includes(searchUserInput.email)) {
+      this.relationshipService.create({
+        email: searchUserInput.email,
+        contactEmail: likedUser.email,
+      });
+      return true;
+    }
     return false;
   }
 
