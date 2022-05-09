@@ -53,3 +53,11 @@ input[type=text], input[type=number], select[type=text] {
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
 }
+
+.badge {
+  background-color: var(--base-escura);
+  padding: 1em;
+  margin: 1px;
+  font-size: initial;
+  cursor: pointer;
+}

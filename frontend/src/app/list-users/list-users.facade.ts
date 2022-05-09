@@ -61,7 +61,7 @@ export class ListUsersFacade {
                 to: user.email,
                 image: user.profileImg,
                 timestamp: new Date().toLocaleString(),
-                text: `Você e ${user} deram Match!.`
+                text: `Você e ${user.username} deram Match!`
               });
               this.matchPopUp()
 

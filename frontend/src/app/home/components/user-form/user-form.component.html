@@ -87,13 +87,18 @@
         placeholder="Descrição"
         [(ngModel)]="profile.bio"
       />
-      <input
-        [disabled]="displayInputs.indexOf('interests') == -1"
-        type="text"
-        name="interests"
-        placeholder="Interesses"
-        [(ngModel)]="profile.interests"
-      />
+      <select [disabled]="displayInputs.indexOf('interests') == -1"
+        type="text" name="interests" placeholder="Interesses"
+        #device (change)="addInterest(device.value)" 
+        [value]="selectInput.value"
+      >
+        <option value="" selected >
+          Selecione
+        </option>
+        <option value="{{interest}}" *ngFor="let interest of interests">
+          {{ translateInterests[interest] }}
+        </option>
+      </select>
       <input
         [disabled]="displayInputs.indexOf('city') == -1"
         [required]="displayInputs.indexOf('city') > -1"
@@ -104,7 +109,7 @@
       />
       <input
         [disabled]="displayInputs.indexOf('state') == -1"
-        [required]="displayInputs.indexOf('state') > -1"
+        required="displayInputs.indexOf('state') > -1"
         type="text"
         name="state"
         placeholder="Estado"
@@ -148,9 +153,19 @@
       </select>
     </div>
   </div>
+  
+  <div class="interests">
+    <span class="badge badge-pill badge-secondary"
+        *ngFor="let interest of profile.interests"
+        (click) = "removeInterest(interest)">
+        {{ translateInterests[interest] }}
+    </span>
+  </div>
   <div class="login-signin">
     <button type="submit">
       {{actionLabel}} 
     </button>
   </div>
 </form>
+<app-popup [label]="error">
+</app-popup>

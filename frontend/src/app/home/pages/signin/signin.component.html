@@ -1,74 +1,18 @@
 <div class="base">
   <div id="form-base">
+    <div id="logo">
+      <img
+        class="modal-picture"
+        src="../../../assets/logo-clara.svg"
+        id="icon"
+      />
+      <p>Coopido</p>
+    </div>
 
-       <div id="logo">
-              <img class="modal-picture" src="../../../assets/logo-clara.svg" id="icon">
-              <p>Coopido</p>
-       </div>
-
-       <form (submit)="register()">
-              <div id="fields">
-                     <div>
-                            <input type="text" name="username" placeholder="Nome de usuário"
-                                   [(ngModel)]="profile.username" required>
-                            <input type="text" name="firstName" placeholder="Nome"
-                                   [(ngModel)]="profile.firstName" required>
-                            <input type="text" name="lastName" placeholder="Sobrenome"
-                                   [(ngModel)]="profile.lastName" required>
-                            <input type="text" name="email" placeholder="Email" 
-                                   [(ngModel)]="profile.email" required disabled>
-                            <select type="text" name="gender"  placeholder="Gênero"
-                                   [(ngModel)]="profile.gender" required>
-                                   <option value="" disabled selected>Gênero</option>
-                                   <option value="FEMALE">Feminino</option>
-                                   <option value="MALE" selected>Masculino</option>
-                            </select>
-                            <input type="number" name="age" placeholder="Idade"
-                                   [(ngModel)]="profile.age" required min="18">
-                            <input type="text" name="occupation" placeholder="Profissão"
-                                   [(ngModel)]="profile.occupation">
-                            <select type="text" name="education"  placeholder="Escolaridade"
-                                   [(ngModel)]="profile.education" required>
-                                   <option value="" disabled selected>Escolaridade</option>
-                                   <option value="bacharelado">Bacharelado</option>
-                                   <option value="cursoTecnico">Curso Técnico</option>
-                                   <option value="doutorado" selected>Doutorado</option>
-                                   <option value="ensinoFundamental">Ensino Fundamental</option>
-                                   <option value="ensinoMedio" selected>Ensino Médio</option>
-                                   <option value="licenciatura" selected>Licenciatura</option>
-                                   <option value="mestrado">Mestrado</option>
-                            </select>
-                                   
-                     </div>
-                     <div>
-                            <input type="text" name="bio" placeholder="Descrição"
-                                   [(ngModel)]="profile.bio">
-                            <input type="text" name="interests" placeholder="Interesses"
-                                   [(ngModel)]="profile.interests">
-                            <input type="text" name="city" placeholder="Cidade"
-                                   [(ngModel)]="profile.city">
-                            <input type="text" name="state" placeholder="Estado"
-                                   [(ngModel)]="profile.state">
-                            <input type="text" name="address" placeholder="Endereço"
-                                   [(ngModel)]="profile.address">
-                            <input type="text" name="birthDate" placeholder="Data de Nascimento"
-                                   [(ngModel)]="profile.birthDate">
-                            <input type="text" name="phoneNumber" placeholder="Telefone"
-                                   [(ngModel)]="profile.phoneNumber">
-                            <select type="text" name="genderOfInterest"  placeholder="Gênero de Interesse"
-                                   [(ngModel)]="profile.genderOfInterest" required>
-                                   <option value="" disabled selected>Gênero de Interesse</option>
-                                   <option value="FEMALE">Feminino</option>
-                                   <option value="MALE" selected>Masculino</option>
-                                   <option value="BOTH" selected>Ambos</option>
-                            </select>
-
-                      </div>
-               </div>
-      <div class="login-signin">
-        <button type="submit"> Cadastrar </button>
-      </div>
-    </form>
-
+    <app-user-form
+      [profile]="profile"
+      [actionLabel]="'Cadastrar'"
+      (onSubmit)="register($event)"
+    ></app-user-form>
   </div>
 </div>

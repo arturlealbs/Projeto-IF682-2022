@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ProfileService } from 'src/app/shared/services/profile.service';
-import { UsersService } from 'src/app/shared/services/users.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { defaultUser, User } from 'src/app/shared/types/User';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +17,9 @@ export class ProfileComponent implements OnInit {
     "education", "bio", "interests", "city", "state", 
     "address", "birthDate", "phoneNumber", "genderOfInterest"
   ]
+
+  public popupLabel: string = 'Perfil atualizado!';
+  @ViewChild(PopupComponent) child!:PopupComponent;
 
   constructor(
     private profileService: ProfileService,
@@ -97,6 +102,6 @@ export class ProfileComponent implements OnInit {
       genderOfInterest: user.genderOfInterest,
     });
     this.profileService.setProfile(user);
-    this.updatePopUp();
+    this.child.showPopUp();
   }
 }

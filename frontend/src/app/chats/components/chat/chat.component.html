@@ -1,7 +1,9 @@
 <div class="ui secondary attached stackable menu">
   <div class="ui container">
     <div class="ui item">
-      <img class="ui mini avatar circular image" [src]="contact.image">
+      <img class="ui tiny avatar circular image" 
+        style="width: 74px"
+        [src]="contact.image">
       <div>
         <strong> {{ capitalizedName(contact.username) }} </strong> <br>
         <div class="ui horizontal label {{onlineStatus()}}">
@@ -10,29 +12,17 @@
       </div>
     </div>
     <div class="right item">
-      <div class="ui icon item dropdown">
-        <!-- This is very very wrong: I'm mixing Fomantic + Bootstrap -->
-        <i class="ellipsis horizontal large icon" id="chatOptions" 
-        data-bs-toggle="dropdown" aria-expanded="false"></i>
-        <ul class="dropdown-menu" aria-labelledby="chatOptions">
-          <li>
-            <button type="button" class="btn dropdown-item" 
-              *ngIf="!contact.blocked" data-bs-toggle="modal" 
-              data-bs-target="#staticBackdrop">
-              <i class="exclamation triangle large icon"></i>
-              Denunciar esse perfil
-            </button>
-            <button type="button" class="btn dropdown-item"
-              *ngIf="contact.blocked" (click)="unlockContact()">
-              <i class="lock open large icon"></i>
-              Desbloquear esse perfil
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div class="ui input">
-        <input type="text" placeholder="Pesquisar...">
-      </div>
+      <button type="button" class="btn dropdown-item" 
+        *ngIf="!contact.blocked" data-bs-toggle="modal" 
+        data-bs-target="#staticBackdrop">
+        <i class="exclamation triangle large icon"></i>
+        Denunciar esse perfil
+      </button>
+      <button type="button" class="btn dropdown-item"
+        *ngIf="contact.blocked" (click)="unlockContact()">
+        <i class="lock open large icon"></i>
+        Desbloquear esse perfil
+      </button>
     </div>
   </div>
 </div>
