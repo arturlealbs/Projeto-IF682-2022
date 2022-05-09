@@ -16,6 +16,17 @@
     p {
         margin-top: 1em;
     }
+    span{
+      font-size: 20px;
+      border-radius: 4px;
+      background-color: var(--base-clara);
+      height: 3em;
+      text-align: center;
+      padding-top: 1em;
+      width: 420px;
+      margin-top: 1em;
+      border: 2px solid var(--escuro)
+    }
 }
 .alert{
     background: var(--base-clara);
