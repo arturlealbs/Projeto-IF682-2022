@@ -41,19 +41,9 @@ export class SigninComponent implements OnInit {
     }
   }
 
-  addInterest(newInterest: string) {
-    this.profile.interests.push(newInterest)
-    this.interests.splice(this.interests.indexOf(newInterest), 1)
-  }
-
-  removeInterest(newInterest: string) {
-    this.interests.push(newInterest)
-    this.profile.interests.splice(this.profile.interests.indexOf(newInterest), 1)
-  }
-
-  public register() {
-    this.usersService.createUser(this.profile).subscribe(async ({ data }) => {
-      this.homeFacade.setProfile(this.profile);
+  public register(newUser: User) {
+    this.usersService.createUser(newUser).subscribe(async ({ data }) => {
+      this.homeFacade.setProfile(newUser);
       if (data?.createUser) {
         if (data.createUser.title) {
           alert(data.createUser.title + '\n' + data.createUser.reason);
@@ -61,11 +51,10 @@ export class SigninComponent implements OnInit {
         const { token } = await this.usersService.getToken();
         if (token) {
           localStorage.setItem("TOKEN", token);
-          this.profileService.setProfile(this.profile);
+          this.profileService.setProfile(newUser);
           this.router.navigate(['/']);
         }
       }
     });
-    return false;
   }
 }

@@ -1,4 +1,7 @@
-
+<div class="alert hide">
+    <span class="fa fa-heart"></span>
+    <span class="msg">Você deu Match!</span>
+ </div>
 <div class="page">
     <h2 class="ui center aligned icon header">
         <i class="big icons">
@@ -12,5 +15,6 @@
     <app-similar-users
         [users]="userList"
     ></app-similar-users>
+    <span *ngIf="userList.length === 0"><i>Parece que não tem ninguem por aqui :(</i></span>
 </div>
 

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../../../shared/services/profile.service';
-import { defaultUser, User } from '../../../shared/types/User';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { defaultUser, User } from 'src/app/shared/types/User';
+import { UsersService } from 'src/app/shared/services/users.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +12,22 @@ import { defaultUser, User } from '../../../shared/types/User';
 })
 export class ProfileComponent implements OnInit {
   public profile: User = defaultUser;
+  public displayInputs = [
+    "firstName", "lastName", "gender", "age", "occupation",
+    "education", "bio", "interests", "city", "state", 
+    "address", "birthDate", "phoneNumber", "genderOfInterest"
+  ]
 
-  constructor(profileService: ProfileService) {
+  public popupLabel: string = 'Perfil atualizado!';
+  @ViewChild(PopupComponent) child!:PopupComponent;
+
+  constructor(
+    private profileService: ProfileService,
+    private usersService: UsersService
+  ) {
     profileService.getProfile().subscribe(profile => {
       if (!profile) return;
-      this.profile = profile;
+      this.profile = {...profile};
     });
   }
 
@@ -57,5 +71,37 @@ export class ProfileComponent implements OnInit {
         age--;
     }
     return age;
+  }
+
+  updatePopUp() {
+    $('.alert').addClass("show");
+    $('.alert').removeClass("hide");
+    $('.alert').addClass("showAlert");
+    setTimeout(function(){
+      $('.alert').removeClass("show");
+      $('.alert').addClass("hide");
+    },5000);
+  };
+
+  async updateUser(user: User) {
+    this.usersService.updateUser({
+      age: user.age,
+      bio: user.bio,
+      city: user.city,
+      state: user.state,
+      gender: user.gender,
+      address: user.address,
+      lastName: user.lastName,
+      birthDate: user.birthDate,
+      education: user.education,
+      firstName: user.firstName,
+      interests: user.interests,
+      languages: user.languages,
+      occupation: user.occupation,
+      phoneNumber: user.phoneNumber,
+      genderOfInterest: user.genderOfInterest,
+    });
+    this.profileService.setProfile(user);
+    this.child.showPopUp();
   }
 }

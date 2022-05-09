@@ -2,7 +2,9 @@
     <div class="personal">
         <div class="profile-infos">
             <div class="profile">
-                <h1><mat-icon>account_circle</mat-icon> Meu Perfil </h1>
+                <h1>
+                  <mat-icon>account_circle</mat-icon> Meu Perfil 
+                </h1>
                 <img [src]="profile.profileImg" class="img-thumbnail">
                 <p>
                     <mat-icon>person</mat-icon>
@@ -16,6 +18,13 @@
                     <mat-icon>phone_forwarded</mat-icon>
                     {{profile.phoneNumber}} <br>
                 </p>
+                <button type="button" 
+                    data-bs-toggle="modal" 
+                    class="btn edit-btn" 
+                    data-bs-target="#staticBackdrop">
+                  <i class="pen large icon"></i>
+                  Editar Perfil
+                </button>
             </div>
             <div class="infos">
                 <div class="info" style="flex:3">
@@ -63,3 +72,29 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" 
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" 
+  aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="staticBackdropLabel"> 
+              Atualizar usuário
+            </h2>
+            <button type="button" class="btn-close" 
+              data-bs-dismiss="modal" aria-label="Close">
+            </button>
+          </div>
+
+          <app-user-form
+            [profile]="profile"
+            [actionLabel]="'Atualizar'"
+            [displayInputs]="displayInputs"
+            (onSubmit)="updateUser($event)"
+          ></app-user-form>
+      </div>
+  </div>
+</div>
+<app-popup [label]="popupLabel" [identifier]="'profile'">
+</app-popup>

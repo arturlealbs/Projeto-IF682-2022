@@ -17,6 +17,7 @@ import { PolicyComponent } from './pages/policy/policy.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @NgModule({
 	providers: [
@@ -31,7 +32,8 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
     ProfileComponent,
     PolicyComponent,
     PrivacyComponent,
-    NotificationsComponent
+    UserFormComponent,
+    NotificationsComponent,
   ],
   imports: [
     CommonModule,

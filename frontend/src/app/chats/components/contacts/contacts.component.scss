@@ -1,5 +1,12 @@
+:host {
+    background-color: var(--base-clara);
+}
+
 .profile {
     display: flex;
+    padding: 1em;
+    background: var(--claro);
+    border-bottom: 2px solid #CCC;
 
     img {
         width: 50px;

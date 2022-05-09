@@ -1,5 +1,15 @@
 @import "../privacy/privacy.component.scss";
 
+:host {
+    height: -webkit-fill-available;
+}
+
+#home-img {
+    position: absolute;
+    width: 100%;
+    max-width: 1900px;
+}
+
 .container {
     text-align: center;
     

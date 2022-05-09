@@ -1,3 +1,29 @@
+.profile button.edit-btn {
+    background: transparent;
+    color: var(--base-clara);
+    border-color: var(--base-clara);
+}
+
+.modal-header, .modal-footer {
+    align-items: baseline;
+    color: var(--branco);
+    height: 4em;
+}
+
+.modal-content {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background-image: linear-gradient(to right, var(--medio) , var(--escuro));
+    padding: 30px;
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+}
+  
+
 /* Página em geral */
 .profile-container {
     margin: 0;

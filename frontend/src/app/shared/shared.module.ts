@@ -16,6 +16,7 @@ import { ProfileService } from './services/profile.service';
 import { NotificationService } from './services/notification.service';
 
 import config from './config/socket';
+import { PopupComponent } from './components/popup/popup.component';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import config from './config/socket';
     ProfileService,
     UsersService,
   ],
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, PopupComponent],
   imports: [
     RouterModule,
     SocialModule,
@@ -37,6 +38,7 @@ import config from './config/socket';
   ],
   exports: [
     HeaderComponent,
+    PopupComponent,
     CommonModule,
     BrowserModule,
   ],
