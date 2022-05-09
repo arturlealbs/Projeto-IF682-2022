@@ -22,7 +22,9 @@ export class HomeFacade {
     }
 
     getFacebookProfileData(facebookID: string, accessToken: string) {
-        this.api.getFacebookData(facebookID, accessToken).subscribe(data => {
+        return this.api.getFacebookData(
+            facebookID, accessToken
+        ).subscribe(data => {
             const profile = this.state.getCurrentProfile();
             if (profile) {
                 this.setProfile({
@@ -36,18 +38,30 @@ export class HomeFacade {
         });
     }
     
+    getCurrentProfile(): User | null {
+        return this.state.getCurrentProfile();
+    }
+
     getGoogleProfileData(accessToken: string) {
-        this.api.getGoogleData(accessToken).subscribe(data => {
+        return this.api.getGoogleData(
+            accessToken
+        ).subscribe(data => {
             const profile = this.state.getCurrentProfile();
             const resizedImage = data.picture.slice(
-                0, data.picture.length - 5);
+                0, data.picture.length - 6);
             if (profile) {
-                console.log("getGoogleProfileData()", profile, data);
                 this.setProfile({
                     ...profile, 
                     profileImg: resizedImage,
                 });
             }
         });
+    }
+
+    updateImageProfile(user: any, loginToken: string) {
+        if (user.provider === "GOOGLE") {
+            return this.getGoogleProfileData(loginToken);
+        } 
+        return this.getFacebookProfileData(user.id, loginToken);
     }
 }

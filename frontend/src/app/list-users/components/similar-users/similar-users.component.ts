@@ -94,7 +94,9 @@ export class SimilarUsersComponent {
       });
     } else {
       usersDisliked = usersLiked.concat(user.email);
-      this.userService.updateUser(usersDisliked);  
+      this.userService.updateUser({
+        usersDisliked,
+      });  
     }
     this.users = this.users.filter(u => u !== user);
 

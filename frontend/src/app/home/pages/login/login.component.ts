@@ -29,16 +29,22 @@ export class LoginComponent implements OnInit {
 
       if (token) {
         localStorage.setItem("TOKEN", token);
-        const newProfile = await this.usersService.getUser();
-        this.profileService.setProfile(newProfile);
+        const currentProfile = await this.usersService.getUser();
+        this.profileService.setProfile(currentProfile);
+        this.homeFacade.setProfile(currentProfile);
+        this.homeFacade.updateImageProfile(user, loginToken).add(() => {
+          const newProfile = this.homeFacade.getCurrentProfile();
+          if (newProfile && 
+            currentProfile.profileImg !== newProfile.profileImg) {
+            this.usersService.updateUser({
+              profileImg: newProfile.profileImg,
+            });
+            this.profileService.setProfile(newProfile);
+          }
+        });
         return this.router.navigate(['/']);
       }
 
-      if (user.provider === "GOOGLE") {
-        this.homeFacade.getGoogleProfileData(loginToken);
-      } else {
-        this.homeFacade.getFacebookProfileData(user.id, loginToken);
-      }
       this.homeFacade.setProfile({...defaultUser, ...user});
       return this.router.navigate(['/signin']);
     });
