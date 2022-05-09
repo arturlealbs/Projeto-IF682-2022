@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FomanticUIModule } from 'ngx-fomantic-ui';
 import { ListUsersModule } from './list-users/list-users.module';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

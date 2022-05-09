@@ -6,14 +6,22 @@ import { User, defaultUser } from 'src/app/shared/types/User';
 import { ProfileService } from '../../../shared/services/profile.service';
 import { HomeFacade } from '../../home.facade';
 
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.scss']
+  styleUrls: ['./signin.component.scss', '../profile/profile.component.scss']
 })
 export class SigninComponent implements OnInit {
 
   public profile: User = defaultUser;
+  interests: string[] = [
+    'arte', 'comida', 'dança', 'jogos', 'livros', 'música', 'moda', 'saúde', 
+    'beleza', 'filmes', 'viagens', 'futebol', 'cultura', 'esportes', 'artistas', 
+    'história', 'economia', 'finanças', 'culinária', 'idiomas', 'negócios', 
+    'política', 'religião', 'crianças', 'basquete', 'geografia', 'filosofia', 
+    'tecnologia', 'literatura', 'fotografia',
+  ]
 
   constructor(
     private profileService: ProfileService,

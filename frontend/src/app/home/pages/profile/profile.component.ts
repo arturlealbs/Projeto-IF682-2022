@@ -4,6 +4,7 @@ import { defaultUser, User } from 'src/app/shared/types/User';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import { PopupComponent } from 'src/app/shared/components/popup/popup.component';
+import { HomeFacade } from '../../home.facade';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +24,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private homeFacade: HomeFacade
   ) {
     profileService.getProfile().subscribe(profile => {
       if (!profile) return;
@@ -82,6 +84,8 @@ export class ProfileComponent implements OnInit {
       $('.alert').addClass("hide");
     },5000);
   };
+
+  translateInterests = this.homeFacade.translateInterests
 
   async updateUser(user: User) {
     this.usersService.updateUser({
