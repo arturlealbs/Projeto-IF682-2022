@@ -9,6 +9,7 @@ import { Rate } from './types/rate';
 import { UsersService } from '../shared/services/users.service';
 import { ChatsFacade } from '../chats/chats.facade';
 import { ProfileService } from '../shared/services/profile.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Injectable()
 export class ListUsersFacade {
@@ -19,7 +20,8 @@ export class ListUsersFacade {
 		private readonly state: ListUsersState,
         private userService: UsersService,
         private chatsFacade: ChatsFacade,
-        private profileService: ProfileService
+        private profileService: ProfileService,
+        private notificationService: NotificationService
 	) {
         this.profileService.getProfile().subscribe((data) => {
             if (data) {
@@ -36,6 +38,15 @@ export class ListUsersFacade {
         this.state.setUserList(userList);
     }
 
+    matchPopUp(){
+        $('.alert').addClass("show");
+        $('.alert').removeClass("hide");
+        $('.alert').addClass("showAlert");
+        setTimeout(function(){
+          $('.alert').removeClass("show");
+          $('.alert').addClass("hide");
+        },5000);
+      };
     async rateUser (rate: Rate) {
         const { user } = rate;
         if (!user?.email) return;
@@ -45,6 +56,14 @@ export class ListUsersFacade {
           this.userService.likeUser(user.email).subscribe(({ data }) => {
             if (data && data.likeUser) {
               this.chatsFacade.fetchContacts();
+              this.notificationService.sendNotification({
+                to: user.email,
+                image: user.profileImg,
+                timestamp: new Date().toLocaleString(),
+                text: `Você e ${user} deram Match!.`
+              });
+              this.matchPopUp()
+
             }
           });
 

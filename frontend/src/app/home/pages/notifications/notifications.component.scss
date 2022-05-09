@@ -1,3 +1,7 @@
+:host{
+    background-color: var(--claro);
+    height:100%;
+}
 .notification {
     display: flex;
     align-items: center;
@@ -7,12 +11,18 @@
     flex-direction: column;
 
     table {
+        border-collapse: collapse;
         margin-top: 1em;
         width: 70%;
-
+        tr {
+            border-right: hidden;
+            border-radius: 8px;
+            background-color: var(--branco);
+            margin-bottom: 2em;
+        }
         td {
+            border: var(--branco);
             vertical-align: middle;
-
             img {
                 border-radius: 50%;
                 width: 50px;
