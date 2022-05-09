@@ -11,18 +11,7 @@ export class NotificationService {
   notification = this.socket.fromEvent<Notification>("notifications");
 
   private notifications: BehaviorSubject<Notification[]> =
-  new BehaviorSubject<Notification[]>([{
-    to: "",
-    text: "Só pra ver como estão as notificações",
-    image: "",
-    timestamp: ""
-  },
-  {
-    to: "",
-    text: "Só pra ver como estão as notificações",
-    image: "",
-    timestamp: ""
-  }]);
+  new BehaviorSubject<Notification[]>([]);
 
   constructor(private socket: Socket) {
     this.notification.subscribe(notification => {

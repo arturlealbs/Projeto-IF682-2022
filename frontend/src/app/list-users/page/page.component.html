@@ -15,5 +15,6 @@
     <app-similar-users
         [users]="userList"
     ></app-similar-users>
+    <span *ngIf="userList.length === 0"><i>Parece que não tem ninguem por aqui :(</i></span>
 </div>
 
