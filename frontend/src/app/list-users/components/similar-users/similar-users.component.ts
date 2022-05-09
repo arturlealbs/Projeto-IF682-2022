@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Rate } from '../../types/rate';
-import { defaultUser, User } from 'src/app/shared/types/User';
+import { User } from 'src/app/shared/types/User';
 import { FuiModalService } from 'ngx-fomantic-ui';
 import { ModalDetails } from '../modal-details/modal-details.component';
-import { UsersService } from 'src/app/shared/services/users.service';
-import { ProfileService } from 'src/app/shared/services/profile.service';
-import { ChatsFacade } from 'src/app/chats/chats.facade';
+
+import { ListUsersFacade } from '../../list-users.facade';
+import { Rate } from '../../types/rate';
 
 @Component({
   selector: 'app-similar-users',
@@ -17,7 +16,6 @@ export class SimilarUsersComponent {
   users: User[] = [];
 
   userInModal?: User;
-  currentProfile: User = defaultUser;
 
   slideConfig = {
     slidesToShow: 5,
@@ -58,18 +56,10 @@ export class SimilarUsersComponent {
     ],
   };
 
-  constructor(public modalService: FuiModalService,
-              public userService: UsersService,
-              private chatsFacade: ChatsFacade,
-              public profileService: ProfileService
-            ) {
-
-              this.profileService.getProfile().subscribe((data) => {
-                if (data) {
-                  this.currentProfile = data
-                }
-              })
-            }
+  constructor(
+    public modalService: FuiModalService,
+    private listUsersFacade: ListUsersFacade,
+  ) {}
 
   showUserModal = (user: User) => {
     this.modalService
@@ -80,27 +70,7 @@ export class SimilarUsersComponent {
       )
   };
 
-
-  async rateUser (rate: Rate) {
-    const { user } = rate;
-    if (!user?.email) return;
-    
-    let { usersDisliked, usersLiked } = this.currentProfile;
-    if (rate.action === 'like') {
-      this.userService.likeUser(user.email).subscribe(({ data }) => {
-        if (data && data.likeUser) {
-          this.chatsFacade.fetchContacts();
-        }
-      });
-    } else {
-      usersDisliked = usersLiked.concat(user.email);
-      this.userService.updateUser({
-        usersDisliked,
-      });  
-    }
-    this.users = this.users.filter(u => u !== user);
-
-    const newUser = await this.userService.getUser();
-    this.profileService.setProfile(newUser);
-  };
+  rateUser(rate: Rate) {
+    this.listUsersFacade.rateUser(rate)
+  }
 }

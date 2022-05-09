@@ -52,7 +52,7 @@ export class UsersService {
       const common_interests = user.interests.filter((i) =>
         interests.includes(i),
       );
-      if (common_interests.length > min_interests) {
+      if (common_interests.length >= min_interests) {
         userList = userList.filter((user) => user !== user);
       }
     }

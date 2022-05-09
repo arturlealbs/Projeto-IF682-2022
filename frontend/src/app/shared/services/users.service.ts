@@ -88,6 +88,8 @@ export class UsersService {
     });
   }
 
+  
+
   async getToken(): Promise<TokenOrError> {
     const result = await this.getTokenQuery.refetch();
     return result.data.session;

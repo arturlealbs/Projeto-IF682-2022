@@ -22,10 +22,17 @@
         </div>
     </div>
     <div class="modal-bottom">
-        <div class="ui labeled icon button profile-button">
-        Visitar o perfil
-        <i class="external link icon"></i>
+        <div class="buttons-container">
+            <div (click)="rateUser('like')" class="ui labeled icon button green">
+                Gostei
+                <i class="white heart outline icon"></i>
+            </div>
+            <div (click)="rateUser('dislike')" class="ui labeled icon button red">
+                Não gostei
+                <i class="white thumbs down outline icon"></i>
+            </div>
         </div>
+        
     </div>
 
 </div>
