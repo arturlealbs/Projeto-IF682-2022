@@ -73,6 +73,4 @@ export class SimilarUsersComponent {
   rateUser(rate: Rate) {
     this.listUsersFacade.rateUser(rate)
   }
-
-  
 }

@@ -53,7 +53,9 @@ export class ListUsersFacade {
         } else {
           console.log("b4", usersDisliked)
           usersDisliked = [...usersDisliked, user.email]
-          this.userService.updateUser(usersDisliked);  
+          this.userService.updateUser({
+            usersDisliked,
+          }); 
           this.profileService.setProfile({
             ...this.currentProfile, usersDisliked
           })

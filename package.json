@@ -20,5 +20,7 @@
     "url": "https://github.com/JDaniloC/Projeto-IF682/issues"
   },
   "homepage": "https://github.com/JDaniloC/Projeto-IF682#readme",
-  "dependencies": {}
+  "devDependencies": {
+    "cypress": "^9.6.0"
+  }
 }

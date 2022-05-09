@@ -32,10 +32,10 @@
                                    <option value="" disabled selected>Escolaridade</option>
                                    <option value="bacharelado">Bacharelado</option>
                                    <option value="cursoTecnico">Curso Técnico</option>
-                                   <option value="doutorado" selected>Doutorado</option>
+                                   <option value="doutorado">Doutorado</option>
                                    <option value="ensinoFundamental">Ensino Fundamental</option>
-                                   <option value="ensinoMedio" selected>Ensino Médio</option>
-                                   <option value="licenciatura" selected>Licenciatura</option>
+                                   <option value="ensinoMedio">Ensino Médio</option>
+                                   <option value="licenciatura">Licenciatura</option>
                                    <option value="mestrado">Mestrado</option>
                             </select>
                                    
@@ -43,8 +43,10 @@
                      <div>
                             <input type="text" name="bio" placeholder="Descrição"
                                    [(ngModel)]="profile.bio">
-                            <input type="text" name="interests" placeholder="Interesses"
-                                   [(ngModel)]="profile.interests">
+                            <select type="text" name="interests" placeholder="Interesses">
+                                   <option *ngFor="let interest of interests" value="interest"></option>
+
+                            </select>
                             <input type="text" name="city" placeholder="Cidade"
                                    [(ngModel)]="profile.city">
                             <input type="text" name="state" placeholder="Estado"
@@ -59,12 +61,19 @@
                                    [(ngModel)]="profile.genderOfInterest" required>
                                    <option value="" disabled selected>Gênero de Interesse</option>
                                    <option value="FEMALE">Feminino</option>
-                                   <option value="MALE" selected>Masculino</option>
-                                   <option value="BOTH" selected>Ambos</option>
+                                   <option value="MALE">Masculino</option>
+                                   <option value="BOTH">Ambos</option>
                             </select>
 
                       </div>
+                      
                </div>
+               <div class="interests">
+                     <span class="badge badge-pill badge-secondary"
+                         *ngFor="let interest of profile.interests">
+                         {{interest}}
+                     </span>
+              </div>
       <div class="login-signin">
         <button type="submit"> Cadastrar </button>
       </div>

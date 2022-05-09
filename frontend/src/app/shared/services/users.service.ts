@@ -9,7 +9,7 @@ import {
   Relationship,
   LikeResponse,
 } from '../types/Responses';
-import { User } from '../types/User';
+import { updateUserInput, User } from '../types/User';
 import { 
   GET_RELATIONSHIPS,
   GET_TOKEN_QUERY,
@@ -68,13 +68,11 @@ export class UsersService {
     }).subscribe().unsubscribe();
   }
 
-  updateUser(usersDisliked: string[]) {
+  updateUser(newUser: updateUserInput) {
     return this.apollo.mutate<CreateResponse>({
       mutation: UPDATE_USER,
       variables: { 
-        newUser: {
-          usersDisliked
-        } 
+        newUser 
       },
     }).subscribe().unsubscribe();
   }
