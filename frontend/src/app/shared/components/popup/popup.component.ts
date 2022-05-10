@@ -15,10 +15,6 @@ export class PopupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  className() {
-    return this.label.replace(' ', '-').toLowerCase();
-  }
-
   showPopUp() {
     $(`.alert.${this.identifier}`).addClass("show");
     $(`.alert.${this.identifier}`).removeClass("hide");

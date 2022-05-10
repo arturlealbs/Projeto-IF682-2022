@@ -149,7 +149,7 @@
         <option value="" disabled selected>Gênero de Interesse</option>
         <option value="FEMALE">Feminino</option>
         <option value="MALE" selected>Masculino</option>
-        <option value="BOTH" selected>Ambos</option>
+        <option value="BOTH">Ambos</option>
       </select>
     </div>
   </div>
@@ -167,5 +167,5 @@
     </button>
   </div>
 </form>
-<app-popup [label]="error">
+<app-popup [identifier]="'signin'" [label]="error">
 </app-popup>

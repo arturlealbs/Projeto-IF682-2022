@@ -2,28 +2,33 @@
     <nav class="navbar navbar-dark shadow-md">
         <div class="Title">
             <img class="modal-picture" src="../../../assets/logo-clara.svg" id="icon">
-            <button routerLink = '/' type = "button" class = "logo">
+            <button routerLink = '/' type = "button" 
+                class = "logo" id="home-link">
                 Coopido
             </button>
         </div>
-        <button routerLink="/profile" type="button" class="ntfc-button">
+        <button routerLink="/profile" type="button" 
+            class="ntfc-button" id="profile-link">
             <i class="fas fa-user"></i>
         </button>
-        <button routerLink="/chats" type="button" class="ntfc-button">
+        <button routerLink="/chats" type="button" 
+            class="ntfc-button" id="chats-link">
             <i class="fas fa-comments"></i>
         </button>
-        <button routerLink="/list" type="button" class="ntfc-button">
+        <button routerLink="/list" type="button" 
+            class="ntfc-button" id="list-link">
             <i class="fas fa-user-friends"></i>
         </button>
-        <button routerLink = '/notifications' type="button" class="ntfc-button">
+        <button routerLink = '/notifications' type="button" 
+            class="ntfc-button" id="notifications-link">
             <i class="fas fa-bell"></i>
             <div *ngIf = "notificationCount > 0"
                 style= font-size:10px; class="badge bg-danger">
                 {{ notificationCount }}
             </div>
         </button>
-        <button routerLink="/login" type="button" 
-            (click)="logout()" class="ntfc-button">
+        <button routerLink="/login" type="button" (click)="logout()" 
+            class="ntfc-button" id="login-link">
             <i class="fas fa-sign-in-alt"></i>
         </button>
     </nav>

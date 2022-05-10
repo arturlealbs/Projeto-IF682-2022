@@ -34,12 +34,7 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    const token = localStorage.getItem("TOKEN");
-    if (!token) {
-      this.router.navigate(['/login']);
-    }
-  }
+  ngOnInit(): void {}
 
   public register(newUser: User) {
     this.usersService.createUser(newUser).subscribe(async ({ data }) => {

@@ -59,7 +59,9 @@ export class UserFormComponent implements OnInit {
   handleSubmit(event: Event): void {
     event.preventDefault();
     let error = '';
-    if (this.profile.username === "") {
+    if (this.profile.email === "") {
+      error = 'O e-mail é obrigatório';
+    } else if (this.profile.username === "") {
       error = 'O nome de usuário é obrigatório';
     } else if (this.profile.firstName === "") {
       error = 'O nome é obrigatório';

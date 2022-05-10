@@ -1,1 +1,2 @@
 back: npm run start:prod
+install: npm install -g @nestjs/cli yarn && cd backend && yarn -i && yarn build
