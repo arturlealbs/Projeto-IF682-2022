@@ -1,4 +1,4 @@
-<div class="alert hide">
+<div class="alert {{alertClass}}">
     <span class="fa fa-heart"></span>
     <span class="msg">Você deu Match!</span>
  </div>
@@ -15,6 +15,6 @@
     <app-similar-users
         [users]="userList"
     ></app-similar-users>
-    <span *ngIf="userList.length === 0"><i>Parece que não tem ninguem por aqui :(</i></span>
+    <span *ngIf="userList.length === 0"><i>Parece que não tem ninguém por aqui :(</i></span>
 </div>
 

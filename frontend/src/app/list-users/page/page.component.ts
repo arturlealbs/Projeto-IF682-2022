@@ -9,6 +9,7 @@ import { ListUsersFacade } from '../list-users.facade';
 })
 export class PageComponent implements OnInit {
 
+  alertClass: string = 'hide';
   userList: User[] = []
 
   constructor(
@@ -17,6 +18,9 @@ export class PageComponent implements OnInit {
     listUserFacade.getUserList().subscribe((userList) => {
       this.userList = userList;
     })
+    listUserFacade.alertClass.asObservable().subscribe((className) => {
+      this.alertClass = className;
+    });
   }
 
   ngOnInit(): void {

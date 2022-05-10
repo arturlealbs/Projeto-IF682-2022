@@ -20,6 +20,7 @@ export class ProfileComponent implements OnInit {
   ]
 
   public popupLabel: string = 'Perfil atualizado!';
+  public translateInterests = this.homeFacade.translateInterests
   @ViewChild(PopupComponent) child!:PopupComponent;
 
   constructor(
@@ -74,18 +75,6 @@ export class ProfileComponent implements OnInit {
     }
     return age;
   }
-
-  updatePopUp() {
-    $('.alert').addClass("show");
-    $('.alert').removeClass("hide");
-    $('.alert').addClass("showAlert");
-    setTimeout(function(){
-      $('.alert').removeClass("show");
-      $('.alert').addClass("hide");
-    },5000);
-  };
-
-  translateInterests = this.homeFacade.translateInterests
 
   async updateUser(user: User) {
     this.usersService.updateUser({
