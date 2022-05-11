@@ -15,7 +15,7 @@
         <div class="eight wide column profile-items">
         <p>{{ modal.context.userInModal?.username }}</p>
         <p *ngIf="modal.context.userInModal.age">{{ modal.context.userInModal?.age }}</p>
-        <p *ngIf="modal.context.userInModal.interests.length !== 0">{{ modal.context.userInModal?.interests?.slice(0,3)?.join(', ') }}</p>
+        <p *ngIf="modal.context.userInModal.interests.length !== 0">{{ interestsTranslated.slice(0,3)?.join(', ') }}</p>
         <p *ngIf="modal.context.userInModal.education">{{ modal.context.userInModal?.education }}</p>
         <p *ngIf="modal.context.userInModal.occupation">{{ modal.context.userInModal?.occupation }}</p>
         <p *ngIf="modal.context.userInModal.bio">{{ modal.context.userInModal?.bio }}</p>
