@@ -1,0 +1,23 @@
+{
+    "operationName": "UpdateUser",
+    "variables": {
+        "newUser": {
+            "age": 18,
+            "bio": "",
+            "city": "Desconhecido",
+            "state": "Desconhecido",
+            "gender": "MALE",
+            "address": "Desconhecido",
+            "lastName": "Teste",
+            "birthDate": "01/01/1900",
+            "education": "ensinoFundamental",
+            "firstName": "Usuário",
+            "interests": [],
+            "languages": [],
+            "occupation": "",
+            "phoneNumber": null,
+            "genderOfInterest": "FEMALE"
+        }
+    },
+    "query": "mutation UpdateUser($newUser: UpdateUserInput!) {\n  updateUser(updateUserInput: $newUser) {\n    ... on User {\n      usersLiked\n      usersDisliked\n      __typename\n    }\n    ... on UserError {\n      title\n      reason\n      __typename\n    }\n    __typename\n  }\n}"
+}

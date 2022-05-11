@@ -1,0 +1,10 @@
+{
+    "operationName": "UpdateUser",
+    "variables": {
+        "newUser": {
+            "usersLiked": [],
+            "usersDisliked": []
+        }
+    },
+    "query": "mutation UpdateUser($newUser: UpdateUserInput!) {\n  updateUser(updateUserInput: $newUser) {\n    ... on User {\n      usersLiked\n      usersDisliked\n      __typename\n    }\n    ... on UserError {\n      title\n      reason\n      __typename\n    }\n    __typename\n  }\n}"
+}

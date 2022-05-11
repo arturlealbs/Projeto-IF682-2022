@@ -66,6 +66,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getAge() {
+    console.log(this.profile.birthDate);
     var today = new Date();
     var birthDate = new Date(this.profile.birthDate || "");
     var age = today.getFullYear() - birthDate.getFullYear();

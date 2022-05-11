@@ -6,7 +6,7 @@
                   <mat-icon>account_circle</mat-icon> Meu Perfil 
                 </h1>
                 <img [src]="profile.profileImg" class="img-thumbnail">
-                <p>
+                <p id = "general-infos">
                     <mat-icon>person</mat-icon>
                     {{capitalizedName()}} <br>
                     <mat-icon>cake</mat-icon>
@@ -19,6 +19,7 @@
                     {{profile.phoneNumber}} <br>
                 </p>
                 <button type="button" 
+                    id = "edit-profile"
                     data-bs-toggle="modal" 
                     class="btn edit-btn" 
                     data-bs-target="#staticBackdrop">
@@ -32,7 +33,7 @@
                         <mat-icon style="margin-right:10px"> description </mat-icon> 
                         Bio
                     </h2>
-                    <p id="text">
+                    <p id="text" class="presentation">
                         Eu, {{profile.firstName}} {{profile.lastName}},
                         {{profile.bio}}
                     </p>
@@ -42,7 +43,7 @@
                         <mat-icon style="margin-right:10px">favorite</mat-icon>
                         Sexo e interesse
                     </h2>
-                    <p id="text">
+                    <p id="text" class="profile-gender">
                         <b> {{getGender(this.profile.gender)}} </b>
                         interessado em pessoas 
                         <span *ngIf = "profile.genderOfInterest !== 'BOTH'">

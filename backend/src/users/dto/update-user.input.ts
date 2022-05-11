@@ -72,7 +72,13 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
   languages?: string[];
 
   @Field((type) => [String], {
-    description: 'List of e-mails of users who disliked the user',
+    description: 'List of e-mails of users who the user was liked',
+    nullable: true,
+  })
+  usersLiked?: string[];
+
+  @Field((type) => [String], {
+    description: 'List of e-mails of users who the user disliked',
     nullable: true,
   })
   usersDisliked?: string[];

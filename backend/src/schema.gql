@@ -96,7 +96,6 @@ enum Interests {
   BEAUTY
   BOOKS
   BUSINESS
-  CHILDREN
   COOKING
   CULTURE
   DANCE
@@ -245,10 +244,10 @@ input UpdateUserInput {
   """Unique user name to identify"""
   username: String
 
-  """List of e-mails of users who disliked the user"""
+  """List of e-mails of users who the user disliked"""
   usersDisliked: [String!]
 
-  """A list of users that the user has liked"""
+  """List of e-mails of users who the user was liked"""
   usersLiked: [String!]
 }
 

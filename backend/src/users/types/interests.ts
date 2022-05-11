@@ -24,7 +24,6 @@ export enum Interests {
   BUSINESS = 'negócios',
   POLITICS = 'política',
   RELIGION = 'religião',
-  CHILDREN = 'crianças',
   BASKETBALL = 'basquete',
   GEOGRAPHY = 'geografia',
   PHILOSOPHY = 'filosofia',

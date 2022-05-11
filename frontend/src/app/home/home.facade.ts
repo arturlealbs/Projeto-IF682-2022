@@ -86,7 +86,6 @@ export class HomeFacade {
     BUSINESS: 'Negócios',
     POLITICS: 'Política',
     RELIGION: 'Religião',
-    CHILDREN: 'Crianças',
     BASKETBALL: 'Basquete',
     GEOGRAPHY: 'Geografia',
     PHILOSOPHY: 'Filosofia',
