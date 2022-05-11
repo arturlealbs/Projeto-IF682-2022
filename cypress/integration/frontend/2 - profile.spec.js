@@ -48,16 +48,15 @@ describe("See user profile", () => {
         cy.get(".presentation").should("contains.text", "Usuário Modificado");
     })
 
-    it("should see the alert", () => {
+    it.only("should see the alert", () => {
         cy.get("#profile-link").click();
         cy.get("#edit-profile").click();
         
         cy.get("[name=birthDate]").clear({force:true});
         cy.get("button[type='submit']").click();
 
-        cy.wait(1000)
-        
-        cy.get("#popup").should("contains.text", "A data de nascimento é obrigatória")
+        cy.get(".alert.showAlert")
+          .should("contains.text", "A data de nascimento é obrigatória");
     })
 
     it("should see the message of updated profile", () => {
