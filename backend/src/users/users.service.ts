@@ -28,6 +28,13 @@ export class UsersService {
     const min_interests = interests.length * THRESHOLD;
     const excludeList = [...usersLiked, ...usersDisliked];
 
+    const filterGender =
+      userLogged.gender !== 'both'
+        ? {
+            gender: userLogged.genderOfInterest,
+          }
+        : {};
+
     let userList = await this.userModel
       .find({
         $and: [
@@ -41,10 +48,21 @@ export class UsersService {
               $nin: excludeList,
             },
           },
+          {
+            $or: [
+              {
+                genderOfInterest: userLogged.gender,
+              },
+              {
+                genderOfInterest: 'both',
+              },
+            ],
+          },
         ],
         usersDisliked: {
           $ne: searchUserInput.email,
         },
+        filterGender,
       })
       .exec();
 

@@ -13,8 +13,11 @@ export class RelationshipsService {
     private relationModel: Model<RelationshipDocument>,
   ) {}
 
-  create(createRelationshipInput: RelationshipInput) {
+  async create(createRelationshipInput: RelationshipInput) {
     const { email, contactEmail } = createRelationshipInput;
+    const hasRelation = await this.findOne(createRelationshipInput);
+    if (hasRelation) return;
+
     const createdUser = new this.relationModel({
       contacts: [email, contactEmail],
       blockedEmail: '',

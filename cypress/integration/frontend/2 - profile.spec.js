@@ -48,7 +48,7 @@ describe("See user profile", () => {
         cy.get(".presentation").should("contains.text", "Usuário Modificado");
     })
 
-    it.only("should see the alert", () => {
+    it("should see the alert", () => {
         cy.get("#profile-link").click();
         cy.get("#edit-profile").click();
         

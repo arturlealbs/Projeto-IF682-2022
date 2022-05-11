@@ -1,9 +1,8 @@
-<ngx-slick-carousel class="carousel" 
-  [config]="slideConfig" 
-  #slickModal="slick-carousel" 
+<ngx-slick-carousel class="carousel" id="carousel"
+  [config]="slideConfig" #slickModal="slick-carousel" 
 >
   <app-user-card
-    ngxSlickItem *ngFor="let user of users" class="slide"
+    ngxSlickItem *ngFor="let user of users" class="slide card-component-test"
     (showRequest)="showUserModal($event)"
     (rateRequest)="rateUser($event)"
     [user]="user"

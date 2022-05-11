@@ -22,4 +22,5 @@ describe('SimilarUsersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
