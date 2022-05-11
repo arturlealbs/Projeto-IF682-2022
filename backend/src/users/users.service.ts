@@ -21,6 +21,18 @@ export class UsersService {
     return createdUser.save();
   }
 
+  removeWrongGender(currentUser: User, userList: User[]) {
+    if (currentUser.genderOfInterest == 'male') {
+      return userList.filter((u) => u.gender == 'male')
+    }
+    if (currentUser.genderOfInterest == 'female') {
+      return userList.filter((u) => u.gender == 'female')
+    }
+
+    return userList
+
+  }
+
   async findAll(searchUserInput: SearchUserInput): Promise<User[]> {
     const THRESHOLD = 0.5;
     const userLogged = await this.findOne({ email: searchUserInput.email });
@@ -49,13 +61,21 @@ export class UsersService {
       .exec();
 
     for (const user of userList) {
-      const common_interests = user.interests.filter((i) =>
-        interests.includes(i),
-      );
+      const common_interests = user.interests.filter((i) => interests.includes(i));
       if (common_interests.length < min_interests) {
         userList = userList.filter((user) => user !== user);
       }
     }
+    if (userLogged.genderOfInterest == 'male') {
+      userList = userList.filter((u) => u.gender === 'male' && (u.genderOfInterest === userLogged.gender || u.genderOfInterest === 'both'))
+    }
+    else if (userLogged.genderOfInterest == 'female') {
+      userList = userList.filter((u) => u.gender == 'female' && (u.genderOfInterest === userLogged.gender || u.genderOfInterest === 'both'))
+    }
+    else if (userLogged.genderOfInterest == 'both') {
+      userList = userList.filter((u) => u.genderOfInterest === userLogged.gender || u.genderOfInterest === 'both')
+    }
+
     return userList;
   }
 
