@@ -4,6 +4,7 @@ import { Rate } from '../../types/rate';
 import { FuiBaseModal, ComponentModalConfig, ModalSize } from 'ngx-fomantic-ui';
 import { User } from '../../../shared/types/User';
 import { ListUsersFacade } from '../../list-users.facade';
+import { HomeFacade } from '../../../home/home.facade'
 
 interface IConfirmModalContext {
   userInModal: User;
@@ -17,6 +18,7 @@ interface IConfirmModalContext {
 export class ModalDetailsComponent {
   constructor(
     public modal: FuiBaseModal<IConfirmModalContext, void, void>,
+    public homeFacade: HomeFacade,
     private listUsersFacade: ListUsersFacade
   ) {}
   @Output() rateRequest = new EventEmitter<Rate>();
@@ -26,6 +28,9 @@ export class ModalDetailsComponent {
     this.listUsersFacade.rateUser(rate);
     this.modal.approve()
   }
+  translateInterests = this.homeFacade.translateInterests
+
+  interestsTranslated = this.modal.context.userInModal.interests.map((interest) => this.translateInterests[interest])
 }
 
 export class ModalDetails extends ComponentModalConfig<
