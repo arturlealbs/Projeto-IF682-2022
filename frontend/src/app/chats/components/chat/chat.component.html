@@ -5,20 +5,22 @@
         style="width: 74px"
         [src]="contact.image">
       <div>
-        <strong> {{ capitalizedName(contact.username) }} </strong> <br>
+        <strong id="contact-name"> 
+          {{ capitalizedName(contact.username) }}
+        </strong> <br>
         <div class="ui horizontal label {{onlineStatus()}}">
           {{(online) ? 'Online' : 'Offline'}}
         </div>
       </div>
     </div>
     <div class="right item">
-      <button type="button" class="btn dropdown-item" 
+      <button type="button" id="block-btn" class="btn" 
         *ngIf="!contact.blocked" data-bs-toggle="modal" 
         data-bs-target="#staticBackdrop">
         <i class="exclamation triangle large icon"></i>
         Denunciar esse perfil
       </button>
-      <button type="button" class="btn dropdown-item"
+      <button type="button" id="unblock-btn" class="btn dropdown-item"
         *ngIf="contact.blocked" (click)="unlockContact()">
         <i class="lock open large icon"></i>
         Desbloquear esse perfil
@@ -67,12 +69,13 @@
 </div>
 
 <div class="ui fluid icon input">
-  <input (keyup)='sendPreview($event)' 
+  <input id="message-field"
+    (keyup)='sendPreview($event)' 
     placeholder='Digite aqui...'
     [(ngModel)]="message.text"
     (keyup.enter)="sendMessage()"
   />
-  <button class="ui icon button" (click)='sendMessage()'>
+  <button id="send-button" class="ui icon button" (click)='sendMessage()'>
     <i class="paper plane icon"></i>
   </button>
 </div>

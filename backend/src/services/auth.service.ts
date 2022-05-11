@@ -43,9 +43,9 @@ export class AuthService {
   }
 
   createJWTToken(email: string) {
-    const oneHourInSeconds = 60 * 60;
+    const oneDayInSeconds = 60 * 60 * 24;
     const token = jwtSign({ email }, process.env.SECRET, {
-      expiresIn: oneHourInSeconds,
+      expiresIn: oneDayInSeconds,
     });
     return token;
   }

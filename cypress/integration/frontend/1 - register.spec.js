@@ -60,7 +60,7 @@ describe("Register new user", () => {
     it('should login', () => {
         const token = Cypress.env("token");
         localStorage.setItem("TOKEN", token);
-        cy.get("#profile-link").click().then(() => {
+        cy.visit("http://localhost:4200/profile").then(() => {
             cy.url().should("include", "/profile");
         });
     })
