@@ -4,7 +4,7 @@
     padding: 1em 2em;
     position: absolute;
     right: 0;
-    top: 5em;
+    top: 10em;
     border-radius: .5em;
     border-left: .5em solid var(--escuro);
     overflow: hidden;
@@ -39,6 +39,7 @@
 @keyframes hide_slide {
     0%{
         transform: translateX(-10px);
+      
     }
     40%{
         transform: translateX(0%);
